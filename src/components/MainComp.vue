@@ -30,6 +30,7 @@
       <option v-for="task in $store.state.taskClassStatements" v-bind:key="task.name">{{ task.name }}</option>
     </select>
     <input type="text" v-model="$store.state.taskSubClass" placeholder="taskSubClass" style="width:50px">
+    <span style="margin-left:10px">{{ $store.state.selectedtaskClass }} : {{ this.$store.state.taskClassStatements.find(type => type.name === $store.state.selectedtaskClass).desc }}</span>
   </div>
   <div>
     <p>
@@ -136,9 +137,6 @@ export default {
     }
   },
   methods: {
-    onChangetaskSubClass(){
-      console.log('2131214')
-    },
     onChangeTypeLen(index, name){
       const columnType = this.$store.state.informixColumnType.find(type => type.name === name)
       this.$store.state.columns[index].sqlLen = columnType.len
