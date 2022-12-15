@@ -6,7 +6,7 @@ export const store = createStore ({
     selectedtaskClass: 'ccs',
     taskSubClass: 'cgs',
     packageName: '',
-    logicalName: 'logic name',
+    logicalName: 'logicName',
     projectRoot : 'kr.re.kitech.biz.',
     projectName : 'projectName',
     tableName: 'tableName',    
