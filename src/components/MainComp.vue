@@ -99,6 +99,7 @@
 
 <script>
 import VoGenComp from './VoGenComp.vue'
+import JSZip from 'jszip'
 
 export default {
   components: {
@@ -140,7 +141,7 @@ export default {
   methods: {
     saveToFile(){
       
-      const zip = new this.$JSZip.JSZip();
+      const zip = new JSZip();
       zip.file('file1.java', this.$store.state.voQuery)
       //zip.file('file2.txt', this.textareaContent2);
       const content = zip.generate({ type: 'blob' })
