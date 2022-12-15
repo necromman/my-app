@@ -79,7 +79,7 @@
   <hr style="margin : 20px 0">
   <div>
     <button type="button" @click="generateSelectQuery">Create</button>
-    <button type="button" @click="saveToFile">zip download</button>
+    <button type="button" @click="saveToFile">download</button>
   </div>
   <div>
     <span>Select Query</span>    
@@ -88,6 +88,7 @@
     <textarea v-model="createQuery" @click="selectTextarea($event)" style="height: 100px"></textarea>
     <!-- <span>vo File</span>
     <textarea v-model="voQuery" @click="selectTextarea($event)" style="height: 100px"></textarea> -->
+    <button type="button" @click="saveToVoFile">download</button>
     <VoGenComp ref="VoGenComp"/>
   </div>
 </template>
@@ -99,7 +100,6 @@
 
 <script>
 import VoGenComp from './VoGenComp.vue'
-import JSZip from 'jszip'
 
 export default {
   components: {
@@ -139,15 +139,11 @@ export default {
     }
   },
   methods: {
-    saveToFile(){
-      
-      const zip = new JSZip();
-      zip.file('file1.java', this.$store.state.voQuery)
-      //zip.file('file2.txt', this.textareaContent2);
-      const content = zip.generate({ type: 'blob' })
-
-      const file = new File([content], 'myfile.zip', { type: 'application/zip' });
-
+    saveToVoFile(){
+      // 먼저 Blob 생성
+      const blob = new Blob([this.$store.state.voQuery], {type: 'text/plain;charset=utf-8'});
+      // 파일 생성
+      const file = new File([blob], `${this.$store.state.projectName}.java`, {type: 'text/plain;charset=utf-8'});
       // 생성된 파일을 다운로드
       const url = window.URL.createObjectURL(file);
       const a = document.createElement('a');
