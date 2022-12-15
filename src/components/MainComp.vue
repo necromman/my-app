@@ -37,6 +37,10 @@
       <input type="text" v-model="$store.state.packageName" placeholder="package Name">
     </p>
     <p>
+      <label>Logical name:</label>
+      <input type="text" v-model="$store.state.logicalName" placeholder="logical Name">
+    </p>
+    <p>
       <label>Project name:</label>
       <input type="text" v-model="$store.state.projectName" placeholder="project name">
     </p>
@@ -127,8 +131,14 @@ export default {
     }
   },
   watch: {
+    '$store.state.taskSubClass': function() {
+      this.onChangeSelectTask()
+    }
   },
   methods: {
+    onChangetaskSubClass(){
+      console.log('2131214')
+    },
     onChangeTypeLen(index, name){
       const columnType = this.$store.state.informixColumnType.find(type => type.name === name)
       this.$store.state.columns[index].sqlLen = columnType.len

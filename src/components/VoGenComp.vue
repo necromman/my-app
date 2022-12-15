@@ -36,7 +36,7 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 `
       this.voQuery += `
 @JsonFilter("elExcludeFilter")
-@ElDto(FldYn = "", delimeterYn = "", logicalName = " ${this.$store.state.projectName}")
+@ElDto(FldYn = "", delimeterYn = "", logicalName = "${this.$store.state.logicalName}")
 public class ${this.$store.state.projectName} extends kr.re.kitech.biz.xom.base.model.BizCommVO {
   private static final long serialVersionUID = 1L;
 
