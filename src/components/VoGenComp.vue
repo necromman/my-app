@@ -27,7 +27,7 @@ export default {
     generateVoQuery() {
       this.columns = this.$store.state.columns
       this.columnsT = this.$store.state.columnsT
-      this.voQuery = `package ${this.$store.state.packageName};\n`
+      this.voQuery = `package ${this.$store.state.packageName}.vo;\n`
       this.voQuery += `
 import com.inswave.elfw.annotation.ElDto;
 import com.inswave.elfw.annotation.ElDtoField;

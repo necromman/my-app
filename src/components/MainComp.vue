@@ -6,7 +6,7 @@
     </p>
   </div>
   <hr>
-  <div>
+  <!-- <div>
     <label>Choose SQL database:</label>
     <select v-model="selectedDb" @change="onChangeSelectDb($event)">
       <option v-for="db in databases" v-bind:key="db">{{ db }}</option>
@@ -22,6 +22,12 @@
     <label>Choose DDL statement:</label>
     <select v-model="selectedDdl">
       <option v-for="ddl in ddlStatements" v-bind:key="ddl">{{ ddl }}</option>
+    </select>
+  </div> -->
+  <div>
+    <label>Choose Task statement:</label>
+    <select v-model="$store.state.selectedtaskClass" @change="onChangeSelectTask()">
+      <option v-for="task in $store.state.taskClassStatements" v-bind:key="task.name">{{ task.name }}</option>
     </select>
   </div>
   <div>
@@ -178,6 +184,9 @@ export default {
       this.changeDb = event.target.value
       this.initializationDb()
     },
+    onChangeSelectTask(){
+      this.$store.state.packageName = this.$store.state.projectRoot + this.$store.state.selectedtaskClass + '.xxx'
+    },
     initializationDb(){
       if(this.changeDb == 'INFORMIX') this.columnType = this.$store.state.informixColumnType
       if(this.changeDb == 'ORACLE') this.columnType = this.oracleColumnType
@@ -189,8 +198,9 @@ export default {
    * 메서드를 호출해보면 에러가 나오지 않는다.
    */
   created() {
-    console.log("created");
-    this.initializationDb();
+    console.log("created")
+    this.initializationDb()
+    this.onChangeSelectTask()
   },
   /**
    * Mounting 단계
