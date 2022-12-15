@@ -79,6 +79,7 @@
   <hr style="margin : 20px 0">
   <div>
     <button type="button" @click="generateSelectQuery">Create</button>
+    <button type="button" @click="saveToFile">zip download</button>
   </div>
   <div>
     <span>Select Query</span>    
@@ -137,6 +138,22 @@ export default {
     }
   },
   methods: {
+    saveToFile(){
+      
+      const zip = new this.$JSZip.JSZip();
+      zip.file('file1.java', this.$store.state.voQuery)
+      //zip.file('file2.txt', this.textareaContent2);
+      const content = zip.generate({ type: 'blob' })
+
+      const file = new File([content], 'myfile.zip', { type: 'application/zip' });
+
+      // 생성된 파일을 다운로드
+      const url = window.URL.createObjectURL(file);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = file.name;
+      a.click();
+    },
     onChangeTypeLen(index, name){
       const columnType = this.$store.state.informixColumnType.find(type => type.name === name)
       this.$store.state.columns[index].sqlLen = columnType.len

@@ -1,6 +1,6 @@
 <template>
     <span>vo File</span>
-    <textarea v-model="voQuery" style="height: 100px"></textarea>
+    <textarea v-model="$store.state.voQuery" style="height: 100px"></textarea>
 </template>
 
 <script>
@@ -16,7 +16,6 @@ export default {
   data() {
     return {
       temp : this.$store.state.count,
-      voQuery : '',
       columns : '',
       columnsT : '',
     }
@@ -27,14 +26,14 @@ export default {
     generateVoQuery() {
       this.columns = this.$store.state.columns
       this.columnsT = this.$store.state.columnsT
-      this.voQuery = `package ${this.$store.state.packageName}.vo;\n`
-      this.voQuery += `
+      this.$store.state.voQuery = `package ${this.$store.state.packageName}.vo;\n`
+      this.$store.state.voQuery += `
 import com.inswave.elfw.annotation.ElDto;
 import com.inswave.elfw.annotation.ElDtoField;
 import com.inswave.elfw.annotation.ElVoField;
 import com.fasterxml.jackson.annotation.JsonFilter;
 `
-      this.voQuery += `
+      this.$store.state.voQuery += `
 @JsonFilter("elExcludeFilter")
 @ElDto(FldYn = "", delimeterYn = "", logicalName = "${this.$store.state.logicalName}")
 public class ${this.$store.state.projectName} extends kr.re.kitech.biz.xom.base.model.BizCommVO {
@@ -44,14 +43,14 @@ public class ${this.$store.state.projectName} extends kr.re.kitech.biz.xom.base.
   }
 `
       this.columnsT.forEach((column, index) => {
-        this.voQuery += `
+        this.$store.state.voQuery += `
   @ElDtoField(logicalName = "${column.logicalName}", physicalName = "${column.name}", type = "${column.dataType}", typeKind = "", fldYn = "", delimeterYn = "", cryptoGbn = "", cryptoKind = "", length = 0, dotLen = 0, baseValue = "", desc = "")
   private ${column.dataType} ${column.name};
 `
       })
       
       this.columnsT.forEach((column, index) => {
-        this.voQuery += `
+        this.$store.state.voQuery += `
   @ElVoField(physicalName = "${column.name}")
   public ${column.dataType} get${this.toUpperCaseFirst(column.name)}(){
       return ${column.name};
@@ -63,7 +62,7 @@ public class ${this.$store.state.projectName} extends kr.re.kitech.biz.xom.base.
   }
 `
       })
-      this.voQuery += `
+      this.$store.state.voQuery += `
   @Override
   public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -71,20 +70,20 @@ public class ${this.$store.state.projectName} extends kr.re.kitech.biz.xom.base.
 `
       this.columnsT.forEach((column, index) => {
         if(index == this.columnsT.length-1){
-          this.voQuery += 
+          this.$store.state.voQuery += 
 `      sb.append("${column.name}").append("=").append(${column.name});
 `      }else{
-        this.voQuery += 
+        this.$store.state.voQuery += 
 `      sb.append("${column.name}").append("=").append(${column.name}).append(",");
 `      }
       })
 
-      this.voQuery += 
+      this.$store.state.voQuery += 
 `      sb.append("]");
       return sb.toString();
     }
 `
-      this.voQuery +=
+      this.$store.state.voQuery +=
 `
 
   public boolean isFixedLengthVo() {
