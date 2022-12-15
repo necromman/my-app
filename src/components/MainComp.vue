@@ -66,7 +66,7 @@
   </div>
   <hr style="margin : 20px 0">
   <div>
-    <button type="button" @click="generateSelectQuery">SQL Create</button>
+    <button type="button" @click="generateSelectQuery">Create</button>
   </div>
   <div>
     <span>Select Query</span>    
