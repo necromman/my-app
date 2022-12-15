@@ -3,6 +3,7 @@ import { createStore } from 'vuex'
 export const store = createStore ({
   state: {
     count : 100,
+    voQuery : '',
     selectedtaskClass: 'ccs',
     taskSubClass: 'cgs',
     packageName: '',
