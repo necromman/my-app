@@ -34,16 +34,16 @@
   </div>
   <div>
     <p>
+      <label>Project name:</label>
+      <input type="text" v-model="$store.state.projectName" placeholder="project name">
+    </p>
+    <p>
       <label>Package name:</label>
       <input type="text" v-model="$store.state.packageName" placeholder="package Name">
     </p>
     <p>
       <label>Logical name:</label>
       <input type="text" v-model="$store.state.logicalName" placeholder="logical Name">
-    </p>
-    <p>
-      <label>Project name:</label>
-      <input type="text" v-model="$store.state.projectName" placeholder="project name">
     </p>
     <p>
       <label>Table name:</label>
