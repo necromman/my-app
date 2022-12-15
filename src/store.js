@@ -4,6 +4,7 @@ export const store = createStore ({
   state: {
     count : 100,
     selectedtaskClass: 'ccs',
+    taskSubClass: 'cgs',
     packageName: '',
     projectRoot : 'kr.re.kitech.biz.',
     projectName : 'projectName',

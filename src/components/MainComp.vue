@@ -29,6 +29,7 @@
     <select v-model="$store.state.selectedtaskClass" @change="onChangeSelectTask()">
       <option v-for="task in $store.state.taskClassStatements" v-bind:key="task.name">{{ task.name }}</option>
     </select>
+    <input type="text" v-model="$store.state.taskSubClass" placeholder="taskSubClass" style="width:50px">
   </div>
   <div>
     <p>
@@ -167,7 +168,7 @@ export default {
           if(column.isPrimary) this.primaryKey.push(column.name)
           this.createQuery += ',\n'
         });
-        if(this.primaryKey) this.createQuery += `\tPRIMARY KEY(${this.primaryKey.join(', ')})\n`
+        if(this.primaryKey.length > 0) this.createQuery += `\tPRIMARY KEY(${this.primaryKey.join(', ')})\n`
         this.createQuery += ')'
         this.$refs.VoGenComp.generateVoQuery();
     },
@@ -185,7 +186,7 @@ export default {
       this.initializationDb()
     },
     onChangeSelectTask(){
-      this.$store.state.packageName = this.$store.state.projectRoot + this.$store.state.selectedtaskClass + '.xxx'
+      this.$store.state.packageName = this.$store.state.projectRoot + this.$store.state.selectedtaskClass + `.${this.$store.state.taskSubClass}`
     },
     initializationDb(){
       if(this.changeDb == 'INFORMIX') this.columnType = this.$store.state.informixColumnType

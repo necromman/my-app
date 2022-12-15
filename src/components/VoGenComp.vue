@@ -36,11 +36,11 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 `
       this.voQuery += `
 @JsonFilter("elExcludeFilter")
-@ElDto(FldYn = "", delimeterYn = "", logicalName = " ${this.$store.state.projectName}VO")
-public class ${this.$store.state.projectName}Vo extends kr.re.kitech.biz.xom.base.model.BizCommVO {
+@ElDto(FldYn = "", delimeterYn = "", logicalName = " ${this.$store.state.projectName}")
+public class ${this.$store.state.projectName} extends kr.re.kitech.biz.xom.base.model.BizCommVO {
   private static final long serialVersionUID = 1L;
 
-  public ${this.$store.state.projectName}Vo(){
+  public ${this.$store.state.projectName}(){
   }
 `
       this.columnsT.forEach((column, index) => {
@@ -67,7 +67,7 @@ public class ${this.$store.state.projectName}Vo extends kr.re.kitech.biz.xom.bas
   @Override
   public String toString() {
       StringBuilder sb = new StringBuilder();
-      sb.append("${this.$store.state.projectName}Vo [");
+      sb.append("${this.$store.state.projectName} [");
 `
       this.columnsT.forEach((column, index) => {
         if(index == this.columnsT.length-1){
