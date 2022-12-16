@@ -7,6 +7,7 @@ export const store = createStore ({
     voListQuery : '',
     serviceQuery : '',
     serviceImplQuery : '',
+    daoQuery : '',
     selectedtaskClass: 'ccs',
     taskSubClass: 'cgs',
     packageName: '',

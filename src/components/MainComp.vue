@@ -104,6 +104,9 @@
     <textarea v-model="createQuery" @click="selectTextarea($event)" style="height: 100px"></textarea>
     <!-- <span>vo File</span>
     <textarea v-model="voQuery" @click="selectTextarea($event)" style="height: 100px"></textarea> -->
+    <span>DAO File</span>
+    <button type="button" @click="saveToFile($store.state.daoQuery, 'DAO', 'java')">download</button>
+    <DaoGenComp ref="DaoGenComp"/>
     <span>serviceImpl File</span>
     <button type="button" @click="saveToFile($store.state.serviceImplQuery, 'ServiceImpl', 'java')">download</button>
     <SvcImplGenComp ref="SvcImplGenComp"/>
@@ -129,6 +132,7 @@ import VoGenComp from './vo/VoGenComp.vue'
 import VoListGenComp from './vo/VoListGenComp.vue'
 import SvcGenComp from './service/SvcGenComp.vue'
 import SvcImplGenComp from './service/SvcImplGenComp.vue'
+import DaoGenComp from './dao/DaoGenComp.vue'
 import JSZip from 'jszip';
 
 export default {
@@ -136,7 +140,8 @@ export default {
     VoGenComp,
     VoListGenComp,
     SvcGenComp,
-    SvcImplGenComp
+    SvcImplGenComp,
+    DaoGenComp
   },
    /* eslint-disable */
   /**
@@ -258,7 +263,8 @@ export default {
         this.$refs.VoGenComp.generateVoQuery();
         this.$refs.VoListGenComp.generateVoQuery();
         this.$refs.SvcGenComp.generateVoQuery();
-        this.$refs.SvcImplGenComp.generateVoQuery();        
+        this.$refs.SvcImplGenComp.generateVoQuery();
+        this.$refs.DaoGenComp.generateVoQuery();
     },
     toUpperCaseFirst(str){
       return str.charAt(0).toUpperCase() + str.slice(1);

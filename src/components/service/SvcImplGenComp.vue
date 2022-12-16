@@ -64,25 +64,25 @@ public class ${this.$store.state.projectName}ServiceImpl  extends EgovAbstractSe
 
   @Override
   public ${this.$store.state.projectName}Vo selectSingleItem(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws ElException {
-    ${this.$store.state.projectName}Vo resultVO = cgsDAO.selectCarAdmin(${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo);			
+    ${this.$store.state.projectName}Vo resultVO = cgsDAO.selectSingleItem(${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo);			
       return resultVO;
   }
 
   @Override
 	public int insertItem(${this.$store.state.projectName}Vo vo) throws ElException, IOException {
-    int result = ${this.$store.state.taskSubClass}DAO.insert${this.$store.state.projectName}(vo);
+    int result = ${this.$store.state.taskSubClass}DAO.insertItem(vo);
     return result;
 	}
 
   @Override
 	public int updateItem(${this.$store.state.projectName}Vo vo) throws Exception {
-    int result = ${this.$store.state.taskSubClass}DAO.update${this.$store.state.projectName}(vo);
+    int result = ${this.$store.state.taskSubClass}DAO.updateItem(vo);
 		return result;
 	}
 
   @Override
 	public int deleteItem(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws Exception {
-		return ${this.$store.state.taskSubClass}DAO.delete${this.$store.state.projectName}(${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo);
+		return ${this.$store.state.taskSubClass}DAO.deleteItem(${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo);
 	}
 
   @Override
