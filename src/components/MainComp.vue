@@ -75,11 +75,26 @@
       </label>
       <button type="button" tabindex="-1" @click="removeColumn(index)">Remove</button>
     </div>
+    
+    <hr>
+    <label>Add VoList columns:</label>
+    <button type="button" @click="addVoListColumn">Add</button>
+    <div v-for="(column, index) in $store.state.voListcolumns" :key="index">
+      <label style="width: 30px;display: inline-block;">{{index+1}} : </label>
+      <input style="width:120px" type="text" v-model="column.name" placeholder="Column name">
+      <input style="width:100px" type="text" v-model="column.logicalName" placeholder="logical Name">
+      <select v-model="$store.state.voListcolumns[index].type">
+        <option v-for="type in $store.state.voListcolumnType" v-bind:key="type">{{ type }}</option>
+      </select>
+      <button type="button" tabindex="-1" @click="removeVoListColumn(index)">Remove</button>
+    </div>
+
+
   </div>
   <hr style="margin : 20px 0">
   <div>
     <button type="button" @click="generateSelectQuery">Create</button>
-    <button type="button" @click="saveToFile">download</button>
+    <button type="button" @click="downloadZipFile">download zip</button>
   </div>
   <div>
     <span>Select Query</span>    
@@ -88,6 +103,7 @@
     <textarea v-model="createQuery" @click="selectTextarea($event)" style="height: 100px"></textarea>
     <!-- <span>vo File</span>
     <textarea v-model="voQuery" @click="selectTextarea($event)" style="height: 100px"></textarea> -->
+    <span>vo File</span>
     <button type="button" @click="saveToVoFile">download</button>
     <VoGenComp ref="VoGenComp"/>
   </div>
@@ -100,6 +116,7 @@
 
 <script>
 import VoGenComp from './VoGenComp.vue'
+import JSZip from 'jszip';
 
 export default {
   components: {
@@ -139,6 +156,24 @@ export default {
     }
   },
   methods: {
+    downloadZipFile() {
+      const zip = new JSZip();
+      zip.file(`${this.$store.state.projectName}.java`, this.$store.state.voQuery);
+      // for (let i = 0; i < this.textareaList.length; i++) {
+      //   const textarea = this.textareaList[i];
+      //   zip.file(`file${i + 1}.txt`, textarea.content);
+      // }
+      const content = zip.generate({ type: 'blob' });
+
+      const file = new File([content], 'myfile.zip', { type: 'application/zip' });
+
+      // 생성된 파일을 다운로드
+      const url = window.URL.createObjectURL(file);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = file.name;
+      a.click();
+    },
     saveToVoFile(){
       // 먼저 Blob 생성
       const blob = new Blob([this.$store.state.voQuery], {type: 'text/plain;charset=utf-8'});
@@ -167,8 +202,16 @@ export default {
         }
       )
     },
+    addVoListColumn(index) {
+      this.$store.state.voListcolumns.unshift(
+        { name: "", logicalName: "리스트vo", link: ""},
+      )
+    },
     removeColumn(index) {
       this.$store.state.columns.splice(index, 1)
+    },
+    removeVoListColumn(index) {
+      this.$store.state.voListcolumns.splice(index, 1)
     },
     generateSelectQuery() {
   			this.selectQuery = `SELECT `

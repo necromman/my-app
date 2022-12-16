@@ -1,5 +1,5 @@
 <template>
-  <textarea v-model="$store.state.voQuery" style="height: 100px"></textarea>
+  <textarea v-model="$store.state.voListQuery" style="height: 100px"></textarea>
 </template>
 
 <script>
@@ -9,7 +9,6 @@ export default {
   },
   data() {
     return {
-      temp : this.$store.state.count,
       columns : '',
       columnsT : '',
     }

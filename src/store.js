@@ -4,6 +4,7 @@ export const store = createStore ({
   state: {
     count : 100,
     voQuery : '',
+    voListQuery : '',
     selectedtaskClass: 'ccs',
     taskSubClass: 'cgs',
     packageName: '',
@@ -43,6 +44,10 @@ export const store = createStore ({
         { name: "updt_daytm", isChecked: true, logicalName: "수정일시",
          isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "int"},
       ],
+    voListcolumns: [
+        { name: "", logicalName: "리스트vo", type: "List", link: ""},
+    ],
+    voListcolumnType: ["List", "Vo"],
   },
   getters: {
   },
