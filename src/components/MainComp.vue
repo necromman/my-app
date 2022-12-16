@@ -4,6 +4,7 @@
       <label>Choosed database:</label>
       {{ changeDb }} {{$store.state.count}}
     </p>
+    <p>Sqlmap Path : {{ $store.state.sqlMapPath }}</p>
   </div>
   <hr>
   <!-- <div>
@@ -260,11 +261,11 @@ export default {
         });
         if(this.primaryKey.length > 0) this.createQuery += `\tPRIMARY KEY(${this.primaryKey.join(', ')})\n`
         this.createQuery += ')'
-        this.$refs.VoGenComp.generateVoQuery();
-        this.$refs.VoListGenComp.generateVoQuery();
-        this.$refs.SvcGenComp.generateVoQuery();
-        this.$refs.SvcImplGenComp.generateVoQuery();
-        this.$refs.DaoGenComp.generateVoQuery();
+        this.$refs.VoGenComp.generateQuery();
+        this.$refs.VoListGenComp.generateQuery();
+        this.$refs.SvcGenComp.generateQuery();
+        this.$refs.SvcImplGenComp.generateQuery();
+        this.$refs.DaoGenComp.generateQuery();
     },
     toUpperCaseFirst(str){
       return str.charAt(0).toUpperCase() + str.slice(1);

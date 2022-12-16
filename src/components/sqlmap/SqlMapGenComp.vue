@@ -1,5 +1,5 @@
 <template>
-  <textarea v-model="$store.state.daoQuery" style="height: 100px"></textarea>
+  <textarea v-model="$store.sqlmapQuery" style="height: 100px"></textarea>
 </template>
 
 <script>
@@ -16,17 +16,17 @@ export default {
   watch: {
   },
   methods: {
-    generateQuery() {
+    generateVoQuery() {
       this.columnsT = this.$store.state.columns.map(column => column).filter(name => name !== '')
-      this.$store.state.daoQuery = `package ${this.$store.state.packageName}.dao;\n`
-      this.$store.state.daoQuery += `
+      this.$store.sqlmapQuery = `package ${this.$store.state.packageName}.dao;\n`
+      this.$store.sqlmapQuery += `
 import java.util.List;
 import org.springframework.stereotype.Repository;
 import com.inswave.elfw.exception.ElException;
 import ${this.$store.state.packageName}.vo.${this.$store.state.projectName}Vo;
 import kr.re.kitech.biz.xom.base.dao.BizDefaultAbstractDAO;
 `
-      this.$store.state.daoQuery += `
+      this.$store.sqlmapQuery += `
 @Repository("${this.$store.state.projectName}DAO")
 public class ${this.$store.state.projectName}DAO extends BizDefaultAbstractDAO {
   

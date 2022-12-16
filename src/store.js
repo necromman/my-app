@@ -3,10 +3,13 @@ import { createStore } from 'vuex'
 export const store = createStore ({
   state: {
     count : 100,
+    // CgsCarUse_SQL_informix_MyBatis.xml
+    sqlMapPath : '/Bizwebapp/src/main/resources/inswave/sqlmap/kr/re/kitech/biz/',
     voQuery : '',
     voListQuery : '',
     serviceQuery : '',
     serviceImplQuery : '',
+    sqlmapQuery : '',
     daoQuery : '',
     selectedtaskClass: 'ccs',
     taskSubClass: 'cgs',

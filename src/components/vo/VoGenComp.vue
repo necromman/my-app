@@ -17,7 +17,7 @@ export default {
   watch: {
   },
   methods: {
-    generateVoQuery() {
+    generateQuery() {
       this.columnsT = this.$store.state.columns.map(column => column).filter(name => name !== '')
       this.$store.state.voQuery = `package ${this.$store.state.packageName}.vo;\n`
       this.$store.state.voQuery += `
