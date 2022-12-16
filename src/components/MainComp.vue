@@ -164,6 +164,9 @@ export default {
   watch: {
     '$store.state.taskSubClass': function() {
       this.onChangeSelectTask()
+    },
+    '$store.state.projectName': function() {
+      this.onChangeSelectTask()
     }
   },
   methods: {

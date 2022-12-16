@@ -29,15 +29,15 @@ public interface ${this.$store.state.projectName}Service {
   // List Select All
   public List<${this.$store.state.projectName}Vo> selectList() throws ElException;
   // List Select Param
-  public List<${this.$store.state.projectName}Vo> selectList(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws ElException;
+  public List<${this.$store.state.projectName}Vo> selectListItem(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws ElException;
   // Single Select
-  public ${this.$store.state.projectName}Vo selectSingle(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws ElException;
+  public ${this.$store.state.projectName}Vo selectSingleItem(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws ElException;
   // Insert
-  public ${this.$store.state.projectName}Vo insert${this.$store.state.projectName}(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws ElException;
+  public ${this.$store.state.projectName}Vo insertItem${this.$store.state.projectName}(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws ElException;
   // Update
-  public ${this.$store.state.projectName}Vo update${this.$store.state.projectName}(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws ElException;
+  public ${this.$store.state.projectName}Vo updateItem${this.$store.state.projectName}(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws ElException;
   // Delete
-  public ${this.$store.state.projectName}Vo delete${this.$store.state.projectName}(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws ElException;
+  public ${this.$store.state.projectName}Vo deleteItem${this.$store.state.projectName}(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws ElException;
   // Mail
   public void ${this.$store.state.taskSubClass}MailSend(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws ElException;
 }
