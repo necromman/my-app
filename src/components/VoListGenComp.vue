@@ -52,12 +52,12 @@ if(column.type == "List"){
   @ElVoField(physicalName = "${column.name}")`
   if(column.type == "List"){
     this.$store.state.voListQuery += `
-    public java.util.List<${column.link}> ${column.name} get${this.toUpperCaseFirst(column.name)}(){
+    public java.util.List<${column.link}> get${this.toUpperCaseFirst(column.name)}(){
       return ${column.name};
   }
 
   @ElVoField(physicalName = "${column.name}")
-  public void set${this.toUpperCaseFirst(column.name)}(java.util.List<${column.link}> ${column.name} ${column.name}){
+  public void set${this.toUpperCaseFirst(column.name)}(java.util.List<${column.link}> ${column.name}){
       this.${column.name} = ${column.name};
   }
 `
@@ -69,7 +69,7 @@ if(column.type == "List"){
   }
 
   @ElVoField(physicalName = "${column.name}")
-  public void set${this.toUpperCaseFirst(column.name)}(${column.link} ${column.name}){
+  public void set${this.toUpperCaseFirst(column.name)}(${column.link} ${column.name} ${column.name}){
       this.${column.name} = ${column.name};
   }
 `
@@ -79,7 +79,7 @@ if(column.type == "List"){
   @Override
   public String toString() {
       StringBuilder sb = new StringBuilder();
-      sb.append("${this.$store.state.projectName} [");
+      sb.append("${this.$store.state.projectName}ListVo [");
 `
       this.columnsT.forEach((column, index) => {
         if(index == this.columnsT.length-1){
@@ -103,14 +103,53 @@ if(column.type == "List"){
     return false;
   }
 
+`
+
+this.columnsT.forEach((column, index) => {
+  if(column.type == "List"){
+    this.$store.state.voListQuery +=
+    `
   @Override
   public void _xStreamEnc() {
+    for( int i=0 ; ${column.name} != null && i < ${column.name}.size() ; i++ ) {
+        ${column.link} vo = (${column.link})${column.name}.get(i);
+        vo._xStreamEnc();	 
+    }
+    `
+  }else{
+    this.$store.state.voListQuery +=
+    `if( this.${column.name} != null ) this.${column.name}._xStreamEnc();    `
+  }
+})
+this.$store.state.voListQuery +=
+`
   }
 
+`
+
+this.columnsT.forEach((column, index) => {
+  if(column.type == "List"){
+    this.$store.state.voListQuery +=
+    `
   @Override
   public void _xStreamDec() {
+    for( int i=0 ; ${column.name} != null && i < ${column.name}.size() ; i++ ) {
+        ${column.link} vo = (${column.link})${column.name}.get(i);
+        vo._xStreamDec();	 
+    }
+    `
+  }else{
+    this.$store.state.voListQuery +=
+    `if( this.${column.name} != null ) this.${column.name}._xStreamDec();    `
   }
-}`
+})
+this.$store.state.voListQuery +=
+`
+  }
+  
+}
+`
+
 
     },
     toUpperCaseFirst(str){
