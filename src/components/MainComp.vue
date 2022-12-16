@@ -105,6 +105,9 @@
     <textarea v-model="createQuery" @click="selectTextarea($event)" style="height: 100px"></textarea>
     <!-- <span>vo File</span>
     <textarea v-model="voQuery" @click="selectTextarea($event)" style="height: 100px"></textarea> -->
+    <span>SqlMap File</span>
+    <button type="button" @click="saveToFile($store.state.sqlmapQuery, '_SQL_informix_MyBatis', 'xml')">download</button>
+    <SqlMapGenComp ref="SqlMapGenComp"/>
     <span>DAO File</span>
     <button type="button" @click="saveToFile($store.state.daoQuery, 'DAO', 'java')">download</button>
     <DaoGenComp ref="DaoGenComp"/>
@@ -134,6 +137,7 @@ import VoListGenComp from './vo/VoListGenComp.vue'
 import SvcGenComp from './service/SvcGenComp.vue'
 import SvcImplGenComp from './service/SvcImplGenComp.vue'
 import DaoGenComp from './dao/DaoGenComp.vue'
+import SqlMapGenComp from './sqlmap/SqlMapGenComp.vue'
 import JSZip from 'jszip';
 
 export default {
@@ -142,7 +146,8 @@ export default {
     VoListGenComp,
     SvcGenComp,
     SvcImplGenComp,
-    DaoGenComp
+    DaoGenComp,
+    SqlMapGenComp
   },
    /* eslint-disable */
   /**
@@ -266,6 +271,7 @@ export default {
         this.$refs.SvcGenComp.generateQuery();
         this.$refs.SvcImplGenComp.generateQuery();
         this.$refs.DaoGenComp.generateQuery();
+        this.$refs.SqlMapGenComp.generateQuery();        
     },
     toUpperCaseFirst(str){
       return str.charAt(0).toUpperCase() + str.slice(1);
