@@ -105,13 +105,15 @@
     <!-- <span>vo File</span>
     <textarea v-model="voQuery" @click="selectTextarea($event)" style="height: 100px"></textarea> -->
     <span>vo File</span>
-    <button type="button" @click="saveToVoFile">download</button>
+    <button type="button" @click="saveToFile($store.state.voQuery, 'Vo')">download</button>
     <VoGenComp ref="VoGenComp"/>
+    <span>voList File</span>
+    <button type="button" @click="saveToFile($store.state.voListQuery, 'ListVo')">download</button>
     <VoListGenComp ref="VoListGenComp"/>
   </div>
 </template>
 <style>
-  textarea {width:100%;}
+  textarea {width: 65%;display: block;}
   p{margin:5px}
   input{text-align:center}
 </style>
@@ -178,11 +180,11 @@ export default {
       a.download = file.name;
       a.click();
     },
-    saveToVoFile(){
+    saveToFile(param, tail){
       // 먼저 Blob 생성
-      const blob = new Blob([this.$store.state.voQuery], {type: 'text/plain;charset=utf-8'});
+      const blob = new Blob([param], {type: 'text/plain;charset=utf-8'});
       // 파일 생성
-      const file = new File([blob], `${this.$store.state.projectName}Vo.java`, {type: 'text/plain;charset=utf-8'});
+      const file = new File([blob], `${this.$store.state.projectName}${tail}.java`, {type: 'text/plain;charset=utf-8'});
       // 생성된 파일을 다운로드
       const url = window.URL.createObjectURL(file);
       const a = document.createElement('a');

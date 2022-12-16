@@ -105,20 +105,24 @@ if(column.type == "List"){
 
 `
 
+
+this.$store.state.voListQuery +=
+`
+  @Override
+  public void _xStreamEnc() {
+`
 this.columnsT.forEach((column, index) => {
   if(column.type == "List"){
     this.$store.state.voListQuery +=
-    `
-  @Override
-  public void _xStreamEnc() {
-    for( int i=0 ; ${column.name} != null && i < ${column.name}.size() ; i++ ) {
+`    for( int i=0 ; ${column.name} != null && i < ${column.name}.size() ; i++ ) {
         ${column.link} vo = (${column.link})${column.name}.get(i);
         vo._xStreamEnc();	 
     }
-    `
+`
   }else{
     this.$store.state.voListQuery +=
-    `if( this.${column.name} != null ) this.${column.name}._xStreamEnc();    `
+`     if( this.${column.name} != null ) this.${column.name}._xStreamEnc();
+`
   }
 })
 this.$store.state.voListQuery +=
@@ -127,20 +131,23 @@ this.$store.state.voListQuery +=
 
 `
 
+this.$store.state.voListQuery +=
+`
+  @Override
+  public void _xStreamDec() {
+`
 this.columnsT.forEach((column, index) => {
   if(column.type == "List"){
     this.$store.state.voListQuery +=
-    `
-  @Override
-  public void _xStreamDec() {
-    for( int i=0 ; ${column.name} != null && i < ${column.name}.size() ; i++ ) {
+`    for( int i=0 ; ${column.name} != null && i < ${column.name}.size() ; i++ ) {
         ${column.link} vo = (${column.link})${column.name}.get(i);
         vo._xStreamDec();	 
     }
-    `
+`
   }else{
     this.$store.state.voListQuery +=
-    `if( this.${column.name} != null ) this.${column.name}._xStreamDec();    `
+`    if( this.${column.name} != null ) this.${column.name}._xStreamDec();
+`
   }
 })
 this.$store.state.voListQuery +=

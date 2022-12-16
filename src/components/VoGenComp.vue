@@ -1,5 +1,5 @@
 <template>
-  <textarea v-model="$store.state.voQuery" style="height: 300px"></textarea>
+  <textarea v-model="$store.state.voQuery" style="height: 100px"></textarea>
 </template>
 
 <script>
@@ -18,8 +18,7 @@ export default {
   },
   methods: {
     generateVoQuery() {
-      this.columns = this.$store.state.columns
-      this.columnsT = this.$store.state.columnsT
+      this.columnsT = this.$store.state.columns.map(column => column).filter(name => name !== '')
       this.$store.state.voQuery = `package ${this.$store.state.packageName}.vo;\n`
       this.$store.state.voQuery += `
 import com.inswave.elfw.annotation.ElDto;
@@ -60,7 +59,7 @@ public class ${this.$store.state.projectName}Vo extends kr.re.kitech.biz.xom.bas
   @Override
   public String toString() {
       StringBuilder sb = new StringBuilder();
-      sb.append("${this.$store.state.projectName} [");
+      sb.append("${this.$store.state.projectName}Vo [");
 `
       this.columnsT.forEach((column, index) => {
         if(index == this.columnsT.length-1){
