@@ -5,6 +5,7 @@ export const store = createStore ({
     count : 100,
     voQuery : '',
     voListQuery : '',
+    serviceQuery : '',
     selectedtaskClass: 'ccs',
     taskSubClass: 'cgs',
     packageName: '',

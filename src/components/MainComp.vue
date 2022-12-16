@@ -104,11 +104,14 @@
     <textarea v-model="createQuery" @click="selectTextarea($event)" style="height: 100px"></textarea>
     <!-- <span>vo File</span>
     <textarea v-model="voQuery" @click="selectTextarea($event)" style="height: 100px"></textarea> -->
+    <span>service File</span>
+    <button type="button" @click="saveToFile($store.state.serviceQuery, 'Service', 'java')">download</button>
+    <SvcGenComp ref="SvcGenComp"/>
     <span>vo File</span>
-    <button type="button" @click="saveToFile($store.state.voQuery, 'Vo')">download</button>
+    <button type="button" @click="saveToFile($store.state.voQuery, 'Vo', 'java')">download</button>
     <VoGenComp ref="VoGenComp"/>
     <span>voList File</span>
-    <button type="button" @click="saveToFile($store.state.voListQuery, 'ListVo')">download</button>
+    <button type="button" @click="saveToFile($store.state.voListQuery, 'ListVo', 'java')">download</button>
     <VoListGenComp ref="VoListGenComp"/>
   </div>
 </template>
@@ -121,12 +124,14 @@
 <script>
 import VoGenComp from './vo/VoGenComp.vue'
 import VoListGenComp from './vo/VoListGenComp.vue'
+import SvcGenComp from './service/SvcGenComp.vue'
 import JSZip from 'jszip';
 
 export default {
   components: {
     VoGenComp,
-    VoListGenComp
+    VoListGenComp,
+    SvcGenComp
   },
    /* eslint-disable */
   /**
@@ -180,11 +185,11 @@ export default {
       a.download = file.name;
       a.click();
     },
-    saveToFile(param, tail){
+    saveToFile(param, tail, ext){
       // 먼저 Blob 생성
       const blob = new Blob([param], {type: 'text/plain;charset=utf-8'});
       // 파일 생성
-      const file = new File([blob], `${this.$store.state.projectName}${tail}.java`, {type: 'text/plain;charset=utf-8'});
+      const file = new File([blob], `${this.$store.state.projectName}${tail}.${ext}`, {type: 'text/plain;charset=utf-8'});
       // 생성된 파일을 다운로드
       const url = window.URL.createObjectURL(file);
       const a = document.createElement('a');
@@ -244,6 +249,7 @@ export default {
         this.createQuery += ')'
         this.$refs.VoGenComp.generateVoQuery();
         this.$refs.VoListGenComp.generateVoQuery();
+        this.$refs.SvcGenComp.generateVoQuery();
     },
     toUpperCaseFirst(str){
       return str.charAt(0).toUpperCase() + str.slice(1);
@@ -259,7 +265,12 @@ export default {
       this.initializationDb()
     },
     onChangeSelectTask(){
-      this.$store.state.packageName = this.$store.state.projectRoot + this.$store.state.selectedtaskClass + `.${this.$store.state.taskSubClass}`
+      const path = this.$store.state.projectRoot + this.$store.state.selectedtaskClass + `.${this.$store.state.taskSubClass}`
+      this.$store.state.packageName = path
+      this.$store.state.voListcolumns.forEach((column, index) => {
+        this.$store.state.voListcolumns[index].link = `${path}.vo.${this.$store.state.projectName}Vo`
+      })
+      
     },
     initializationDb(){
       if(this.changeDb == 'INFORMIX') this.columnType = this.$store.state.informixColumnType
