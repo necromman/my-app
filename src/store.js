@@ -8,9 +8,9 @@ export const store = createStore ({
     selectedtaskClass: 'ccs',
     taskSubClass: 'cgs',
     packageName: '',
+    projectName : 'CgsCarUse',
     logicalName: 'logicName',
     projectRoot : 'kr.re.kitech.biz.',
-    projectName : 'projectName',
     tableName: 'tableName',    
     taskClassStatements : [
         {name: "ass", desc: "자산관리"},
@@ -45,7 +45,7 @@ export const store = createStore ({
          isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "int"},
       ],
     voListcolumns: [
-        { name: "", logicalName: "리스트vo", type: "List", link: ""},
+        //{ name: "CgsCarUseListVo", logicalName: "리스트vo", type: "List", link: ""},
     ],
     voListcolumnType: ["List", "Vo"],
   },

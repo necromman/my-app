@@ -29,10 +29,10 @@ import com.fasterxml.jackson.annotation.JsonFilter;
       this.$store.state.voQuery += `
 @JsonFilter("elExcludeFilter")
 @ElDto(FldYn = "", delimeterYn = "", logicalName = "${this.$store.state.logicalName}")
-public class ${this.$store.state.projectName} extends kr.re.kitech.biz.xom.base.model.BizCommVO {
+public class ${this.$store.state.projectName}ListVo extends kr.re.kitech.biz.xom.base.model.BizCommVO {
   private static final long serialVersionUID = 1L;
 
-  public ${this.$store.state.projectName}(){
+  public ${this.$store.state.projectName}ListVo(){
   }
 `
       this.columnsT.forEach((column, index) => {

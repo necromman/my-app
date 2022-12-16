@@ -1,5 +1,5 @@
 <template>
-  <textarea v-model="$store.state.voQuery" style="height: 100px"></textarea>
+  <textarea v-model="$store.state.voQuery" style="height: 300px"></textarea>
 </template>
 
 <script>
@@ -30,10 +30,10 @@ import com.fasterxml.jackson.annotation.JsonFilter;
       this.$store.state.voQuery += `
 @JsonFilter("elExcludeFilter")
 @ElDto(FldYn = "", delimeterYn = "", logicalName = "${this.$store.state.logicalName}")
-public class ${this.$store.state.projectName} extends kr.re.kitech.biz.xom.base.model.BizCommVO {
+public class ${this.$store.state.projectName}Vo extends kr.re.kitech.biz.xom.base.model.BizCommVO {
   private static final long serialVersionUID = 1L;
 
-  public ${this.$store.state.projectName}(){
+  public ${this.$store.state.projectName}Vo(){
   }
 `
       this.columnsT.forEach((column, index) => {

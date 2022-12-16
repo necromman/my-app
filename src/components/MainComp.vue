@@ -83,6 +83,7 @@
       <label style="width: 30px;display: inline-block;">{{index+1}} : </label>
       <input style="width:120px" type="text" v-model="column.name" placeholder="Column name">
       <input style="width:100px" type="text" v-model="column.logicalName" placeholder="logical Name">
+      <input style="width:250px" type="text" v-model="column.link" placeholder="link vo">
       <select v-model="$store.state.voListcolumns[index].type">
         <option v-for="type in $store.state.voListcolumnType" v-bind:key="type">{{ type }}</option>
       </select>
@@ -178,7 +179,7 @@ export default {
       // 먼저 Blob 생성
       const blob = new Blob([this.$store.state.voQuery], {type: 'text/plain;charset=utf-8'});
       // 파일 생성
-      const file = new File([blob], `${this.$store.state.projectName}.java`, {type: 'text/plain;charset=utf-8'});
+      const file = new File([blob], `${this.$store.state.projectName}Vo.java`, {type: 'text/plain;charset=utf-8'});
       // 생성된 파일을 다운로드
       const url = window.URL.createObjectURL(file);
       const a = document.createElement('a');
@@ -203,8 +204,9 @@ export default {
       )
     },
     addVoListColumn(index) {
+      let link =`${this.$store.state.projectRoot}${this.$store.state.selectedtaskClass}.${this.$store.state.taskSubClass}.${this.$store.state.projectName}Vo`
       this.$store.state.voListcolumns.unshift(
-        { name: "", logicalName: "리스트vo", link: ""},
+        { name: "", logicalName: "List Vo", type: "List", link: link},
       )
     },
     removeColumn(index) {
@@ -267,6 +269,12 @@ export default {
     console.log("created")
     this.initializationDb()
     this.onChangeSelectTask()
+    let link =`${this.$store.state.projectRoot}${this.$store.state.selectedtaskClass}.${this.$store.state.taskSubClass}.${this.$store.state.projectName}Vo`
+    this.$store.state.voListcolumns = [
+      { name: "CgsCarUseListVo", logicalName: "List Vo", type: "List", link: link},
+      { name: "CgsCarUse2Vo", logicalName: "Single Vo", type: "Vo", link: link},
+      ]
+    
   },
   /**
    * Mounting 단계
