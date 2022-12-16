@@ -17,16 +17,15 @@ export default {
   },
   methods: {
     generateVoQuery() {
-      this.columns = this.$store.state.columns
-      this.columnsT = this.$store.state.columnsT
-      this.$store.state.voQuery = `package ${this.$store.state.packageName}.vo;\n`
-      this.$store.state.voQuery += `
+      this.columnsT = this.$store.state.voListcolumns.map(column => column).filter(name => name !== '')
+      this.$store.state.voListQuery = `package ${this.$store.state.packageName}.vo;\n`
+      this.$store.state.voListQuery += `
 import com.inswave.elfw.annotation.ElDto;
 import com.inswave.elfw.annotation.ElDtoField;
 import com.inswave.elfw.annotation.ElVoField;
 import com.fasterxml.jackson.annotation.JsonFilter;
 `
-      this.$store.state.voQuery += `
+      this.$store.state.voListQuery += `
 @JsonFilter("elExcludeFilter")
 @ElDto(FldYn = "", delimeterYn = "", logicalName = "${this.$store.state.logicalName}")
 public class ${this.$store.state.projectName}ListVo extends kr.re.kitech.biz.xom.base.model.BizCommVO {
@@ -36,26 +35,47 @@ public class ${this.$store.state.projectName}ListVo extends kr.re.kitech.biz.xom
   }
 `
       this.columnsT.forEach((column, index) => {
-        this.$store.state.voQuery += `
-  @ElDtoField(logicalName = "${column.logicalName}", physicalName = "${column.name}", type = "${column.dataType}", typeKind = "", fldYn = "", delimeterYn = "", cryptoGbn = "", cryptoKind = "", length = 0, dotLen = 0, baseValue = "", desc = "")
-  private ${column.dataType} ${column.name};
-`
+        this.$store.state.voListQuery += `
+  @ElDtoField(logicalName = "${column.logicalName}", physicalName = "${column.name}", type = "", typeKind = "${column.type}", fldYn = "", delimeterYn = "", cryptoGbn = "", cryptoKind = "", length = 0, dotLen = 0, baseValue = "", desc = "")
+  `
+if(column.type == "List"){
+  this.$store.state.voListQuery += `private java.util.List<${column.link}> ${column.name};
+  `
+}else{
+  this.$store.state.voListQuery += `private ${column.link} ${column.name};
+  `
+}
       })
       
       this.columnsT.forEach((column, index) => {
-        this.$store.state.voQuery += `
-  @ElVoField(physicalName = "${column.name}")
-  public ${column.dataType} get${this.toUpperCaseFirst(column.name)}(){
+        this.$store.state.voListQuery += `
+  @ElVoField(physicalName = "${column.name}")`
+  if(column.type == "List"){
+    this.$store.state.voListQuery += `
+    public java.util.List<${column.link}> ${column.name} get${this.toUpperCaseFirst(column.name)}(){
       return ${column.name};
   }
 
   @ElVoField(physicalName = "${column.name}")
-  public void set${this.toUpperCaseFirst(column.name)}(${column.dataType} ${column.name}){
+  public void set${this.toUpperCaseFirst(column.name)}(java.util.List<${column.link}> ${column.name} ${column.name}){
       this.${column.name} = ${column.name};
   }
 `
+  }else{
+
+    this.$store.state.voListQuery += `
+    public ${column.link} get${this.toUpperCaseFirst(column.name)}(){
+      return ${column.name};
+  }
+
+  @ElVoField(physicalName = "${column.name}")
+  public void set${this.toUpperCaseFirst(column.name)}(${column.link} ${column.name}){
+      this.${column.name} = ${column.name};
+  }
+`
+ }
       })
-      this.$store.state.voQuery += `
+      this.$store.state.voListQuery += `
   @Override
   public String toString() {
       StringBuilder sb = new StringBuilder();
@@ -63,20 +83,20 @@ public class ${this.$store.state.projectName}ListVo extends kr.re.kitech.biz.xom
 `
       this.columnsT.forEach((column, index) => {
         if(index == this.columnsT.length-1){
-          this.$store.state.voQuery += 
+          this.$store.state.voListQuery += 
 `      sb.append("${column.name}").append("=").append(${column.name});
 `      }else{
-        this.$store.state.voQuery += 
+        this.$store.state.voListQuery += 
 `      sb.append("${column.name}").append("=").append(${column.name}).append(",");
 `      }
       })
 
-      this.$store.state.voQuery += 
+      this.$store.state.voListQuery += 
 `      sb.append("]");
       return sb.toString();
     }
 `
-      this.$store.state.voQuery +=
+      this.$store.state.voListQuery +=
 `
 
   public boolean isFixedLengthVo() {

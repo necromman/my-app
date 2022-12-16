@@ -107,6 +107,7 @@
     <span>vo File</span>
     <button type="button" @click="saveToVoFile">download</button>
     <VoGenComp ref="VoGenComp"/>
+    <VoListGenComp ref="VoListGenComp"/>
   </div>
 </template>
 <style>
@@ -117,11 +118,13 @@
 
 <script>
 import VoGenComp from './VoGenComp.vue'
+import VoListGenComp from './VoListGenComp.vue'
 import JSZip from 'jszip';
 
 export default {
   components: {
-    VoGenComp
+    VoGenComp,
+    VoListGenComp
   },
    /* eslint-disable */
   /**
@@ -204,9 +207,9 @@ export default {
       )
     },
     addVoListColumn(index) {
-      let link =`${this.$store.state.projectRoot}${this.$store.state.selectedtaskClass}.${this.$store.state.taskSubClass}.${this.$store.state.projectName}Vo`
+      let link =`${this.$store.state.projectRoot}${this.$store.state.selectedtaskClass}.${this.$store.state.taskSubClass}.vo.${this.$store.state.projectName}Vo`
       this.$store.state.voListcolumns.unshift(
-        { name: "", logicalName: "List Vo", type: "List", link: link},
+        { name: "nameVoList", logicalName: "List Vo", type: "List", link: link},
       )
     },
     removeColumn(index) {
@@ -238,6 +241,7 @@ export default {
         if(this.primaryKey.length > 0) this.createQuery += `\tPRIMARY KEY(${this.primaryKey.join(', ')})\n`
         this.createQuery += ')'
         this.$refs.VoGenComp.generateVoQuery();
+        this.$refs.VoListGenComp.generateVoQuery();
     },
     toUpperCaseFirst(str){
       return str.charAt(0).toUpperCase() + str.slice(1);
@@ -269,9 +273,9 @@ export default {
     console.log("created")
     this.initializationDb()
     this.onChangeSelectTask()
-    let link =`${this.$store.state.projectRoot}${this.$store.state.selectedtaskClass}.${this.$store.state.taskSubClass}.${this.$store.state.projectName}Vo`
+    let link =`${this.$store.state.projectRoot}${this.$store.state.selectedtaskClass}.${this.$store.state.taskSubClass}.vo.${this.$store.state.projectName}Vo`
     this.$store.state.voListcolumns = [
-      { name: "CgsCarUseListVo", logicalName: "List Vo", type: "List", link: link},
+      { name: "CgsCarUseVoList", logicalName: "List Vo", type: "List", link: link},
       { name: "CgsCarUse2Vo", logicalName: "Single Vo", type: "Vo", link: link},
       ]
     
