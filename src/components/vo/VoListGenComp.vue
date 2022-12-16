@@ -121,7 +121,7 @@ this.columnsT.forEach((column, index) => {
 `
   }else{
     this.$store.state.voListQuery +=
-`     if( this.${column.name} != null ) this.${column.name}._xStreamEnc();
+`    if( this.${column.name} != null ) this.${column.name}._xStreamEnc();
 `
   }
 })

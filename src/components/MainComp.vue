@@ -119,8 +119,8 @@
 </style>
 
 <script>
-import VoGenComp from './VoGenComp.vue'
-import VoListGenComp from './VoListGenComp.vue'
+import VoGenComp from './vo/VoGenComp.vue'
+import VoListGenComp from './vo/VoListGenComp.vue'
 import JSZip from 'jszip';
 
 export default {
