@@ -18,44 +18,45 @@ export default {
   methods: {
     generateVoQuery() {
       this.columnsT = this.$store.state.columns.map(column => column).filter(name => name !== '')
-      this.$store.sqlmapQuery = `package ${this.$store.state.packageName}.dao;\n`
-      this.$store.sqlmapQuery += `
-import java.util.List;
-import org.springframework.stereotype.Repository;
-import com.inswave.elfw.exception.ElException;
-import ${this.$store.state.packageName}.vo.${this.$store.state.projectName}Vo;
-import kr.re.kitech.biz.xom.base.dao.BizDefaultAbstractDAO;
+      this.$store.sqlmapQuery += 
 `
-      this.$store.sqlmapQuery += `
-@Repository("${this.$store.state.projectName}DAO")
-public class ${this.$store.state.projectName}DAO extends BizDefaultAbstractDAO {
-  
-  public List<${this.$store.state.projectName}Vo> selectList() throws ElException {
-    List<${this.$store.state.projectName}Vo> result = (List<${this.$store.state.projectName}Vo>)list("${this.$store.state.packageName}.selectList"); 
-    return result;
-  }
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper      
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"      
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-  public List<${this.$store.state.projectName}Vo> selectListItem(${this.$store.state.projectName}Vo vo) throws ElException {
-    return (List<${this.$store.state.projectName}Vo>)list("${this.$store.state.packageName}.selectListItem", vo);
-  }
+<mapper namespace="${this.$store.state.packageName}">
 
-  public ${this.$store.state.projectName}Vo selectSingleItem(${this.$store.state.projectName}Vo vo) throws ElException {
-    return (${this.$store.state.projectName}Vo) selectByPk("${this.$store.state.packageName}.selectSingleItem", vo);
-  }
+  <select id="selectListItem" parameterType="${this.$store.state.packageName}.vo.${this.$store.state.projectName}Vo" resultType="${this.$store.state.packageName}.vo.${this.$store.state.projectName}Vo">
+    SELECT   /* QueryID : ${this.$store.state.packageName}.selectListItem */
+      column1,
+      column2
+    FROM tableName
+    WHERE column1 = #{param}
+    <if test="param2 != null">
+      AND column1 LIKE DECODE(#{param2}, '', '%', #{param2})
+    </if>
+    <if test="param3 != null">
+      AND column1 = #{param3}
+    </if>
 
-  public int insertItem(${this.$store.state.projectName}Vo vo) throws ElException {
-    return insert("${this.$store.state.packageName}.insertItem", vo);
-  }
+  </select>
 
-  public int updateItem(${this.$store.state.projectName}Vo vo) throws ElException {
-    return update("${this.$store.state.packageName}.updateItem", vo);
-  }
+  <insert id="insertItem" parameterType="${this.$store.state.packageName}.vo.${this.$store.state.projectName}Vo">
+    INSERT INTO tableName     /* QueryID : ${this.$store.state.packageName}.insertItem */
+    (
+      <if test="param1        != null and param1 != ''" >column1 ,</if>
+      column2,
+    ) VALUES (
+      <if test="param1        != null and param1 != ''">#{param1} ,</if>
+      param2
+    )
 
-  public int deleteItem(${this.$store.state.projectName}Vo vo) throws ElException {
-    return update("${this.$store.state.packageName}.deleteItem", vo);
-  }
+  </insert>
 
-}
+
+
+</mapper>
 `
     },
     toUpperCaseFirst(str){
