@@ -18,7 +18,7 @@ export default {
   methods: {
     generateVoQuery() {
       this.columnsT = this.$store.state.columns.map(column => column).filter(name => name !== '')
-      this.$store.state.serviceImplQuery = `package ${this.$store.state.packageName}.service;\n`
+      this.$store.state.serviceImplQuery = `package ${this.$store.state.packageName}.service.impl;\n`
       this.$store.state.serviceImplQuery += `
 import java.io.IOException;
 import java.util.ArrayList;
@@ -83,6 +83,39 @@ public class ${this.$store.state.projectName}ServiceImpl  extends EgovAbstractSe
   @Override
 	public int deleteItem(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws Exception {
 		return ${this.$store.state.taskSubClass}DAO.delete${this.$store.state.projectName}(${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo);
+	}
+
+  @Override
+	public void ${this.$store.state.taskSubClass}MailSend(${this.$store.state.projectName}Vo ${this.$store.state.taskSubClass}Vo) throws ElException {
+		MailTemplateVo templateVo = new MailTemplateVo();
+		Map<String, String> templateVar = new HashMap<String, String>();
+		BizUserHeader siteUserHeader = (BizUserHeader)ControllerContextUtil.getUserHeader();
+		
+		
+		templateVar.put("@data@", ${this.$store.state.taskSubClass}Vo.getDataName());
+		
+		String subject = "subject";
+		String templatePath = "${this.$store.state.selectedtaskClass}/TemplateMailName";
+		String syspayno = siteUserHeader.getSession().getSn();
+		String toAddr = ${this.$store.state.taskSubClass}DAO.selectReqPsnEmail(${this.$store.state.taskSubClass}Vo).getEmail();
+		String sender = siteUserHeader.getSession().getUid() + "@kitech.re.kr";
+		
+		templateVo.setContentVar(templateVar);
+		List<MailTemplateVo> templateVars = new ArrayList<>();
+		templateVars.add(templateVo);
+		
+		mailSender.sendMessage(
+			// 비즈니스 타입, 행위자 시스템 사번, 개별발송여부는 고정 속성
+			new BizMail.Builder(syspayno, Business.CCS, true)
+				.senderEmail(sender.trim())
+				.toAddr(toAddr.trim())
+				//.ccAddr(ccAddress)
+				.subject(subject)
+				.savesent(false)	// 받은 편지함 저장 여부
+				.logging(true)	// 로그 저장 여부
+				.templatePath(templatePath)
+				.templateVars(templateVars)
+			.build());
 	}
 
 }

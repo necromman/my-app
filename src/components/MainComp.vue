@@ -104,6 +104,9 @@
     <textarea v-model="createQuery" @click="selectTextarea($event)" style="height: 100px"></textarea>
     <!-- <span>vo File</span>
     <textarea v-model="voQuery" @click="selectTextarea($event)" style="height: 100px"></textarea> -->
+    <span>serviceImpl File</span>
+    <button type="button" @click="saveToFile($store.state.serviceImplQuery, 'ServiceImpl', 'java')">download</button>
+    <SvcImplGenComp ref="SvcImplGenComp"/>
     <span>service File</span>
     <button type="button" @click="saveToFile($store.state.serviceQuery, 'Service', 'java')">download</button>
     <SvcGenComp ref="SvcGenComp"/>
@@ -125,13 +128,15 @@
 import VoGenComp from './vo/VoGenComp.vue'
 import VoListGenComp from './vo/VoListGenComp.vue'
 import SvcGenComp from './service/SvcGenComp.vue'
+import SvcImplGenComp from './service/SvcImplGenComp.vue'
 import JSZip from 'jszip';
 
 export default {
   components: {
     VoGenComp,
     VoListGenComp,
-    SvcGenComp
+    SvcGenComp,
+    SvcImplGenComp
   },
    /* eslint-disable */
   /**
@@ -253,6 +258,7 @@ export default {
         this.$refs.VoGenComp.generateVoQuery();
         this.$refs.VoListGenComp.generateVoQuery();
         this.$refs.SvcGenComp.generateVoQuery();
+        this.$refs.SvcImplGenComp.generateVoQuery();        
     },
     toUpperCaseFirst(str){
       return str.charAt(0).toUpperCase() + str.slice(1);
