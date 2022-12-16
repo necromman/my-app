@@ -106,7 +106,7 @@ public class ${this.$store.state.projectName}ServiceImpl  extends EgovAbstractSe
 		
 		mailSender.sendMessage(
 			// 비즈니스 타입, 행위자 시스템 사번, 개별발송여부는 고정 속성
-			new BizMail.Builder(syspayno, Business.CCS, true)
+			new BizMail.Builder(syspayno, Business.${this.$store.state.selectedtaskClass.toUpperCase()}, true)
 				.senderEmail(sender.trim())
 				.toAddr(toAddr.trim())
 				//.ccAddr(ccAddress)
