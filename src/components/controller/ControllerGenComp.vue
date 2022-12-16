@@ -51,6 +51,13 @@ public class ${this.$store.state.projectName}Controller {
       ${this.taskSubClass}VoList.set${this.$store.state.packageName}VoList(list);
       return ${this.taskSubClass}VoList;
   }
+
+  @ElService(key="Svc${this.selectedtaskClass}${this.taskSubClass}COMI01")
+  @RequestMapping(value="Svc${this.selectedtaskClass}${this.taskSubClass}COMR01")
+  @ElDescription(sub="insertItem",desc="insertItem")
+  public void insertItem(${this.$store.state.packageName}Vo ${this.taskSubClass}Vo) throws Exception {
+      ${this.taskSubClass}Service.insertItem(${this.taskSubClass}Vo);
+  }
   
   
 
