@@ -1,0 +1,71 @@
+<template>
+  <textarea v-model="$store.controllerQuery" style="height: 100px"></textarea>
+</template>
+
+<script>
+export default {
+   /* eslint-disable */
+  beforeCreate() {
+  },
+  data() {
+    return {
+      columns : '',
+      columnsT : '',
+      selectedtaskClass : '',
+      taskSubClass : ''
+    }
+  },
+  watch: {
+  },
+  methods: {
+    generateQuery() {
+      this.selectedtaskClass = this.$store.state.selectedtaskClass.toUpperCase()
+      this.taskSubClass = this.$store.state.taskSubClass.toUpperCase()
+      this.columnsT = this.$store.state.columns.map(column => column).filter(name => name !== '')
+      this.$store.controllerQuery = `package ${this.$store.state.packageName}.web;\n`
+      this.$store.controllerQuery += `
+import java.util.List;
+import javax.annotation.Resource;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import com.inswave.elfw.annotation.ElDescription;
+import com.inswave.elfw.annotation.ElService;
+import com.inswave.elfw.annotation.ElValidator;
+
+import ${this.$store.state.packageName}.vo.${this.$store.state.projectName}Service;
+import ${this.$store.state.packageName}.vo.${this.$store.state.projectName}Vo
+`
+      this.$store.controllerQuery += `
+@Controller
+public class ${this.$store.state.projectName}Controller {
+
+  @Resource(name = "${this.$store.state.projectName}ServiceImpl")
+  private ${this.$store.state.projectName}Service ${this.$store.state.taskSubClass}Service;
+
+  @ElService(key="Svc${this.selectedtaskClass}${this.taskSubClass}COMR01")
+  @RequestMapping(value="Svc${this.selectedtaskClass}${this.taskSubClass}COMR01")
+  @ElDescription(sub="selectListItem",desc="selectListItem")
+  public ${this.$store.state.packageName}Vo selectListItem(${this.$store.state.packageName}Vo ${this.taskSubClass}Vo) throws Exception {
+      List<${this.$store.state.packageName}Vo> list = ${this.taskSubClass}Service.selectListItem(${this.taskSubClass}Vo);
+      ${this.$store.state.packageName}Vo ${this.taskSubClass}VoList = new ${this.$store.state.packageName}Vo();
+      ${this.taskSubClass}VoList.set${this.$store.state.packageName}VoList(list);
+      return ${this.taskSubClass}VoList;
+  }
+  
+  
+
+}
+`
+    },
+    toUpperCaseFirst(str){
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    },
+  },
+  created() {
+  },
+  beforeMount() {
+  },
+  mounted() {
+  },
+}
+</script>
