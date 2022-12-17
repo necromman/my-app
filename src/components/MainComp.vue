@@ -4,7 +4,8 @@
       <label>Choosed database:</label>
       {{ changeDb }} {{$store.state.count}}
     </p>
-    <p>Sqlmap Path : {{ $store.state.sqlMapPath }}</p>
+    <p>Sqlmap Path : {{ sqlmapPath }}</p>
+    <p>Java Path : {{ javaPath }}</p>
   </div>
   <hr>
   <!-- <div>
@@ -159,6 +160,8 @@ export default {
   },
   data() {
     return {
+      sqlmapPath : this.$store.state.basePath + this.$store.state.sqlMapPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\',
+      javaPath : this.$store.state.basePath + this.$store.state.javaPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\',
       temp : this.$store.state.count,
       changeDb : 'INFORMIX',
       primaryKey : [],
@@ -292,6 +295,7 @@ export default {
       this.$store.state.voListcolumns.forEach((column, index) => {
         this.$store.state.voListcolumns[index].link = `${path}.vo.${this.$store.state.projectName}Vo`
       })
+      this.sqlmapPath = this.$store.state.basePath + this.$store.state.sqlMapPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\'
       
     },
     initializationDb(){

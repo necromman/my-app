@@ -4,7 +4,11 @@ export const store = createStore ({
   state: {
     count : 100,
     // CgsCarUse_SQL_informix_MyBatis.xml
-    sqlMapPath : '/Bizwebapp/src/main/resources/inswave/sqlmap/kr/re/kitech/biz/',
+    basePath : 'C:\\InswaveTool\\workspace\\Bizwebapp\\src\\main\\',
+    sqlMapPath : 'resources\\inswave\\sqlmap\\kr\\re\\kitech\\biz\\',
+    javaPath : 'java\\kr\\re\\kitech\\biz\\',
+    xmlPath : 'webapp\\ui\\',
+    batchQuery : '',
     controllerQuery : '',
     voQuery : '',
     voListQuery : '',
