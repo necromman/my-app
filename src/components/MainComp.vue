@@ -4,6 +4,7 @@
       <label>Choosed database:</label>
       {{ changeDb }} {{$store.state.count}}
     </p>
+    <p>{{ batchQuery }}</p>
     <p>Sqlmap Path : {{ sqlmapPath }}</p>
     <p>Java Path : {{ javaPath }}</p>
     <p>Xml Path : {{ xmlPath }}</p>
@@ -108,6 +109,9 @@
     <!-- <span>vo File</span>
     <textarea v-model="voQuery" @click="selectTextarea($event)" style="height: 100px"></textarea> -->
     <span>Controller File</span>
+    <button type="button" @click="saveToFile(batchQuery, '', 'bat')">download</button>
+    <textarea v-model="batchQuery" style="height: 100px"></textarea>
+    <span>Controller File</span>
     <button type="button" @click="saveToFile($store.state.controllerQuery, 'Controller', 'java')">download</button>
     <ControllerGenComp ref="ControllerGenComp"/>
     <span>SqlMap File</span>
@@ -166,6 +170,7 @@ export default {
   },
   data() {
     return {
+      batchQuery :`@echo off`,
       sqlmapPath : this.$store.state.basePath + this.$store.state.sqlMapPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\',
       javaPath : this.$store.state.basePath + this.$store.state.javaPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\',
       xmlPath : this.$store.state.basePath + this.$store.state.xmlPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\',
@@ -327,7 +332,15 @@ export default {
       { name: "CgsCarUseVoList", logicalName: "List Vo", type: "List", link: link},
       { name: "CgsCarUse2Vo", logicalName: "Single Vo", type: "Vo", link: link},
       ]
-    
+    this.batchQuery += `
+xcopy "%CD%\\${this.$store.state.projectName}Controller.java" "${this.javaPath}web" /y
+xcopy "%CD%\\${this.$store.state.projectName}DAO.java" "${this.javaPath}dao" /y
+xcopy "%CD%\\${this.$store.state.projectName}ServiceImpl.java" "${this.javaPath}service\\impl" /y
+xcopy "%CD%\\${this.$store.state.projectName}Service.java" "${this.javaPath}service" /y
+xcopy "%CD%\\${this.$store.state.projectName}Vo.java" "${this.javaPath}vo" /y
+xcopy "%CD%\\${this.$store.state.projectName}ListVo.java" "${this.javaPath}vo" /y
+xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.sqlmapPath}" /y
+`
   },
   /**
    * Mounting 단계
