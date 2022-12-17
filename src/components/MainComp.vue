@@ -6,6 +6,7 @@
     </p>
     <p>Sqlmap Path : {{ sqlmapPath }}</p>
     <p>Java Path : {{ javaPath }}</p>
+    <p>Xml Path : {{ xmlPath }}</p>
   </div>
   <hr>
   <!-- <div>
@@ -106,6 +107,9 @@
     <textarea v-model="createQuery" @click="selectTextarea($event)" style="height: 100px"></textarea>
     <!-- <span>vo File</span>
     <textarea v-model="voQuery" @click="selectTextarea($event)" style="height: 100px"></textarea> -->
+    <span>Controller File</span>
+    <button type="button" @click="saveToFile($store.state.controllerQuery, 'Controller', 'java')">download</button>
+    <ControllerGenComp ref="ControllerGenComp"/>
     <span>SqlMap File</span>
     <button type="button" @click="saveToFile($store.state.sqlmapQuery, '_SQL_informix_MyBatis', 'xml')">download</button>
     <SqlMapGenComp ref="SqlMapGenComp"/>
@@ -139,6 +143,7 @@ import SvcGenComp from './service/SvcGenComp.vue'
 import SvcImplGenComp from './service/SvcImplGenComp.vue'
 import DaoGenComp from './dao/DaoGenComp.vue'
 import SqlMapGenComp from './sqlmap/SqlMapGenComp.vue'
+import ControllerGenComp from './controller/ControllerGenComp.vue'
 import JSZip from 'jszip';
 
 export default {
@@ -148,7 +153,8 @@ export default {
     SvcGenComp,
     SvcImplGenComp,
     DaoGenComp,
-    SqlMapGenComp
+    SqlMapGenComp,
+    ControllerGenComp
   },
    /* eslint-disable */
   /**
@@ -162,6 +168,7 @@ export default {
     return {
       sqlmapPath : this.$store.state.basePath + this.$store.state.sqlMapPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\',
       javaPath : this.$store.state.basePath + this.$store.state.javaPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\',
+      xmlPath : this.$store.state.basePath + this.$store.state.xmlPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\',
       temp : this.$store.state.count,
       changeDb : 'INFORMIX',
       primaryKey : [],
@@ -269,12 +276,13 @@ export default {
         });
         if(this.primaryKey.length > 0) this.createQuery += `\tPRIMARY KEY(${this.primaryKey.join(', ')})\n`
         this.createQuery += ')'
-        this.$refs.VoGenComp.generateQuery();
-        this.$refs.VoListGenComp.generateQuery();
-        this.$refs.SvcGenComp.generateQuery();
-        this.$refs.SvcImplGenComp.generateQuery();
-        this.$refs.DaoGenComp.generateQuery();
-        this.$refs.SqlMapGenComp.generateQuery();        
+        this.$refs.VoGenComp.generateQuery()
+        this.$refs.VoListGenComp.generateQuery()
+        this.$refs.SvcGenComp.generateQuery()
+        this.$refs.SvcImplGenComp.generateQuery()
+        this.$refs.DaoGenComp.generateQuery()
+        this.$refs.SqlMapGenComp.generateQuery()
+        this.$refs.ControllerGenComp.generateQuery()
     },
     toUpperCaseFirst(str){
       return str.charAt(0).toUpperCase() + str.slice(1);
@@ -296,6 +304,8 @@ export default {
         this.$store.state.voListcolumns[index].link = `${path}.vo.${this.$store.state.projectName}Vo`
       })
       this.sqlmapPath = this.$store.state.basePath + this.$store.state.sqlMapPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\'
+      this.javaPath = this.$store.state.basePath + this.$store.state.javaPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\'
+      this.xmlPath = this.$store.state.basePath + this.$store.state.xmlPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\'
       
     },
     initializationDb(){

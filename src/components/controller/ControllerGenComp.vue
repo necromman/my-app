@@ -1,5 +1,5 @@
 <template>
-  <textarea v-model="$store.controllerQuery" style="height: 100px"></textarea>
+  <textarea v-model="$store.state.controllerQuery" style="height: 100px"></textarea>
 </template>
 
 <script>
@@ -22,8 +22,8 @@ export default {
       this.selectedtaskClass = this.$store.state.selectedtaskClass.toUpperCase()
       this.taskSubClass = this.$store.state.taskSubClass.toUpperCase()
       this.columnsT = this.$store.state.columns.map(column => column).filter(name => name !== '')
-      this.$store.controllerQuery = `package ${this.$store.state.packageName}.web;\n`
-      this.$store.controllerQuery += `
+      this.$store.state.controllerQuery = `package ${this.$store.state.packageName}.web;\n`
+      this.$store.state.controllerQuery += `
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
@@ -35,7 +35,7 @@ import com.inswave.elfw.annotation.ElValidator;
 import ${this.$store.state.packageName}.vo.${this.$store.state.projectName}Service;
 import ${this.$store.state.packageName}.vo.${this.$store.state.projectName}Vo
 `
-      this.$store.controllerQuery += `
+      this.$store.state.controllerQuery += `
 @Controller
 public class ${this.$store.state.projectName}Controller {
 
