@@ -107,7 +107,7 @@
     <textarea v-model="createQuery" @click="selectTextarea($event)" style="height: 100px"></textarea>
     <!-- <span>vo File</span>
     <textarea v-model="voQuery" @click="selectTextarea($event)" style="height: 100px"></textarea> -->
-    <span>Controller File</span>
+    <span>FileCopyBatch File</span>
     <button type="button" @click="saveToFile(batchQuery, '', 'bat')">download</button>
     <textarea v-model="batchQuery" style="height: 100px"></textarea>
     <span>Controller File</span>
