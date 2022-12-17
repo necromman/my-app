@@ -4,7 +4,6 @@
       <label>Choosed database:</label>
       {{ changeDb }} {{$store.state.count}}
     </p>
-    <p>{{ batchQuery }}</p>
     <p>Sqlmap Path : {{ sqlmapPath }}</p>
     <p>Java Path : {{ javaPath }}</p>
     <p>Xml Path : {{ xmlPath }}</p>
