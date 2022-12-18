@@ -147,7 +147,8 @@ import SvcImplGenComp from './service/SvcImplGenComp.vue'
 import DaoGenComp from './dao/DaoGenComp.vue'
 import SqlMapGenComp from './sqlmap/SqlMapGenComp.vue'
 import ControllerGenComp from './controller/ControllerGenComp.vue'
-import JSZip from 'jszip';
+import JSZip from 'jszip'
+import { saveAs } from 'file-saver';
 
 export default {
   components: {
@@ -202,21 +203,20 @@ export default {
   methods: {
     downloadZipFile() {
       const zip = new JSZip();
-      zip.file(`${this.$store.state.projectName}.java`, this.$store.state.voQuery);
-      // for (let i = 0; i < this.textareaList.length; i++) {
-      //   const textarea = this.textareaList[i];
-      //   zip.file(`file${i + 1}.txt`, textarea.content);
-      // }
-      const content = zip.generate({ type: 'blob' });
+    zip.file(`${this.$store.state.projectName}.bat`, this.$store.state.batchQuery);
+    zip.file(`${this.$store.state.projectName}Controller.java`, this.$store.state.controllerQuery);
+    zip.file(`${this.$store.state.projectName}DAO.java`, this.$store.state.daoQuery);
+    zip.file(`${this.$store.state.projectName}ServiceImpl.java`, this.$store.state.serviceImplQuery);
+    zip.file(`${this.$store.state.projectName}Service.java`, this.$store.state.serviceQuery);
+    zip.file(`${this.$store.state.projectName}Vo.java`, this.$store.state.voQuery);
+    zip.file(`${this.$store.state.projectName}ListVo.java`, this.$store.state.voListQuery);
+    zip.file(`${this.$store.state.projectName}_SQL_informix_MyBatis.xml`, this.$store.state.sqlmapQuery);
 
-      const file = new File([content], 'myfile.zip', { type: 'application/zip' });
-
-      // 생성된 파일을 다운로드
-      const url = window.URL.createObjectURL(file);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = file.name;
-      a.click();
+    // zip 파일을 생성합니다.
+    zip.generateAsync({ type: 'blob' }).then(function (content) {
+      // 생성된 zip 파일을 일괄 다운로드합니다.
+      saveAs(content, 'queries.zip');
+});
     },
     saveToFile(param, tail, ext){
       // 먼저 Blob 생성
