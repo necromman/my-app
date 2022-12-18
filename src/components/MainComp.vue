@@ -203,7 +203,7 @@ export default {
   methods: {
     downloadZipFile() {
       const zip = new JSZip();
-    zip.file(`${this.$store.state.projectName}.bat`, this.$store.state.batchQuery);
+    zip.file(`${this.$store.state.projectName}.bat`, this.batchQuery);
     zip.file(`${this.$store.state.projectName}Controller.java`, this.$store.state.controllerQuery);
     zip.file(`${this.$store.state.projectName}DAO.java`, this.$store.state.daoQuery);
     zip.file(`${this.$store.state.projectName}ServiceImpl.java`, this.$store.state.serviceImplQuery);
