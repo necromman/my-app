@@ -3,6 +3,8 @@
     <textarea cols="30" rows="10">
       TO-DO
         기능
+          - 라우팅
+          - xml 생성 컴포넌트
           - vo 무한생성
           - DB 명세서 출력
           ....
