@@ -61,28 +61,62 @@
       <label>Project name:</label>
       <input type="text" v-model="$store.state.projectName" placeholder="project name">
     </p>
-    <p>
+    <!-- <p>
       <label>Logical name:</label>
       <input type="text" v-model="$store.state.logicalName" placeholder="logical Name">
     </p>
     <p>
       <label>Table name:</label>
       <input type="text" v-model="$store.state.tableName" placeholder="Table name">
+    </p> -->
+
+  <hr>
+  <label>Add VoList columns:</label>
+  <button type="button" @click="addVoListColumn">Add</button>
+  <div v-for="(column, index) in $store.state.voListcolumns" :key="index">
+    <label style="width: 30px;display: inline-block;">{{index+1}} : </label>
+    <input style="width:120px" type="text" v-model="column.name" placeholder="Column name">
+    <input style="width:100px" type="text" v-model="column.logicalName" placeholder="logical Name">
+    <input style="width:250px" type="text" v-model="column.link" placeholder="link vo">
+    <select v-model="$store.state.voListcolumns[index].type">
+      <option v-for="type in $store.state.voListcolumnType" v-bind:key="type">{{ type }}</option>
+    </select>
+    <button type="button" tabindex="-1" @click="removeVoListColumn(index)">Remove</button>
+  </div>
+
+  <hr>
+  <label>Add voCumns:</label>
+  <button type="button" @click="addVoColumn">Add</button>
+  <label>Remove voCumns:</label>
+  <button type="button" @click="removeVoColumn">Remove</button>
+  <div v-for="(column, index) in $store.state.voCumns" :key="index">
+    <hr>
+    <p>
+      <label>Vo name:</label>
+      <input type="text" v-model="column.name" placeholder="vo Name">
+    </p>
+    <p>
+      <label>Logical name:</label>
+      <input type="text" v-model="column.logicalName" placeholder="logical Name">
+    </p>
+    <p>
+      <label>Table name:</label>
+      <input type="text" v-model="column.tableName" placeholder="Table name">
     </p>
     <label>Add columns:</label>
-    <button type="button" @click="addColumn">Add</button>
-    <div v-for="(column, index) in $store.state.columns" :key="index">
-      <label style="width: 30px;display: inline-block;">{{index+1}} : </label>
+    <button type="button" @click="addColumn(index)">Add</button>
+    <div v-for="(column, sindex) in $store.state.voCumns[index].columns" :key="sindex">
+      <label style="width: 30px;display: inline-block;">{{sindex+1}} : </label>
       <input style="width:120px" type="text" v-model="column.name" placeholder="Column name">
       <input style="width:100px" type="text" v-model="column.logicalName" placeholder="logical Name">
       <!-- sql type -->
-      <select v-model="$store.state.columns[index].sqlType"
-              @change="onChangeTypeLen(index, $store.state.columns[index].sqlType)">
+      <select v-model="$store.state.voCumns[index].columns[sindex].sqlType"
+              @change="onChangeTypeLen(index, sindex, $store.state.voCumns[index].columns[sindex].sqlType)">
         <option v-for="type in columnType" v-bind:key="type.name">{{ type.name }}</option>
       </select>
-      <input style="width:30px" type="text" v-model="$store.state.columns[index].sqlLen" placeholder="Type len">
+      <input style="width:30px" type="text" v-model="$store.state.voCumns[index].columns[sindex].sqlLen" placeholder="Type len">
       <!-- vo type -->
-      <select v-model="$store.state.columns[index].dataType">
+      <select v-model="$store.state.voCumns[index].columns[sindex].dataType">
         <option v-for="type in $store.state.voColumnType" v-bind:key="type">{{ type }}</option>
       </select>
       <label>
@@ -93,23 +127,9 @@
         pk :
         <input type="checkbox" v-model="column.isPrimary" /> 
       </label>
-      <button type="button" tabindex="-1" @click="removeColumn(index)">Remove</button>
+      <button type="button" tabindex="-1" @click="removeColumn(index, sindex)">Remove</button>
     </div>
-    
-    <hr>
-    <label>Add VoList columns:</label>
-    <button type="button" @click="addVoListColumn">Add</button>
-    <div v-for="(column, index) in $store.state.voListcolumns" :key="index">
-      <label style="width: 30px;display: inline-block;">{{index+1}} : </label>
-      <input style="width:120px" type="text" v-model="column.name" placeholder="Column name">
-      <input style="width:100px" type="text" v-model="column.logicalName" placeholder="logical Name">
-      <input style="width:250px" type="text" v-model="column.link" placeholder="link vo">
-      <select v-model="$store.state.voListcolumns[index].type">
-        <option v-for="type in $store.state.voListcolumnType" v-bind:key="type">{{ type }}</option>
-      </select>
-      <button type="button" tabindex="-1" @click="removeVoListColumn(index)">Remove</button>
-    </div>
-
+  </div>
 
   </div>
   <hr style="margin : 20px 0">
@@ -247,13 +267,34 @@ export default {
       a.download = file.name;
       a.click();
     },
-    onChangeTypeLen(index, name){
+    onChangeTypeLen(index, sindex, name){
       const columnType = this.$store.state.informixColumnType.find(type => type.name === name)
-      this.$store.state.columns[index].sqlLen = columnType.len
+      this.$store.state.voCumns[index].columns[sindex].sqlLen = columnType.len
     },    
+    addVoColumn(index) {
+      this.$store.state.voCumns.unshift(
+        {
+          name : `name${this.$store.state.voCumns.length+1}Vo`,
+          logicalName : "LogicalName",
+          tableName : "tableName",
+          columns : [
+              { name: "column1", isChecked: false, logicalName: "컬럼설명",
+                isPrimary: true, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
+              { name: "column2", isChecked: false, logicalName: "컬럼설명",
+                isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
+              { name: "column3", isChecked: false, logicalName: "컬럼설명",
+                isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
+              { name: "column4", isChecked: true, logicalName: "컬럼설명",
+                isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
+              { name: "column5", isChecked: true, logicalName: "컬럼설명",
+                isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
+          ],
+        }
+      )
+    },
     addColumn(index) {
-      this.$store.state.columns.unshift(
-        { name: `column${this.$store.state.columns.length+1}`,
+      this.$store.state.voCumns[index].columns.unshift(
+        { name: `column${this.$store.state.voCumns[index].columns.length+1}`,
          isChecked: true,
          logicalName: "",
          isPrimary: false,
@@ -263,14 +304,36 @@ export default {
         }
       )
     },
+    // addVoListColumn(index) {
+    //   let link =`${this.$store.state.projectRoot}${this.$store.state.selectedtaskClass}.${this.$store.state.taskSubClass}.vo.${this.$store.state.projectName}Vo`
+    //   this.$store.state.voCumns.voListcolumns.unshift(
+    //     { name: "VoListName"+index, logicalName: "List Vo", type: "List", link: link},
+    //   )
+    // },
+    // addColumn(index) {
+    //   this.$store.state.columns.unshift(
+    //     { name: `column${this.$store.state.columns.length+1}`,
+    //      isChecked: true,
+    //      logicalName: "",
+    //      isPrimary: false,
+    //      sqlType: "VARCHAR",
+    //      sqlLen: 255,
+    //      dataType: "String"
+    //     }
+    //   )
+    // },
+    
     addVoListColumn(index) {
       let link =`${this.$store.state.projectRoot}${this.$store.state.selectedtaskClass}.${this.$store.state.taskSubClass}.vo.${this.$store.state.projectName}Vo`
       this.$store.state.voListcolumns.unshift(
         { name: "nameVoList", logicalName: "List Vo", type: "List", link: link},
       )
     },
-    removeColumn(index) {
-      this.$store.state.columns.splice(index, 1)
+    removeVoColumn(index, sindex) {
+      this.$store.state.voCumns.splice(sindex, 1)
+    },
+    removeColumn(index, sindex) {
+      this.$store.state.voCumns[index].columns.splice(sindex, 1)
     },
     removeVoListColumn(index) {
       this.$store.state.voListcolumns.splice(index, 1)
@@ -357,6 +420,26 @@ xcopy "%CD%\\${this.$store.state.projectName}Vo.java" "${this.javaPath}vo" /y
 xcopy "%CD%\\${this.$store.state.projectName}ListVo.java" "${this.javaPath}vo" /y
 xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.sqlmapPath}" /y
 `
+    this.$store.state.voCumns = []
+    this.$store.state.voCumns.unshift(
+      {
+        name :  "nameVo",
+        logicalName : "LogicalName",
+        tableName : "tableName",
+        columns : [
+            { name: "column1", isChecked: false, logicalName: "컬럼설명",
+              isPrimary: true, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
+            { name: "column2", isChecked: false, logicalName: "컬럼설명",
+              isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
+            { name: "column3", isChecked: false, logicalName: "컬럼설명",
+              isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
+            { name: "column4", isChecked: true, logicalName: "컬럼설명",
+              isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
+            { name: "column5", isChecked: true, logicalName: "컬럼설명",
+              isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
+        ],
+      }
+    )
   },
   /**
    * Mounting 단계

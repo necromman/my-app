@@ -43,6 +43,17 @@ export const store = createStore ({
     informixColumnType:[{name: "BIGINT", len: 0},{name: "BIGSERIAL", len: 0},{name: "BINARY18", len:0},{name: "BLOB", len:0},{name: "BOOLEAN", len:0},{name: "BSON", len:0},{name: "BYTE", len:0},{name: "CHAR", len:8},{name: "NCHAR", len:25},{name: "NODE", len:0},  {name: "CLOB", len:0},{name: "DATE", len:0},{name: "DATETIME", len:0},{name: "DECIMAL", len:0},{name: "FLOAT", len:0},{name: "INT", len:0},{name: "INT8", len:0},{name: "INTEGER", len:0},{name: "SERIAL", len:0},{name: "SERIAL8", len:0},{name: "SMALLFLOAT", len:0},{name: "SMALLINT", len:0},{name: "TEXT", len:0},{name: "MONEY", len:0},  {name: "LVARCHAR", len:2000},{name: "NVARCHAR", len:255},  {name: "VARCHAR", len:255}],
     voColumnType:["String","int","long","double","BigInteger","BigDecimal","boolean","Map","byte[]","MultipartFile"],
     columnsT: '',
+    voCumns :[
+        // {
+        //     name: "",
+        //     columns :[
+        //         {name: "column1", isChecked: false, logicalName: "컬럼설명", isPrimary: true, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
+        //     ],
+        //     voListcolumns : [
+        //         { name: "CgsCarUseListVo", logicalName: "리스트vo", type: "List", link: ""},
+        //     ],
+        // }
+    ],
     columns: [
         { name: "column1", isChecked: false, logicalName: "컬럼설명",
          isPrimary: true, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
