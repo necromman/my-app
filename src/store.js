@@ -46,11 +46,10 @@ export const store = createStore ({
     voCumns :[
         // {
         //     name: "",
+        //     logicalName : "LogicalName",
+        //     tableName : "tableName",
         //     columns :[
         //         {name: "column1", isChecked: false, logicalName: "컬럼설명", isPrimary: true, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
-        //     ],
-        //     voListcolumns : [
-        //         { name: "CgsCarUseListVo", logicalName: "리스트vo", type: "List", link: ""},
         //     ],
         // }
     ],

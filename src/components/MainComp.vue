@@ -185,7 +185,7 @@ import DaoGenComp from './dao/DaoGenComp.vue'
 import SqlMapGenComp from './sqlmap/SqlMapGenComp.vue'
 import ControllerGenComp from './controller/ControllerGenComp.vue'
 import JSZip from 'jszip'
-import { saveAs } from 'file-saver';
+import { saveAs } from 'file-saver'
 
 export default {
   components: {
