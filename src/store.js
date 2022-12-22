@@ -10,7 +10,7 @@ export const store = createStore ({
     xmlPath : 'webapp\\ui\\',
     batchQuery : '',
     controllerQuery : '',
-    voQuery : '',
+    voQuery : [],
     voListQuery : '',
     serviceQuery : '',
     serviceImplQuery : '',
@@ -66,7 +66,13 @@ export const store = createStore ({
          isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
       ],
     voListcolumns: [
-        //{ name: "CgsCarUseListVo", logicalName: "리스트vo", type: "List", link: ""},
+        // {
+        //     name : `${this.$store.state.projectName}ListVo`,
+        //     content : [
+        //     { name: `${this.$store.state.projectName}VoList`, logicalName: "List Vo", type: "List", link: link},
+        //     { name: `${this.$store.state.projectName}2Vo`, logicalName: "Single Vo", type: "Vo", link: link},
+        //     ]
+        //   }      
     ],
     voListcolumnType: ["List", "Vo"],
   },

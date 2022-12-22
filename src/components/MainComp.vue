@@ -71,14 +71,16 @@
     </p> -->
 
   <hr>
+    <label style="display: inline-block;">file name : </label>
+  <input style="width:120px" type="text" v-model="$store.state.voListcolumns[0].name" placeholder="file name">
   <label>Add VoList columns:</label>
   <button type="button" @click="addVoListColumn">Add</button>
-  <div v-for="(column, index) in $store.state.voListcolumns" :key="index">
+  <div v-for="(column, index) in $store.state.voListcolumns[0].content" :key="index">
     <label style="width: 30px;display: inline-block;">{{index+1}} : </label>
     <input style="width:120px" type="text" v-model="column.name" placeholder="Column name">
     <input style="width:100px" type="text" v-model="column.logicalName" placeholder="logical Name">
     <input style="width:250px" type="text" v-model="column.link" placeholder="link vo">
-    <select v-model="$store.state.voListcolumns[index].type">
+    <select v-model="$store.state.voListcolumns[0].content[index].type">
       <option v-for="type in $store.state.voListcolumnType" v-bind:key="type">{{ type }}</option>
     </select>
     <button type="button" tabindex="-1" @click="removeVoListColumn(index)">Remove</button>
@@ -325,7 +327,7 @@ export default {
     
     addVoListColumn(index) {
       let link =`${this.$store.state.projectRoot}${this.$store.state.selectedtaskClass}.${this.$store.state.taskSubClass}.vo.${this.$store.state.projectName}Vo`
-      this.$store.state.voListcolumns.unshift(
+      this.$store.state.voListcolumns[0].content.unshift(
         { name: "nameVoList", logicalName: "List Vo", type: "List", link: link},
       )
     },
@@ -336,7 +338,7 @@ export default {
       this.$store.state.voCumns[index].columns.splice(sindex, 1)
     },
     removeVoListColumn(index) {
-      this.$store.state.voListcolumns.splice(index, 1)
+      this.$store.state.voListcolumns[0].content.splice(index, 1)
     },
     generateSelectQuery() {
   			this.selectQuery = `SELECT `
@@ -360,7 +362,11 @@ export default {
         });
         if(this.primaryKey.length > 0) this.createQuery += `\tPRIMARY KEY(${this.primaryKey.join(', ')})\n`
         this.createQuery += ')'
-        this.$refs.VoGenComp.generateQuery()
+        
+        this.$store.state.voCumns.forEach((column, index) => {
+          this.$refs.VoGenComp.generateQuery(index)
+        })
+
         this.$refs.VoListGenComp.generateQuery()
         this.$refs.SvcGenComp.generateQuery()
         this.$refs.SvcImplGenComp.generateQuery()
@@ -385,7 +391,9 @@ export default {
       const path = this.$store.state.projectRoot + this.$store.state.selectedtaskClass + `.${this.$store.state.taskSubClass}`
       this.$store.state.packageName = path
       this.$store.state.voListcolumns.forEach((column, index) => {
-        this.$store.state.voListcolumns[index].link = `${path}.vo.${this.$store.state.projectName}Vo`
+        column.content.forEach((col, sindex) => {
+           this.$store.state.voListcolumns[index].content[sindex].link = `${path}.vo.${this.$store.state.projectName}Vo`
+        })
       })
       this.sqlmapPath = this.$store.state.basePath + this.$store.state.sqlMapPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\'
       this.javaPath = this.$store.state.basePath + this.$store.state.javaPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\'
@@ -408,9 +416,14 @@ export default {
     this.onChangeSelectTask()
     let link =`${this.$store.state.projectRoot}${this.$store.state.selectedtaskClass}.${this.$store.state.taskSubClass}.vo.${this.$store.state.projectName}Vo`
     this.$store.state.voListcolumns = [
-      { name: "CgsCarUseVoList", logicalName: "List Vo", type: "List", link: link},
-      { name: "CgsCarUse2Vo", logicalName: "Single Vo", type: "Vo", link: link},
-      ]
+      {
+        name : `${this.$store.state.projectName}ListVo`,
+        content : [
+        { name: `${this.$store.state.projectName}VoList`, logicalName: "List Vo", type: "List", link: link},
+        { name: `${this.$store.state.projectName}2Vo`, logicalName: "Single Vo", type: "Vo", link: link},
+        ]
+      }      
+    ]
     this.batchQuery += `
 xcopy "%CD%\\${this.$store.state.projectName}Controller.java" "${this.javaPath}web" /y
 xcopy "%CD%\\${this.$store.state.projectName}DAO.java" "${this.javaPath}dao" /y
@@ -424,7 +437,7 @@ xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.
     this.$store.state.voCumns.unshift(
       {
         name :  "nameVo",
-        logicalName : "LogicalName",
+        logicalName : "LogicalName!!!",
         tableName : "tableName",
         columns : [
             { name: "column1", isChecked: false, logicalName: "컬럼설명",

@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     generateQuery() {
-      this.columnsT = this.$store.state.voListcolumns.map(column => column).filter(name => name !== '')
+      this.columnsT = this.$store.state.voListcolumns[0].content.map(column => column).filter(name => name !== '')
       this.$store.state.voListQuery = `package ${this.$store.state.packageName}.vo;\n`
       this.$store.state.voListQuery += `
 import com.inswave.elfw.annotation.ElDto;
