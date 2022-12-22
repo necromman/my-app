@@ -1,6 +1,6 @@
 <template>
   <div v-for="(column, index) in this.$store.state.voCumns" :key="index">
-    {{ index }}
+    {{ $store.state.voCumns[index].name }}
     <textarea v-model="$store.state.voQuery[index]" style="height: 100px"></textarea>
   </div>
 </template>
@@ -20,7 +20,6 @@ export default {
   methods: {
     generateQuery(index) {
       this.columnsT = this.$store.state.voCumns[index].columns.map(column => column).filter(name => name !== '')
-      console.log("columnsT : >>>>" + this.columnsT.length)
       this.$store.state.voQuery[index] = `package ${this.$store.state.packageName}.vo;\n`
       this.$store.state.voQuery[index] += `
 import com.inswave.elfw.annotation.ElDto;

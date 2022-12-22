@@ -437,7 +437,7 @@ xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.
     this.$store.state.voCumns.unshift(
       {
         name :  "nameVo",
-        logicalName : "LogicalName!!!",
+        logicalName : "LogicalName",
         tableName : "tableName",
         columns : [
             { name: "column1", isChecked: false, logicalName: "컬럼설명",
