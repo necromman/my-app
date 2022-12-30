@@ -218,10 +218,31 @@ export default {
    * 가장 먼저 실행되는 훅 data와 events가 세팅되지 않은 시점
    */
   beforeCreate() {
+
+    this.axios({
+      url: "http://localhost:3000/loginProcess",
+      method: "POST",
+      data: {
+        name: "name",
+        email: "email",
+        password: "password"
+      },
+    }).
+      then(res => {
+        console.log("응답 데이터 : " + JSON.stringify(res.data.token));
+        this.$store.state.token = res.data.token
+      })
+      .catch(error => {
+        console.log("에러 데이터 : " + error.data);
+      })
+      .finally(() => {
+      })
+
     console.log("beforeCreate");
   },
   data() {
     return {
+      token: '',
       batchQuery: `@echo off`,
       sqlmapPath: this.$store.state.basePath + this.$store.state.sqlMapPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\',
       javaPath: this.$store.state.basePath + this.$store.state.javaPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\',
@@ -436,17 +457,14 @@ export default {
    */
   created() {
 
-    this.axios({
-        url: "http://localhost:3000/loginProcess",
-        method: "POST",
-        data: {
-          name: "name",
-          email: "email",
-          password: "password"
-        },
-      }).
-      then(res => {
-        console.log(res.data.message);
+    this.axios.get('http://localhost:3000/users', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': this.$store.state.token
+      }
+    })
+      .then(res => {
+        console.log(this.$store.state.token)
         console.log("응답 데이터 : " + JSON.stringify(res.data));
       })
       .catch(error => {
@@ -454,21 +472,6 @@ export default {
       })
       .finally(() => {
       })
-
-    // this.axios.get('http://localhost:3000/users', {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': 'Bearer 1234567890'
-    //   }
-    // })
-    //   .then(res => {
-    //     console.log("응답 데이터 : " + JSON.stringify(res.data));
-    //   })
-    //   .catch(error => {
-    //     console.log("에러 데이터 : " + error.data);
-    //   })
-    //   .finally(() => {
-    //   })
 
     console.log("created")
     this.initializationDb()

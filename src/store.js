@@ -3,6 +3,7 @@ import { createStore } from 'vuex'
 export const store = createStore ({
   state: {
     count : 100,
+    token: '',
     // CgsCarUse_SQL_informix_MyBatis.xml
     basePath : 'C:\\InswaveTool\\workspace\\Bizwebapp\\src\\main\\',
     sqlMapPath : 'resources\\inswave\\sqlmap\\kr\\re\\kitech\\biz\\',
