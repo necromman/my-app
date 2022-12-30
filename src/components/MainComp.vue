@@ -19,7 +19,7 @@
     </textarea>
     <p>
       <label>Choosed database:</label>
-      {{ changeDb }} {{$store.state.count}}
+      {{ changeDb }} {{ $store.state.count }}
     </p>
     <p>Sqlmap Path : {{ sqlmapPath }}</p>
     <p>Java Path : {{ javaPath }}</p>
@@ -50,7 +50,9 @@
       <option v-for="task in $store.state.taskClassStatements" v-bind:key="task.name">{{ task.name }}</option>
     </select>
     <input type="text" v-model="$store.state.taskSubClass" placeholder="taskSubClass" style="width:50px">
-    <span style="margin-left:10px">{{ $store.state.selectedtaskClass }} : {{ this.$store.state.taskClassStatements.find(type => type.name === $store.state.selectedtaskClass).desc }}</span>
+    <span style="margin-left:10px">{{ $store.state.selectedtaskClass }} : {{
+    this.$store.state.taskClassStatements.find(type => type.name === $store.state.selectedtaskClass).desc
+}}</span>
   </div>
   <div>
     <p>
@@ -70,68 +72,69 @@
       <input type="text" v-model="$store.state.tableName" placeholder="Table name">
     </p> -->
 
-  <hr>
-    <label style="display: inline-block;">file name : </label>
-  <input style="width:120px" type="text" v-model="$store.state.voListcolumns[0].name" placeholder="file name">
-  <label>Add VoList columns:</label>
-  <button type="button" @click="addVoListColumn">Add</button>
-  <div v-for="(column, index) in $store.state.voListcolumns[0].content" :key="index">
-    <label style="width: 30px;display: inline-block;">{{index+1}} : </label>
-    <input style="width:120px" type="text" v-model="column.name" placeholder="Column name">
-    <input style="width:100px" type="text" v-model="column.logicalName" placeholder="logical Name">
-    <input style="width:250px" type="text" v-model="column.link" placeholder="link vo">
-    <select v-model="$store.state.voListcolumns[0].content[index].type">
-      <option v-for="type in $store.state.voListcolumnType" v-bind:key="type">{{ type }}</option>
-    </select>
-    <button type="button" tabindex="-1" @click="removeVoListColumn(index)">Remove</button>
-  </div>
-
-  <hr>
-  <label>Add voCumns:</label>
-  <button type="button" @click="addVoColumn">Add</button>
-  <label>Remove voCumns:</label>
-  <button type="button" @click="removeVoColumn">Remove</button>
-  <div v-for="(column, index) in $store.state.voCumns" :key="index">
     <hr>
-    <p>
-      <label>Vo name:</label>
-      <input type="text" v-model="column.name" placeholder="vo Name">
-    </p>
-    <p>
-      <label>Logical name:</label>
-      <input type="text" v-model="column.logicalName" placeholder="logical Name">
-    </p>
-    <p>
-      <label>Table name:</label>
-      <input type="text" v-model="column.tableName" placeholder="Table name">
-    </p>
-    <label>Add columns:</label>
-    <button type="button" @click="addColumn(index)">Add</button>
-    <div v-for="(column, sindex) in $store.state.voCumns[index].columns" :key="sindex">
-      <label style="width: 30px;display: inline-block;">{{sindex+1}} : </label>
+    <label style="display: inline-block;">file name : </label>
+    <input style="width:120px" type="text" v-model="$store.state.voListcolumns[0].name" placeholder="file name">
+    <label>Add VoList columns:</label>
+    <button type="button" @click="addVoListColumn">Add</button>
+    <div v-for="(column, index) in $store.state.voListcolumns[0].content" :key="index">
+      <label style="width: 30px;display: inline-block;">{{ index + 1 }} : </label>
       <input style="width:120px" type="text" v-model="column.name" placeholder="Column name">
       <input style="width:100px" type="text" v-model="column.logicalName" placeholder="logical Name">
-      <!-- sql type -->
-      <select v-model="$store.state.voCumns[index].columns[sindex].sqlType"
-              @change="onChangeTypeLen(index, sindex, $store.state.voCumns[index].columns[sindex].sqlType)">
-        <option v-for="type in columnType" v-bind:key="type.name">{{ type.name }}</option>
+      <input style="width:250px" type="text" v-model="column.link" placeholder="link vo">
+      <select v-model="$store.state.voListcolumns[0].content[index].type">
+        <option v-for="type in $store.state.voListcolumnType" v-bind:key="type">{{ type }}</option>
       </select>
-      <input style="width:30px" type="text" v-model="$store.state.voCumns[index].columns[sindex].sqlLen" placeholder="Type len">
-      <!-- vo type -->
-      <select v-model="$store.state.voCumns[index].columns[sindex].dataType">
-        <option v-for="type in $store.state.voColumnType" v-bind:key="type">{{ type }}</option>
-      </select>
-      <label>
-        null :
-        <input type="checkbox" v-model="column.isChecked" /> 
-      </label>
-      <label>
-        pk :
-        <input type="checkbox" v-model="column.isPrimary" /> 
-      </label>
-      <button type="button" tabindex="-1" @click="removeColumn(index, sindex)">Remove</button>
+      <button type="button" tabindex="-1" @click="removeVoListColumn(index)">Remove</button>
     </div>
-  </div>
+
+    <hr>
+    <label>Add voCumns:</label>
+    <button type="button" @click="addVoColumn">Add</button>
+    <label>Remove voCumns:</label>
+    <button type="button" @click="removeVoColumn">Remove</button>
+    <div v-for="(column, index) in $store.state.voCumns" :key="index">
+      <hr>
+      <p>
+        <label>Vo name:</label>
+        <input type="text" v-model="column.name" placeholder="vo Name">
+      </p>
+      <p>
+        <label>Logical name:</label>
+        <input type="text" v-model="column.logicalName" placeholder="logical Name">
+      </p>
+      <p>
+        <label>Table name:</label>
+        <input type="text" v-model="column.tableName" placeholder="Table name">
+      </p>
+      <label>Add columns:</label>
+      <button type="button" @click="addColumn(index)">Add</button>
+      <div v-for="(column, sindex) in $store.state.voCumns[index].columns" :key="sindex">
+        <label style="width: 30px;display: inline-block;">{{ sindex + 1 }} : </label>
+        <input style="width:120px" type="text" v-model="column.name" placeholder="Column name">
+        <input style="width:100px" type="text" v-model="column.logicalName" placeholder="logical Name">
+        <!-- sql type -->
+        <select v-model="$store.state.voCumns[index].columns[sindex].sqlType"
+          @change="onChangeTypeLen(index, sindex, $store.state.voCumns[index].columns[sindex].sqlType)">
+          <option v-for="type in columnType" v-bind:key="type.name">{{ type.name }}</option>
+        </select>
+        <input style="width:30px" type="text" v-model="$store.state.voCumns[index].columns[sindex].sqlLen"
+          placeholder="Type len">
+        <!-- vo type -->
+        <select v-model="$store.state.voCumns[index].columns[sindex].dataType">
+          <option v-for="type in $store.state.voColumnType" v-bind:key="type">{{ type }}</option>
+        </select>
+        <label>
+          null :
+          <input type="checkbox" v-model="column.isChecked" />
+        </label>
+        <label>
+          pk :
+          <input type="checkbox" v-model="column.isPrimary" />
+        </label>
+        <button type="button" tabindex="-1" @click="removeColumn(index, sindex)">Remove</button>
+      </div>
+    </div>
 
   </div>
   <hr style="margin : 20px 0">
@@ -140,7 +143,7 @@
     <button type="button" @click="downloadZipFile">download zip</button>
   </div>
   <div>
-    <span>Select Query</span>    
+    <span>Select Query</span>
     <textarea v-model="selectQuery" @click="selectTextarea($event)"></textarea>
     <span>Create Query</span>
     <textarea v-model="createQuery" @click="selectTextarea($event)" style="height: 100px"></textarea>
@@ -151,31 +154,41 @@
     <textarea v-model="batchQuery" style="height: 100px"></textarea>
     <span>Controller File</span>
     <button type="button" @click="saveToFile($store.state.controllerQuery, 'Controller', 'java')">download</button>
-    <ControllerGenComp ref="ControllerGenComp"/>
+    <ControllerGenComp ref="ControllerGenComp" />
     <span>SqlMap File</span>
-    <button type="button" @click="saveToFile($store.state.sqlmapQuery, '_SQL_informix_MyBatis', 'xml')">download</button>
-    <SqlMapGenComp ref="SqlMapGenComp"/>
+    <button type="button"
+      @click="saveToFile($store.state.sqlmapQuery, '_SQL_informix_MyBatis', 'xml')">download</button>
+    <SqlMapGenComp ref="SqlMapGenComp" />
     <span>DAO File</span>
     <button type="button" @click="saveToFile($store.state.daoQuery, 'DAO', 'java')">download</button>
-    <DaoGenComp ref="DaoGenComp"/>
+    <DaoGenComp ref="DaoGenComp" />
     <span>serviceImpl File</span>
     <button type="button" @click="saveToFile($store.state.serviceImplQuery, 'ServiceImpl', 'java')">download</button>
-    <SvcImplGenComp ref="SvcImplGenComp"/>
+    <SvcImplGenComp ref="SvcImplGenComp" />
     <span>service File</span>
     <button type="button" @click="saveToFile($store.state.serviceQuery, 'Service', 'java')">download</button>
-    <SvcGenComp ref="SvcGenComp"/>
+    <SvcGenComp ref="SvcGenComp" />
     <span>vo File</span>
     <button type="button" @click="saveToFile($store.state.voQuery, 'Vo', 'java')">download</button>
-    <VoGenComp ref="VoGenComp"/>
+    <VoGenComp ref="VoGenComp" />
     <span>voList File</span>
     <button type="button" @click="saveToFile($store.state.voListQuery, 'ListVo', 'java')">download</button>
-    <VoListGenComp ref="VoListGenComp"/>
+    <VoListGenComp ref="VoListGenComp" />
   </div>
 </template>
 <style>
-  textarea {width: 65%;display: block;}
-  p{margin:5px}
-  input{text-align:center}
+textarea {
+  width: 65%;
+  display: block;
+}
+
+p {
+  margin: 5px
+}
+
+input {
+  text-align: center
+}
 </style>
 
 <script>
@@ -199,7 +212,7 @@ export default {
     SqlMapGenComp,
     ControllerGenComp
   },
-   /* eslint-disable */
+  /* eslint-disable */
   /**
    * Creation 단계
    * 가장 먼저 실행되는 훅 data와 events가 세팅되지 않은 시점
@@ -209,59 +222,59 @@ export default {
   },
   data() {
     return {
-      batchQuery :`@echo off`,
-      sqlmapPath : this.$store.state.basePath + this.$store.state.sqlMapPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\',
-      javaPath : this.$store.state.basePath + this.$store.state.javaPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\',
-      xmlPath : this.$store.state.basePath + this.$store.state.xmlPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\',
-      temp : this.$store.state.count,
-      changeDb : 'INFORMIX',
-      primaryKey : [],
-      selectQuery : '',
-      createQuery : '',
-      voQuery : '',
+      batchQuery: `@echo off`,
+      sqlmapPath: this.$store.state.basePath + this.$store.state.sqlMapPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\',
+      javaPath: this.$store.state.basePath + this.$store.state.javaPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\',
+      xmlPath: this.$store.state.basePath + this.$store.state.xmlPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\',
+      temp: this.$store.state.count,
+      changeDb: 'INFORMIX',
+      primaryKey: [],
+      selectQuery: '',
+      createQuery: '',
+      voQuery: '',
       selectedDb: "INFORMIX",
       databases: ["INFORMIX", "ORACLE", "MySQL"],
       selectedDml: "SELECT",
       dmlStatements: ["INSERT", "SELECT", "UPDATE", "DELETE", "MERGE"],
       selectedDdl: "CREATE",
       ddlStatements: ["CREATE", "ALTER", "DROP"],
-      columnsT : '',
-      columnType:[],
-      oracleColumnType:[],
-      mySqlColumnType:[],
+      columnsT: '',
+      columnType: [],
+      oracleColumnType: [],
+      mySqlColumnType: [],
     }
   },
   watch: {
-    '$store.state.taskSubClass': function() {
+    '$store.state.taskSubClass': function () {
       this.onChangeSelectTask()
     },
-    '$store.state.projectName': function() {
+    '$store.state.projectName': function () {
       this.onChangeSelectTask()
     }
   },
   methods: {
     downloadZipFile() {
       const zip = new JSZip();
-    zip.file(`${this.$store.state.projectName}.bat`, this.batchQuery);
-    zip.file(`${this.$store.state.projectName}Controller.java`, this.$store.state.controllerQuery);
-    zip.file(`${this.$store.state.projectName}DAO.java`, this.$store.state.daoQuery);
-    zip.file(`${this.$store.state.projectName}ServiceImpl.java`, this.$store.state.serviceImplQuery);
-    zip.file(`${this.$store.state.projectName}Service.java`, this.$store.state.serviceQuery);
-    zip.file(`${this.$store.state.projectName}Vo.java`, this.$store.state.voQuery);
-    zip.file(`${this.$store.state.projectName}ListVo.java`, this.$store.state.voListQuery);
-    zip.file(`${this.$store.state.projectName}_SQL_informix_MyBatis.xml`, this.$store.state.sqlmapQuery);
+      zip.file(`${this.$store.state.projectName}.bat`, this.batchQuery);
+      zip.file(`${this.$store.state.projectName}Controller.java`, this.$store.state.controllerQuery);
+      zip.file(`${this.$store.state.projectName}DAO.java`, this.$store.state.daoQuery);
+      zip.file(`${this.$store.state.projectName}ServiceImpl.java`, this.$store.state.serviceImplQuery);
+      zip.file(`${this.$store.state.projectName}Service.java`, this.$store.state.serviceQuery);
+      zip.file(`${this.$store.state.projectName}Vo.java`, this.$store.state.voQuery);
+      zip.file(`${this.$store.state.projectName}ListVo.java`, this.$store.state.voListQuery);
+      zip.file(`${this.$store.state.projectName}_SQL_informix_MyBatis.xml`, this.$store.state.sqlmapQuery);
 
-    // zip 파일을 생성합니다.
-    zip.generateAsync({ type: 'blob' }).then(function (content) {
-      // 생성된 zip 파일을 일괄 다운로드합니다.
-      saveAs(content, 'queries.zip');
-});
+      // zip 파일을 생성합니다.
+      zip.generateAsync({ type: 'blob' }).then(function (content) {
+        // 생성된 zip 파일을 일괄 다운로드합니다.
+        saveAs(content, 'queries.zip');
+      });
     },
-    saveToFile(param, tail, ext){
+    saveToFile(param, tail, ext) {
       // 먼저 Blob 생성
-      const blob = new Blob([param], {type: 'text/plain;charset=utf-8'});
+      const blob = new Blob([param], { type: 'text/plain;charset=utf-8' });
       // 파일 생성
-      const file = new File([blob], `${this.$store.state.projectName}${tail}.${ext}`, {type: 'text/plain;charset=utf-8'});
+      const file = new File([blob], `${this.$store.state.projectName}${tail}.${ext}`, { type: 'text/plain;charset=utf-8' });
       // 생성된 파일을 다운로드
       const url = window.URL.createObjectURL(file);
       const a = document.createElement('a');
@@ -269,40 +282,51 @@ export default {
       a.download = file.name;
       a.click();
     },
-    onChangeTypeLen(index, sindex, name){
+    onChangeTypeLen(index, sindex, name) {
       const columnType = this.$store.state.informixColumnType.find(type => type.name === name)
       this.$store.state.voCumns[index].columns[sindex].sqlLen = columnType.len
-    },    
+    },
     addVoColumn(index) {
       this.$store.state.voCumns.unshift(
         {
-          name : `name${this.$store.state.voCumns.length+1}Vo`,
-          logicalName : "LogicalName",
-          tableName : "tableName",
-          columns : [
-              { name: "column1", isChecked: false, logicalName: "컬럼설명",
-                isPrimary: true, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
-              { name: "column2", isChecked: false, logicalName: "컬럼설명",
-                isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
-              { name: "column3", isChecked: false, logicalName: "컬럼설명",
-                isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
-              { name: "column4", isChecked: true, logicalName: "컬럼설명",
-                isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
-              { name: "column5", isChecked: true, logicalName: "컬럼설명",
-                isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
+          name: `name${this.$store.state.voCumns.length + 1}Vo`,
+          logicalName: "LogicalName",
+          tableName: "tableName",
+          columns: [
+            {
+              name: "column1", isChecked: false, logicalName: "컬럼설명",
+              isPrimary: true, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"
+            },
+            {
+              name: "column2", isChecked: false, logicalName: "컬럼설명",
+              isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"
+            },
+            {
+              name: "column3", isChecked: false, logicalName: "컬럼설명",
+              isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"
+            },
+            {
+              name: "column4", isChecked: true, logicalName: "컬럼설명",
+              isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"
+            },
+            {
+              name: "column5", isChecked: true, logicalName: "컬럼설명",
+              isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"
+            },
           ],
         }
       )
     },
     addColumn(index) {
       this.$store.state.voCumns[index].columns.unshift(
-        { name: `column${this.$store.state.voCumns[index].columns.length+1}`,
-         isChecked: true,
-         logicalName: "",
-         isPrimary: false,
-         sqlType: "VARCHAR",
-         sqlLen: 255,
-         dataType: "String"
+        {
+          name: `column${this.$store.state.voCumns[index].columns.length + 1}`,
+          isChecked: true,
+          logicalName: "",
+          isPrimary: false,
+          sqlType: "VARCHAR",
+          sqlLen: 255,
+          dataType: "String"
         }
       )
     },
@@ -324,11 +348,11 @@ export default {
     //     }
     //   )
     // },
-    
+
     addVoListColumn(index) {
-      let link =`${this.$store.state.projectRoot}${this.$store.state.selectedtaskClass}.${this.$store.state.taskSubClass}.vo.${this.$store.state.projectName}Vo`
+      let link = `${this.$store.state.projectRoot}${this.$store.state.selectedtaskClass}.${this.$store.state.taskSubClass}.vo.${this.$store.state.projectName}Vo`
       this.$store.state.voListcolumns[0].content.unshift(
-        { name: "nameVoList", logicalName: "List Vo", type: "List", link: link},
+        { name: "nameVoList", logicalName: "List Vo", type: "List", link: link },
       )
     },
     removeVoColumn(index, sindex) {
@@ -341,69 +365,69 @@ export default {
       this.$store.state.voListcolumns[0].content.splice(index, 1)
     },
     generateSelectQuery() {
-  			this.selectQuery = `SELECT `
-  			this.$store.state.columnsT = this.$store.state.columns.map(column => column.name).filter(name => name !== '')
-  			this.selectQuery += this.$store.state.columnsT.join(', ') + ' '
-  			this.selectQuery += `FROM ${this.$store.state.tableName}`
-        this.generateCreateQuery()
+      this.selectQuery = `SELECT `
+      this.$store.state.columnsT = this.$store.state.columns.map(column => column.name).filter(name => name !== '')
+      this.selectQuery += this.$store.state.columnsT.join(', ') + ' '
+      this.selectQuery += `FROM ${this.$store.state.tableName}`
+      this.generateCreateQuery()
     },
     generateCreateQuery() {
-        this.primaryKey = []
-  			this.createQuery = `CREATE TABLE `
-        this.createQuery += `${this.$store.state.tableName} (\n`
-  			this.$store.state.columnsT = this.$store.state.columns.map(column => column).filter(name => name !== '')
-      
-        this.$store.state.columnsT.forEach((column, index) => {
-          this.createQuery += '\t' + column.name + '\t' + this.$store.state.columns[index].sqlType
-          if(this.$store.state.columns[index].sqlLen > 0) this.createQuery += '(' + this.$store.state.columns[index].sqlLen + ')'
-          if(!column.isChecked) this.createQuery += '\tNOT NULL'
-          if(column.isPrimary) this.primaryKey.push(column.name)
-          this.createQuery += ',\n'
-        });
-        if(this.primaryKey.length > 0) this.createQuery += `\tPRIMARY KEY(${this.primaryKey.join(', ')})\n`
-        this.createQuery += ')'
-        
-        this.$store.state.voCumns.forEach((column, index) => {
-          this.$refs.VoGenComp.generateQuery(index)
-        })
+      this.primaryKey = []
+      this.createQuery = `CREATE TABLE `
+      this.createQuery += `${this.$store.state.tableName} (\n`
+      this.$store.state.columnsT = this.$store.state.columns.map(column => column).filter(name => name !== '')
 
-        this.$refs.VoListGenComp.generateQuery()
-        this.$refs.SvcGenComp.generateQuery()
-        this.$refs.SvcImplGenComp.generateQuery()
-        this.$refs.DaoGenComp.generateQuery()
-        this.$refs.SqlMapGenComp.generateQuery()
-        this.$refs.ControllerGenComp.generateQuery()
+      this.$store.state.columnsT.forEach((column, index) => {
+        this.createQuery += '\t' + column.name + '\t' + this.$store.state.columns[index].sqlType
+        if (this.$store.state.columns[index].sqlLen > 0) this.createQuery += '(' + this.$store.state.columns[index].sqlLen + ')'
+        if (!column.isChecked) this.createQuery += '\tNOT NULL'
+        if (column.isPrimary) this.primaryKey.push(column.name)
+        this.createQuery += ',\n'
+      });
+      if (this.primaryKey.length > 0) this.createQuery += `\tPRIMARY KEY(${this.primaryKey.join(', ')})\n`
+      this.createQuery += ')'
+
+      this.$store.state.voCumns.forEach((column, index) => {
+        this.$refs.VoGenComp.generateQuery(index)
+      })
+
+      this.$refs.VoListGenComp.generateQuery()
+      this.$refs.SvcGenComp.generateQuery()
+      this.$refs.SvcImplGenComp.generateQuery()
+      this.$refs.DaoGenComp.generateQuery()
+      this.$refs.SqlMapGenComp.generateQuery()
+      this.$refs.ControllerGenComp.generateQuery()
     },
-    toUpperCaseFirst(str){
+    toUpperCaseFirst(str) {
       return str.charAt(0).toUpperCase() + str.slice(1);
     },
     selectTextarea(event) {
       event.target.select()
     },
-    onChangeSelectType(index){
+    onChangeSelectType(index) {
       //
     },
-    onChangeSelectDb(event){
+    onChangeSelectDb(event) {
       this.changeDb = event.target.value
       this.initializationDb()
     },
-    onChangeSelectTask(){
+    onChangeSelectTask() {
       const path = this.$store.state.projectRoot + this.$store.state.selectedtaskClass + `.${this.$store.state.taskSubClass}`
       this.$store.state.packageName = path
       this.$store.state.voListcolumns.forEach((column, index) => {
         column.content.forEach((col, sindex) => {
-           this.$store.state.voListcolumns[index].content[sindex].link = `${path}.vo.${this.$store.state.projectName}Vo`
+          this.$store.state.voListcolumns[index].content[sindex].link = `${path}.vo.${this.$store.state.projectName}Vo`
         })
       })
       this.sqlmapPath = this.$store.state.basePath + this.$store.state.sqlMapPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\'
       this.javaPath = this.$store.state.basePath + this.$store.state.javaPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\'
       this.xmlPath = this.$store.state.basePath + this.$store.state.xmlPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\'
-      
+
     },
-    initializationDb(){
-      if(this.changeDb == 'INFORMIX') this.columnType = this.$store.state.informixColumnType
-      if(this.changeDb == 'ORACLE') this.columnType = this.oracleColumnType
-      if(this.changeDb == 'MySQL') this.columnType = this.mySqlColumnType
+    initializationDb() {
+      if (this.changeDb == 'INFORMIX') this.columnType = this.$store.state.informixColumnType
+      if (this.changeDb == 'ORACLE') this.columnType = this.oracleColumnType
+      if (this.changeDb == 'MySQL') this.columnType = this.mySqlColumnType
     },
   },
   /**
@@ -411,18 +435,53 @@ export default {
    * 메서드를 호출해보면 에러가 나오지 않는다.
    */
   created() {
+
+    this.axios({
+        url: "http://localhost:3000/loginProcess",
+        method: "POST",
+        data: {
+          name: "name",
+          email: "email",
+          password: "password"
+        },
+      }).
+      then(res => {
+        console.log(res.data.message);
+        console.log("응답 데이터 : " + JSON.stringify(res.data));
+      })
+      .catch(error => {
+        console.log("에러 데이터 : " + error.data);
+      })
+      .finally(() => {
+      })
+
+    // this.axios.get('http://localhost:3000/users', {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Authorization': 'Bearer 1234567890'
+    //   }
+    // })
+    //   .then(res => {
+    //     console.log("응답 데이터 : " + JSON.stringify(res.data));
+    //   })
+    //   .catch(error => {
+    //     console.log("에러 데이터 : " + error.data);
+    //   })
+    //   .finally(() => {
+    //   })
+
     console.log("created")
     this.initializationDb()
     this.onChangeSelectTask()
-    let link =`${this.$store.state.projectRoot}${this.$store.state.selectedtaskClass}.${this.$store.state.taskSubClass}.vo.${this.$store.state.projectName}Vo`
+    let link = `${this.$store.state.projectRoot}${this.$store.state.selectedtaskClass}.${this.$store.state.taskSubClass}.vo.${this.$store.state.projectName}Vo`
     this.$store.state.voListcolumns = [
       {
-        name : `${this.$store.state.projectName}ListVo`,
-        content : [
-        { name: `${this.$store.state.projectName}VoList`, logicalName: "List Vo", type: "List", link: link},
-        { name: `${this.$store.state.projectName}2Vo`, logicalName: "Single Vo", type: "Vo", link: link},
+        name: `${this.$store.state.projectName}ListVo`,
+        content: [
+          { name: `${this.$store.state.projectName}VoList`, logicalName: "List Vo", type: "List", link: link },
+          { name: `${this.$store.state.projectName}2Vo`, logicalName: "Single Vo", type: "Vo", link: link },
         ]
-      }      
+      }
     ]
     this.batchQuery += `
 xcopy "%CD%\\${this.$store.state.projectName}Controller.java" "${this.javaPath}web" /y
@@ -436,20 +495,30 @@ xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.
     this.$store.state.voCumns = []
     this.$store.state.voCumns.unshift(
       {
-        name :  "nameVo",
-        logicalName : "LogicalName",
-        tableName : "tableName",
-        columns : [
-            { name: "column1", isChecked: false, logicalName: "컬럼설명",
-              isPrimary: true, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
-            { name: "column2", isChecked: false, logicalName: "컬럼설명",
-              isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
-            { name: "column3", isChecked: false, logicalName: "컬럼설명",
-              isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
-            { name: "column4", isChecked: true, logicalName: "컬럼설명",
-              isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
-            { name: "column5", isChecked: true, logicalName: "컬럼설명",
-              isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},
+        name: "nameVo",
+        logicalName: "LogicalName",
+        tableName: "tableName",
+        columns: [
+          {
+            name: "column1", isChecked: false, logicalName: "컬럼설명",
+            isPrimary: true, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"
+          },
+          {
+            name: "column2", isChecked: false, logicalName: "컬럼설명",
+            isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"
+          },
+          {
+            name: "column3", isChecked: false, logicalName: "컬럼설명",
+            isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"
+          },
+          {
+            name: "column4", isChecked: true, logicalName: "컬럼설명",
+            isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"
+          },
+          {
+            name: "column5", isChecked: true, logicalName: "컬럼설명",
+            isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"
+          },
         ],
       }
     )
