@@ -1,6 +1,6 @@
 <template>
   <div v-for="(column, index) in this.$store.state.voCumns" :key="index">
-    {{ $store.state.voCumns[index].name }}
+    [ {{ $store.state.voCumns[index].name }} ]
     <textarea v-model="$store.state.voQuery[index]" style="height: 100px"></textarea>
   </div>
 </template>
@@ -30,10 +30,10 @@ import com.fasterxml.jackson.annotation.JsonFilter;
       this.$store.state.voQuery[index] += `
 @JsonFilter("elExcludeFilter")
 @ElDto(FldYn = "", delimeterYn = "", logicalName = "${this.$store.state.voCumns[index].logicalName}")
-public class ${this.$store.state.projectName}Vo extends kr.re.kitech.biz.xom.base.model.BizCommVO {
+public class ${this.$store.state.voCumns[index].name}Vo extends kr.re.kitech.biz.xom.base.model.BizCommVO {
   private static final long serialVersionUID = 1L;
 
-  public ${this.$store.state.projectName}Vo(){
+  public ${this.$store.state.voCumns[index].name}Vo(){
   }
 `
       this.columnsT.forEach((column, sindex) => {
@@ -60,7 +60,7 @@ public class ${this.$store.state.projectName}Vo extends kr.re.kitech.biz.xom.bas
   @Override
   public String toString() {
       StringBuilder sb = new StringBuilder();
-      sb.append("${this.$store.state.projectName}Vo [");
+      sb.append("${this.$store.state.voCumns[index].name}Vo [");
 `
       this.columnsT.forEach((column, sindex) => {
         if(sindex == this.columnsT.length-1){

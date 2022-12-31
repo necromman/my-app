@@ -107,6 +107,11 @@
         <label>Table name:</label>
         <input type="text" v-model="column.tableName" placeholder="Table name">
       </p>
+      <p>
+        <label>Xda name:</label>
+        <input type="text" v-model="column.xdaName" placeholder="Xda name">
+        <button type="button" @click="callXdaAllParameter(index)">Call</button>
+      </p>
       <label>Add columns:</label>
       <button type="button" @click="addColumn(index)">Add</button>
       <div v-for="(column, sindex) in $store.state.voCumns[index].columns" :key="sindex">
@@ -152,6 +157,12 @@
     <span>FileCopyBatch File</span>
     <button type="button" @click="saveToFile(batchQuery, '', 'bat')">download</button>
     <textarea v-model="batchQuery" style="height: 100px"></textarea>
+    <span>vo File</span>
+    <button type="button" @click="saveToFile($store.state.voQuery, 'Vo', 'java')">download</button>
+    <VoGenComp ref="VoGenComp" />
+    <span>voList File</span>
+    <button type="button" @click="saveToFile($store.state.voListQuery, 'ListVo', 'java')">download</button>
+    <VoListGenComp ref="VoListGenComp" />
     <span>Controller File</span>
     <button type="button" @click="saveToFile($store.state.controllerQuery, 'Controller', 'java')">download</button>
     <ControllerGenComp ref="ControllerGenComp" />
@@ -168,12 +179,6 @@
     <span>service File</span>
     <button type="button" @click="saveToFile($store.state.serviceQuery, 'Service', 'java')">download</button>
     <SvcGenComp ref="SvcGenComp" />
-    <span>vo File</span>
-    <button type="button" @click="saveToFile($store.state.voQuery, 'Vo', 'java')">download</button>
-    <VoGenComp ref="VoGenComp" />
-    <span>voList File</span>
-    <button type="button" @click="saveToFile($store.state.voListQuery, 'ListVo', 'java')">download</button>
-    <VoListGenComp ref="VoListGenComp" />
   </div>
 </template>
 <style>
@@ -292,16 +297,34 @@ export default {
       });
     },
     saveToFile(param, tail, ext) {
-      // 먼저 Blob 생성
-      const blob = new Blob([param], { type: 'text/plain;charset=utf-8' });
-      // 파일 생성
-      const file = new File([blob], `${this.$store.state.projectName}${tail}.${ext}`, { type: 'text/plain;charset=utf-8' });
-      // 생성된 파일을 다운로드
-      const url = window.URL.createObjectURL(file);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = file.name;
-      a.click();
+
+      if (Object.prototype.toString.call(param) === '[object Array]') {
+        param.forEach((column, index) => {
+        // 먼저 Blob 생성
+        const blob = new Blob([column], { type: 'text/plain;charset=utf-8' });
+        // 파일 생성
+        const filname = tail === 'Vo' ? `${this.$store.state.voCumns[index].name}${tail}.${ext}` : `${this.$store.state.projectName}${tail}.${ext}`
+        const file = new File([blob], filname, { type: 'text/plain;charset=utf-8' });
+        // 생성된 파일을 다운로드
+        const url = window.URL.createObjectURL(file);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = file.name;
+        a.click();
+      })
+      } else {
+        // 먼저 Blob 생성
+        const blob = new Blob([param], { type: 'text/plain;charset=utf-8' });
+        // 파일 생성
+        const file = new File([blob], `${this.$store.state.projectName}${tail}.${ext}`, { type: 'text/plain;charset=utf-8' });
+        // 생성된 파일을 다운로드
+        const url = window.URL.createObjectURL(file);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = file.name;
+        a.click();
+
+      }
     },
     onChangeTypeLen(index, sindex, name) {
       const columnType = this.$store.state.informixColumnType.find(type => type.name === name)
@@ -310,7 +333,7 @@ export default {
     addVoColumn(index) {
       this.$store.state.voCumns.unshift(
         {
-          name: `name${this.$store.state.voCumns.length + 1}Vo`,
+          name: `name${this.$store.state.voCumns.length + 1}`,
           logicalName: "LogicalName",
           tableName: "tableName",
           columns: [
@@ -450,6 +473,47 @@ export default {
       if (this.changeDb == 'ORACLE') this.columnType = this.oracleColumnType
       if (this.changeDb == 'MySQL') this.columnType = this.mySqlColumnType
     },
+    callXdaAllParameter(index) {
+      this.axios.post('http://localhost:3000/getAllParameter', {
+        data: {
+          xdaName: this.$store.state.voCumns[index].xdaName
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': this.$store.state.token
+        }
+      })
+        .then(res => {
+          console.log("응답 데이터 : " + JSON.stringify(res.data))
+          console.log(res.data.length)
+          res.data.forEach((column, sindex) => {
+            console.log(column)
+          })
+          this.$store.state.voCumns[index].columns = []
+          res.data.forEach((column, sindex) => {
+            this.$store.state.voCumns[index].columns.push(
+              {
+                name: column, isChecked: true, logicalName: this.snakeToCamel(column),
+                isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"
+              }
+            )
+          })
+        })
+        .catch(error => {
+          console.log("에러 데이터 : " + error.data);
+        })
+        .finally(() => {
+
+        })
+    },
+    snakeToCamel(snakeCase) {
+      let words = snakeCase.split("_");
+      for (let i = 1; i < words.length; i++) {
+        let camelCaseWord = words[i].substr(0, 1).toUpperCase() + words[i].substr(1);
+        words.splice(i, 1, camelCaseWord);
+      }
+      return words.join("");
+    },
   },
   /**
    * data와 events가 활성화되어 접근할 수 있는 단계
@@ -457,27 +521,7 @@ export default {
    */
   created() {
 
-    this.axios.post('http://localhost:3000/getAllParameter', {
-      data: {
-        xdaName: '%kitech.com.sms.xda.ComSmsSS01%'
-      },
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': this.$store.state.token
-      }
-    })
-      .then(res => {
-        console.log("응답 데이터 : " + JSON.stringify(res.data))
-        console.log(res.data.length)
-        res.data.forEach((column, index) => {
-          console.log(column)
-        })
-      })
-      .catch(error => {
-        console.log("에러 데이터 : " + error.data);
-      })
-      .finally(() => {
-      })
+
 
     console.log("created")
     this.initializationDb()
@@ -504,9 +548,10 @@ xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.
     this.$store.state.voCumns = []
     this.$store.state.voCumns.unshift(
       {
-        name: "nameVo",
+        name: "name",
         logicalName: "LogicalName",
         tableName: "tableName",
+        xdaName: "kitech.com.sms.xda.ComSmsSS01",
         columns: [
           {
             name: "column1", isChecked: false, logicalName: "컬럼설명",
