@@ -457,7 +457,7 @@ export default {
    */
   created() {
 
-    this.axios.post('http://localhost:3000/getRequestParameter', {
+    this.axios.post('http://localhost:3000/getAllParameter', {
       data: {
         xdaName: '%kitech.com.sms.xda.ComSmsSS01%'
       },
@@ -467,9 +467,10 @@ export default {
       }
     })
       .then(res => {
-        //console.log("응답 데이터 : " + JSON.stringify(res.data));
+        console.log("응답 데이터 : " + JSON.stringify(res.data))
+        console.log(res.data.length)
         res.data.forEach((column, index) => {
-          console.log(column.sColumnName);
+          console.log(column)
         })
       })
       .catch(error => {
