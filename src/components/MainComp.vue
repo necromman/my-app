@@ -457,15 +457,20 @@ export default {
    */
   created() {
 
-    this.axios.get('http://localhost:3000/users', {
+    this.axios.post('http://localhost:3000/getRequestParameter', {
+      data: {
+        xdaName: '%kitech.com.sms.xda.ComSmsSS01%'
+      },
       headers: {
         'Content-Type': 'application/json',
         'Authorization': this.$store.state.token
       }
     })
       .then(res => {
-        console.log(this.$store.state.token)
-        console.log("응답 데이터 : " + JSON.stringify(res.data));
+        //console.log("응답 데이터 : " + JSON.stringify(res.data));
+        res.data.forEach((column, index) => {
+          console.log(column.sColumnName);
+        })
       })
       .catch(error => {
         console.log("에러 데이터 : " + error.data);
