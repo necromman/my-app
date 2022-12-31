@@ -296,35 +296,26 @@ export default {
         saveAs(content, 'queries.zip');
       });
     },
-    saveToFile(param, tail, ext) {
-
-      if (Object.prototype.toString.call(param) === '[object Array]') {
-        param.forEach((column, index) => {
-        // 먼저 Blob 생성
-        const blob = new Blob([column], { type: 'text/plain;charset=utf-8' });
-        // 파일 생성
-        const filname = tail === 'Vo' ? `${this.$store.state.voCumns[index].name}${tail}.${ext}` : `${this.$store.state.projectName}${tail}.${ext}`
-        const file = new File([blob], filname, { type: 'text/plain;charset=utf-8' });
-        // 생성된 파일을 다운로드
-        const url = window.URL.createObjectURL(file);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = file.name;
-        a.click();
-      })
+    saveToFile(param, tail = '', ext = 'txt') {
+      if (Array.isArray(param)) {
+        for (let i = 0; i < param.length; i++) {
+          const column = param[i];
+          const filename = tail === 'Vo' ? `${this.$store.state.voCumns[i].name}${tail}.${ext}` : `${this.$store.state.projectName}${tail}.${ext}`;
+          this.downloadFile(column, filename);
+        }
       } else {
-        // 먼저 Blob 생성
-        const blob = new Blob([param], { type: 'text/plain;charset=utf-8' });
-        // 파일 생성
-        const file = new File([blob], `${this.$store.state.projectName}${tail}.${ext}`, { type: 'text/plain;charset=utf-8' });
-        // 생성된 파일을 다운로드
-        const url = window.URL.createObjectURL(file);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = file.name;
-        a.click();
-
+        const filename = `${this.$store.state.projectName}${tail}.${ext}`;
+        this.downloadFile(param, filename);
       }
+    },
+    downloadFile(content, filename) {
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const file = new File([blob], filename, { type: 'text/plain;charset=utf-8' });
+      const url = window.URL.createObjectURL(file);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = file.name;
+      a.click();
     },
     onChangeTypeLen(index, sindex, name) {
       const columnType = this.$store.state.informixColumnType.find(type => type.name === name)
