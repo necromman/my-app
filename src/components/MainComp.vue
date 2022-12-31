@@ -286,9 +286,11 @@ export default {
       zip.file(`${this.$store.state.projectName}DAO.java`, this.$store.state.daoQuery);
       zip.file(`${this.$store.state.projectName}ServiceImpl.java`, this.$store.state.serviceImplQuery);
       zip.file(`${this.$store.state.projectName}Service.java`, this.$store.state.serviceQuery);
-      zip.file(`${this.$store.state.projectName}Vo.java`, this.$store.state.voQuery);
       zip.file(`${this.$store.state.projectName}ListVo.java`, this.$store.state.voListQuery);
       zip.file(`${this.$store.state.projectName}_SQL_informix_MyBatis.xml`, this.$store.state.sqlmapQuery);
+      for (let i = 0; i < this.$store.state.voCumns.length; i++) {
+        zip.file(`${this.$store.state.voCumns[i].name}Vo.java`, this.$store.state.voQuery[i]);
+      }
 
       // zip 파일을 생성합니다.
       zip.generateAsync({ type: 'blob' }).then(function (content) {
