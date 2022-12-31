@@ -5,16 +5,15 @@
         기능
           - 라우팅
           - xml 생성 컴포넌트
-          - vo 무한생성
           - DB 명세서 출력
           ....
 
         프로젝트
-        - 서버구축
+        - front-end
+          - Vue.js
+        - back-end
           - Express
-        - 데이터 베이스 결정 및 연동
-          - Firebase
-          - MongoDB
+        - database
           - MariaDB
     </textarea>
     <p>
