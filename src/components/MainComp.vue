@@ -227,26 +227,6 @@ export default {
    * 가장 먼저 실행되는 훅 data와 events가 세팅되지 않은 시점
    */
   beforeCreate() {
-
-    this.axios({
-      url: "http://localhost:3000/loginProcess",
-      method: "POST",
-      data: {
-        name: "name",
-        email: "email",
-        password: "password"
-      },
-    }).
-      then(res => {
-        console.log("응답 데이터 : " + JSON.stringify(res.data.token));
-        this.$store.state.token = res.data.token
-      })
-      .catch(error => {
-        console.log("에러 데이터 : " + error.data);
-      })
-      .finally(() => {
-      })
-
     console.log("beforeCreate");
   },
   data() {
@@ -615,6 +595,25 @@ xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.
    */
   beforeMount() {
     console.log("beforeMount");
+
+    this.axios({
+      url: "http://localhost:3000/loginProcess",
+      method: "POST",
+      data: {
+        name: "name",
+        email: "email",
+        password: "password"
+      },
+    }).
+      then(res => {
+        console.log("응답 데이터 : " + JSON.stringify(res.data.token));
+        this.$store.state.token = res.data.token
+      })
+      .catch(error => {
+        console.log("에러 데이터 : " + error.data);
+      })
+      .finally(() => {
+      })
   },
   /**
    * 여기서는 컴포넌트, 템플릿, 랜더링된 돔에 접근할 수 있는 단계이다.
