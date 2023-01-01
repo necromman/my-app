@@ -8,31 +8,6 @@
           <!-- 내용 시작 -->
           <label class="block">
             <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
-              name
-            </span>
-          </label>
-          <textarea data-testid="textbox" class="w-full scroll-hide block gr-box gr-input gr-text-input" placeholder=""
-            rows="1"></textarea>
-          <!-- 내용 끝 -->
-        </div>
-      </div>
-    </div>
-    <!-- 버튼 영역 -->
-    <div class="flex row flex-wrap gap-4">
-      <button class="gr-button gr-button-lg gr-button-secondary">클리어</button>
-      <button class="gr-button gr-button-lg gr-button-primary">제출하기</button>
-    </div>
-  </div>
-  <!-- 카드영역 끝 -->
-
-  <!-- 카드영역 시작 -->
-  <div class="flex flex-col relative col gap-4 gr-panel">
-    <div class="flex flex-col relative col gap-4">
-      <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
-        <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
-          <!-- 내용 시작 -->
-          <label class="block">
-            <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
               SPEC
             </span>
           </label>
@@ -57,11 +32,6 @@
         </div>
       </div>
     </div>
-    <!-- 버튼 영역 -->
-    <!-- <div class="flex row flex-wrap gap-4">
-      <button class="gr-button gr-button-lg gr-button-secondary">클리어</button>
-      <button class="gr-button gr-button-lg gr-button-primary">제출하기</button>
-    </div> -->
   </div>
   <!-- 카드영역 끝 -->
 
@@ -71,17 +41,6 @@
       <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
         <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
           <!-- 내용 시작 -->
-          <label class="block">
-            <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
-              Package & Project Name
-            </span>
-            <div class="flex row flex-wrap gap-4">
-              <input type="text" v-model="$store.state.packageName" placeholder="package Name"
-                class="block gr-box gr-input gr-text-input">
-              <input type="text" v-model="$store.state.projectName" placeholder="project name"
-                class="block gr-box gr-input gr-text-input">
-            </div>
-          </label>
           <label class="block">
             <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
               Choose Task statement
@@ -99,6 +58,17 @@
     find(type => type.name === $store.state.selectedtaskClass).desc
 }}
               </span>
+            </div>
+          </label>
+          <label class="block">
+            <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
+              Package & Project Name
+            </span>
+            <div class="flex row flex-wrap gap-4">
+              <input type="text" v-model="$store.state.packageName" placeholder="package Name"
+                class="block gr-box gr-input gr-text-input">
+              <input type="text" v-model="$store.state.projectName" placeholder="project name"
+                class="block gr-box gr-input gr-text-input">
             </div>
           </label>
           <!-- 내용 끝 -->
@@ -312,6 +282,33 @@
     <button type="button" @click="saveToFile($store.state.serviceQuery, 'Service', 'java')">download</button>
     <SvcGenComp ref="SvcGenComp" />
   </div>
+
+
+
+    <!-- 카드영역 시작 -->
+    <div class="flex flex-col relative col gap-4 gr-panel">
+    <div class="flex flex-col relative col gap-4">
+      <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
+        <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
+          <!-- 내용 시작 -->
+          <label class="block">
+            <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
+              name
+            </span>
+          </label>
+          <textarea data-testid="textbox" class="w-full scroll-hide block gr-box gr-input gr-text-input" placeholder=""
+            rows="1"></textarea>
+          <!-- 내용 끝 -->
+        </div>
+      </div>
+    </div>
+    <!-- 버튼 영역 -->
+    <div class="flex row flex-wrap gap-4">
+      <button class="gr-button gr-button-lg gr-button-secondary">클리어</button>
+      <button class="gr-button gr-button-lg gr-button-primary">제출하기</button>
+    </div>
+  </div>
+  <!-- 카드영역 끝 -->
 </template>
 <style>
 textarea {
@@ -503,25 +500,6 @@ export default {
         }
       )
     },
-    // addVoListColumn(index) {
-    //   let link =`${this.$store.state.projectRoot}${this.$store.state.selectedtaskClass}.${this.$store.state.taskSubClass}.vo.${this.$store.state.projectName}Vo`
-    //   this.$store.state.voCumns.voListcolumns.unshift(
-    //     { name: "VoListName"+index, logicalName: "List Vo", type: "List", link: link},
-    //   )
-    // },
-    // addColumn(index) {
-    //   this.$store.state.columns.unshift(
-    //     { name: `column${this.$store.state.columns.length+1}`,
-    //      isChecked: true,
-    //      logicalName: "",
-    //      isPrimary: false,
-    //      sqlType: "VARCHAR",
-    //      sqlLen: 255,
-    //      dataType: "String"
-    //     }
-    //   )
-    // },
-
     addVoListColumn(index) {
       let link = `${this.$store.state.projectRoot}${this.$store.state.selectedtaskClass}.${this.$store.state.taskSubClass}.vo.${this.$store.state.projectName}Vo`
       this.$store.state.voListcolumns[0].content.unshift(
