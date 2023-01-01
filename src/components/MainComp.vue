@@ -1,93 +1,242 @@
 <template>
-  <div>
-    <textarea cols="30" rows="10">
-      TO-DO
-        기능
-          - 라우팅
-          - xml 생성 컴포넌트
-          - DB 명세서 출력
-          ....
 
-        프로젝트
-        - front-end
-          - Vue.js
-        - back-end
-          - Express
-        - database
-          - MariaDB
-    </textarea>
-    <p>
-      <label>Choosed database:</label>
-      {{ changeDb }} {{ $store.state.count }}
-    </p>
-    <p>Sqlmap Path : {{ sqlmapPath }}</p>
-    <p>Java Path : {{ javaPath }}</p>
-    <p>Xml Path : {{ xmlPath }}</p>
+  <!-- 카드영역 시작 -->
+  <div class="flex flex-col relative col gap-4 gr-panel">
+    <div class="flex flex-col relative col gap-4">
+      <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
+        <div class="gr-block gr-box relative w-full border-solid border border-gray-200 gr-padded">
+          <!-- 내용 시작 -->
+          <label class="block w-full">
+            <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
+              name
+            </span>
+          </label>
+          <textarea data-testid="textbox" class="scroll-hide block gr-box gr-input w-full gr-text-input" placeholder=""
+            rows="1"></textarea>
+          <!-- 내용 끝 -->
+        </div>
+      </div>
+    </div>
+    <!-- 버튼 영역 -->
+    <div class="flex row w-full flex-wrap gap-4">
+      <button class="gr-button gr-button-lg gr-button-secondary">클리어</button>
+      <button class="gr-button gr-button-lg gr-button-primary">제출하기</button>
+    </div>
   </div>
-  <hr>
-  <!-- <div>
-    <label>Choose SQL database:</label>
-    <select v-model="selectedDb" @change="onChangeSelectDb($event)">
-      <option v-for="db in databases" v-bind:key="db">{{ db }}</option>
-    </select>
-  </div>
-  <div>
-    <label>Choose DML statement:</label>
-    <select v-model="selectedDml">
-      <option v-for="dml in dmlStatements" v-bind:key="dml">{{ dml }}</option>
-    </select>
-  </div>
-  <div>
-    <label>Choose DDL statement:</label>
-    <select v-model="selectedDdl">
-      <option v-for="ddl in ddlStatements" v-bind:key="ddl">{{ ddl }}</option>
-    </select>
-  </div> -->
-  <div>
-    <label>Choose Task statement:</label>
-    <select v-model="$store.state.selectedtaskClass" @change="onChangeSelectTask()">
-      <option v-for="task in $store.state.taskClassStatements" v-bind:key="task.name">{{ task.name }}</option>
-    </select>
-    <input type="text" v-model="$store.state.taskSubClass" placeholder="taskSubClass" style="width:50px">
-    <span style="margin-left:10px">{{ $store.state.selectedtaskClass }} : {{
-    this.$store.state.taskClassStatements.find(type => type.name === $store.state.selectedtaskClass).desc
-}}</span>
-  </div>
-  <div>
-    <p>
-      <label>Package name:</label>
-      <input type="text" v-model="$store.state.packageName" placeholder="package Name">
-    </p>
-    <p>
-      <label>Project name:</label>
-      <input type="text" v-model="$store.state.projectName" placeholder="project name">
-    </p>
-    <!-- <p>
-      <label>Logical name:</label>
-      <input type="text" v-model="$store.state.logicalName" placeholder="logical Name">
-    </p>
-    <p>
-      <label>Table name:</label>
-      <input type="text" v-model="$store.state.tableName" placeholder="Table name">
-    </p> -->
+  <!-- 카드영역 끝 -->
 
-    <hr>
-    <label style="display: inline-block;">file name : </label>
-    <input style="width:120px" type="text" v-model="$store.state.voListcolumns[0].name" placeholder="file name">
-    <label>Add VoList columns:</label>
-    <button type="button" @click="addVoListColumn">Add</button>
-    <div v-for="(column, index) in $store.state.voListcolumns[0].content" :key="index">
-      <label style="width: 30px;display: inline-block;">{{ index + 1 }} : </label>
-      <input style="width:120px" type="text" v-model="column.name" placeholder="Column name">
-      <input style="width:100px" type="text" v-model="column.logicalName" placeholder="logical Name">
-      <input style="width:250px" type="text" v-model="column.link" placeholder="link vo">
-      <select v-model="$store.state.voListcolumns[0].content[index].type">
-        <option v-for="type in $store.state.voListcolumnType" v-bind:key="type">{{ type }}</option>
-      </select>
-      <button type="button" tabindex="-1" @click="removeVoListColumn(index)">Remove</button>
+  <!-- 카드영역 시작 -->
+  <div class="flex flex-col relative col gap-4 gr-panel">
+    <div class="flex flex-col relative col gap-4">
+      <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
+        <div class="gr-block gr-box relative w-full border-solid border border-gray-200 gr-padded">
+          <!-- 내용 시작 -->
+          <label class="block w-full">
+            <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
+              TO-DO
+            </span>
+          </label>
+          <textarea class="scroll-hide block gr-box gr-input w-full gr-text-input" cols="30" rows="10">
+              TO-DO
+                기능
+                  - 라우팅
+                  - xml 생성 컴포넌트
+                  - DB 명세서 출력
+                  ....
+
+                프로젝트
+                - front-end
+                  - Vue.js
+                - back-end
+                  - Express
+                - database
+                  - MariaDB
+            </textarea>
+          <!-- 내용 끝 -->
+        </div>
+      </div>
+    </div>
+    <!-- 버튼 영역 -->
+    <!-- <div class="flex row w-full flex-wrap gap-4">
+      <button class="gr-button gr-button-lg gr-button-secondary">클리어</button>
+      <button class="gr-button gr-button-lg gr-button-primary">제출하기</button>
+    </div> -->
+  </div>
+  <!-- 카드영역 끝 -->
+
+  <!-- 카드영역 시작 -->
+  <div class="flex flex-col relative col gap-4 gr-panel">
+    <div class="flex flex-col relative col gap-4">
+      <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
+        <div class="gr-block gr-box relative w-full border-solid border border-gray-200 gr-padded">
+          <!-- 내용 시작 -->
+          <label class="block w-full">
+            <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
+              Package & Project Name
+            </span>
+            <div class="flex row w-full flex-wrap gap-4">
+              <input type="text" v-model="$store.state.packageName" placeholder="package Name"
+                class="block gr-box gr-input w-full gr-text-input">
+              <input type="text" v-model="$store.state.projectName" placeholder="project name"
+                class="block gr-box gr-input w-full gr-text-input">
+            </div>
+          </label>
+          <label class="block w-full">
+            <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
+              Choose Task statement
+            </span>
+            <div class="flex row w-full flex-wrap gap-4">
+              <select class="gr-box gr-input w-full disabled:cursor-not-allowed"
+                v-model="$store.state.selectedtaskClass" @change="onChangeSelectTask()">
+                <option v-for="task in $store.state.taskClassStatements" v-bind:key="task.name">{{ task.name }}</option>
+              </select>
+              <input type="text" v-model="$store.state.taskSubClass" placeholder="taskSubClass"
+                class="block gr-box gr-input w-full gr-text-input">
+              <span class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
+                {{ $store.state.selectedtaskClass }} :
+                {{ this.$store.state.taskClassStatements.
+    find(type => type.name === $store.state.selectedtaskClass).desc
+}}
+              </span>
+            </div>
+          </label>
+          <!-- 내용 끝 -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 카드영역 끝 -->
+
+
+  <!-- 카드영역 시작 -->
+  <div class="flex flex-col relative col gap-4 gr-panel">
+    <div class="flex flex-col relative col gap-4">
+      <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
+        <div class="gr-block gr-box relative w-full border-solid border border-gray-200 gr-padded">
+          <!-- 내용 시작 -->
+          <label class="block w-full mb-2">
+            <span style="flex-grow: 0.1;" class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
+              voList Generate
+            </span>
+          </label>
+          <!-- 버튼 영역 -->
+          <div class="flex row w-full flex-wrap gap-4 mb-2">
+            <button @click="addVoListColumn" class="gr-button gr-button-lg gr-button-primary">ADD</button>
+          </div>
+          <div class="flex row w-full flex-wrap gap-4 mb-2">
+            <span style="flex-grow: 0.1;" class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
+              FileName
+            </span>
+            <input type="text" v-model="$store.state.voListcolumns[0].name" placeholder="file name"
+              class="block gr-box gr-input w-full gr-text-input">
+          </div>
+          <div v-for="(column, index) in $store.state.voListcolumns[0].content" :key="index"
+            class="flex row w-full flex-wrap gap-4 mb-2">
+            <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">{{ index
+    + 1
+}}</label>
+            <input type="text" v-model="column.name" placeholder="Column name"
+              class="block gr-box gr-input w-full gr-text-input">
+            <input type="text" v-model="column.logicalName" placeholder="logical Name"
+              class="block gr-box gr-input w-full gr-text-input">
+            <input type="text" v-model="column.link" placeholder="link vo"
+              class="block gr-box gr-input w-full gr-text-input" style="flex-grow: 4;">
+            <select v-model="$store.state.voListcolumns[0].content[index].type"
+              class="gr-box gr-input w-full disabled:cursor-not-allowed">
+              <option v-for="type in $store.state.voListcolumnType" v-bind:key="type">{{ type }}</option>
+            </select>
+            <button type="button" style="flex-grow: 0.1;" tabindex="-1" @click="removeVoListColumn(index)"
+              class="gr-button gr-button-lg gr-button-secondary">Remove</button>
+          </div>
+          <!-- 내용 끝 -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 카드영역 끝 -->
+
+
+  <!-- 카드영역 시작 -->
+  <div class="flex flex-col relative col gap-4 gr-panel">
+    <div class="flex flex-col relative col gap-4">
+      <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
+        <div class="gr-block gr-box relative w-full border-solid border border-gray-200 gr-padded">
+          <label class="block w-full">
+            <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
+              vo Generate
+            </span>
+          </label>
+          <!-- 버튼 영역 -->
+          <div class="flex row w-full flex-wrap gap-4 mb-2">
+            <button @click="addVoColumn" class="gr-button gr-button-lg gr-button-primary">ADD</button>
+            <button @click="removeVoColumn" class="gr-button gr-button-lg gr-button-secondary">REMOVE</button>
+          </div>
+          <!-- 내용 시작 -->
+          <div v-for="(column, index) in $store.state.voCumns" :key="index">
+            <div class="flex row w-full flex-wrap gap-4 mb-2">
+              <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">Vo name:</label>
+              <input type="text" v-model="column.name" placeholder="vo Name"  class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
+              <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">Logical name:</label>
+              <input type="text" v-model="column.logicalName" placeholder="logical Name" class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
+              <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">Table name:</label>
+              <input type="text" v-model="column.tableName" placeholder="Table name" class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
+            </div>
+            <div class="flex row w-full flex-wrap gap-4 mb-2">
+              <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">Xda name:</label>
+              <input type="text" v-model="column.xdaName" placeholder="Xda name" class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
+              <button @click="callXdaAllParameter(index)" class="gr-button gr-button-lg gr-button-secondary" style="flex-grow: 0.1;">CALL</button>
+            </div>
+            <div class="flex row w-full flex-wrap gap-4 mb-2">
+              <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">columnList : {{ $store.state.voCumns[index].columns.length }}</label>
+              <textarea type="text" v-model="this.voCumnsList[index]" placeholder="columnList" class="gr-sample-textbox block gr-box gr-input w-full gr-text-input"></textarea>
+              <button @click="pushColumns(index)" class="gr-button gr-button-lg gr-button-secondary" style="flex-grow: 0.1;">PUSH</button>
+            </div>
+
+            <div>
+              <div>
+                <label>Add columns:</label>
+                <button type="button" @click="addColumn(index)">Add</button>
+              </div>
+              <div v-for="(column, sindex) in $store.state.voCumns[index].columns" :key="sindex">
+                <label style="width: 30px;display: inline-block;">{{ sindex + 1 }} : </label>
+                <input style="width:120px" type="text" v-model="column.name" placeholder="Column name">
+                <input style="width:100px" type="text" v-model="column.logicalName" placeholder="logical Name">
+                <!-- sql type -->
+                <select v-model="$store.state.voCumns[index].columns[sindex].sqlType"
+                  @change="onChangeTypeLen(index, sindex, $store.state.voCumns[index].columns[sindex].sqlType)">
+                  <option v-for="type in columnType" v-bind:key="type.name">{{ type.name }}</option>
+                </select>
+                <input style="width:30px" type="text" v-model="$store.state.voCumns[index].columns[sindex].sqlLen"
+                  placeholder="Type len">
+                <!-- vo type -->
+                <select v-model="$store.state.voCumns[index].columns[sindex].dataType">
+                  <option v-for="type in $store.state.voColumnType" v-bind:key="type">{{ type }}</option>
+                </select>
+                <label>
+                  null :
+                  <input type="checkbox" v-model="column.isChecked" />
+                </label>
+                <label>
+                  pk :
+                  <input type="checkbox" v-model="column.isPrimary" />
+                </label>
+                <button type="button" tabindex="-1" @click="removeColumn(index, sindex)">Remove</button>
+              </div>
+
+            </div>
+
+
+          </div>
+          <!-- 내용 끝 -->
+        </div>
+      </div>
     </div>
 
-    <hr>
+  </div>
+  <!-- 카드영역 끝 -->
+
+  <div>
+
     <label>Add voCumns:</label>
     <button type="button" @click="addVoColumn">Add</button>
     <label>Remove voCumns:</label>
@@ -276,11 +425,11 @@ export default {
     },
     'voCumnsList': {
       handler() {
-        this.voCumnsList.forEach((col, index)=>{
-          if(!Array.isArray(col)){
+        this.voCumnsList.forEach((col, index) => {
+          if (!Array.isArray(col)) {
             this.voCumnsList[index] = col.split(',')
           }
-          
+
         })
       },
       deep: true
@@ -474,8 +623,8 @@ export default {
       if (this.changeDb == 'ORACLE') this.columnType = this.oracleColumnType
       if (this.changeDb == 'MySQL') this.columnType = this.mySqlColumnType
     },
-    pushColumns(index){
-      this.voCumnsList[index].forEach((col, sindex)=>{
+    pushColumns(index) {
+      this.voCumnsList[index].forEach((col, sindex) => {
         this.$store.state.voCumns[index].columns[sindex].name = col
       })
     },
