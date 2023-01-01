@@ -512,8 +512,8 @@ export default {
    * 메서드를 호출해보면 에러가 나오지 않는다.
    */
   created() {
-
-
+    const obj = {'a': 'a'}
+    this.$store.dispatch('a', obj)
 
     console.log("created")
     this.initializationDb()

@@ -80,7 +80,13 @@ export const store = createStore ({
   getters: {
   },
   mutations: {
+    a:(state, payload) => {
+      console.log(payload)
+    }
   },
   actions: {
+    a:({commit}, payload) => {
+      commit('a', payload)
+    }
   },
 })
