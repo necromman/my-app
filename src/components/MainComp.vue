@@ -33,10 +33,10 @@
           <!-- 내용 시작 -->
           <label class="block w-full">
             <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
-              TO-DO
+              SPEC
             </span>
           </label>
-          <textarea class="scroll-hide block gr-box gr-input w-full gr-text-input" cols="30" rows="10">
+          <textarea data-testid="textbox" class="block gr-box gr-input w-full gr-text-input" cols="30" rows="8">
                 프로젝트
                 - front-end
                   - Vue.js
@@ -193,7 +193,7 @@
               <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">Xda
                 name:</label>
               <input type="text" v-model="column.xdaName" placeholder="Xda name"
-                class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
+                class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="background-color: #ffc48c;color: #ae5706;">
               <button @click="callXdaAllParameter(index)" class="gr-button gr-button-lg gr-button-primary"
                 style="flex-grow: 0.1;">CALL</button>
             </div>
@@ -201,7 +201,7 @@
               <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input"
                 style="flex-grow: 0.1;">columnList {{ $store.state.voCumns[index].columns.length }}</label>
               <textarea type="text" v-model="this.voCumnsList[index]" placeholder="columnList"
-                class="gr-sample-textbox block gr-box gr-input w-full gr-text-input"></textarea>
+                class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" rows="1"></textarea>
               <button @click="pushColumns(index)" class="gr-button gr-button-lg gr-button-secondary"
                 style="flex-grow: 0.1;">PUSH</button>
             </div>
