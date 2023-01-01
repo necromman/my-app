@@ -171,6 +171,7 @@
             <button @click="addVoColumn" class="gr-button gr-button-lg gr-button-primary">ADD</button>
             <button @click="removeVoColumn" class="gr-button gr-button-lg gr-button-secondary">REMOVE</button>
           </div>
+
           <!-- 내용 시작 -->
           <div v-for="(column, index) in $store.state.voCumns" :key="index">
             <div class="flex row w-full flex-wrap gap-4 mb-2">
@@ -184,50 +185,47 @@
             <div class="flex row w-full flex-wrap gap-4 mb-2">
               <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">Xda name:</label>
               <input type="text" v-model="column.xdaName" placeholder="Xda name" class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
-              <button @click="callXdaAllParameter(index)" class="gr-button gr-button-lg gr-button-secondary" style="flex-grow: 0.1;">CALL</button>
+              <button @click="callXdaAllParameter(index)" class="gr-button gr-button-lg gr-button-primary" style="flex-grow: 0.1;">CALL</button>
             </div>
             <div class="flex row w-full flex-wrap gap-4 mb-2">
-              <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">columnList : {{ $store.state.voCumns[index].columns.length }}</label>
+              <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">columnList {{ $store.state.voCumns[index].columns.length }}</label>
               <textarea type="text" v-model="this.voCumnsList[index]" placeholder="columnList" class="gr-sample-textbox block gr-box gr-input w-full gr-text-input"></textarea>
               <button @click="pushColumns(index)" class="gr-button gr-button-lg gr-button-secondary" style="flex-grow: 0.1;">PUSH</button>
             </div>
 
             <div>
-              <div>
-                <label>Add columns:</label>
-                <button type="button" @click="addColumn(index)">Add</button>
+              <div class="flex row w-full flex-wrap gap-4 mb-2">
+                <button @click="addColumn(index)" class="gr-button gr-button-lg gr-button-primary" style="flex-grow: 0.2;">ADD</button>
               </div>
-              <div v-for="(column, sindex) in $store.state.voCumns[index].columns" :key="sindex">
-                <label style="width: 30px;display: inline-block;">{{ sindex + 1 }} : </label>
-                <input style="width:120px" type="text" v-model="column.name" placeholder="Column name">
-                <input style="width:100px" type="text" v-model="column.logicalName" placeholder="logical Name">
+              <div v-for="(column, sindex) in $store.state.voCumns[index].columns" :key="sindex" class="flex row w-full flex-wrap gap-4 mb-1">
+                <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">{{ sindex + 1 }} </label>
+                <input class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" type="text" v-model="column.name" placeholder="Column name">
+                <input class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" type="text" v-model="column.logicalName" placeholder="logical Name">
                 <!-- sql type -->
                 <select v-model="$store.state.voCumns[index].columns[sindex].sqlType"
-                  @change="onChangeTypeLen(index, sindex, $store.state.voCumns[index].columns[sindex].sqlType)">
+                  @change="onChangeTypeLen(index, sindex, $store.state.voCumns[index].columns[sindex].sqlType)" class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
                   <option v-for="type in columnType" v-bind:key="type.name">{{ type.name }}</option>
                 </select>
-                <input style="width:30px" type="text" v-model="$store.state.voCumns[index].columns[sindex].sqlLen"
-                  placeholder="Type len">
+                <input type="text" v-model="$store.state.voCumns[index].columns[sindex].sqlLen"
+                  placeholder="Type len" class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
                 <!-- vo type -->
-                <select v-model="$store.state.voCumns[index].columns[sindex].dataType">
+                <select v-model="$store.state.voCumns[index].columns[sindex].dataType" class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
                   <option v-for="type in $store.state.voColumnType" v-bind:key="type">{{ type }}</option>
                 </select>
-                <label>
-                  null :
-                  <input type="checkbox" v-model="column.isChecked" />
+                <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">
+                  null
                 </label>
-                <label>
-                  pk :
-                  <input type="checkbox" v-model="column.isPrimary" />
+                <input type="checkbox" v-model="column.isChecked" class="gr-sample-textbox block gr-box gr-input w-full gr-text-input"/>
+                <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">
+                  pk
                 </label>
-                <button type="button" tabindex="-1" @click="removeColumn(index, sindex)">Remove</button>
+                <input type="checkbox" v-model="column.isPrimary" class="gr-sample-textbox block gr-box gr-input w-full gr-text-input"/>
+                <button @click="removeColumn(index, sindex)" class="gr-button gr-button-md gr-button-secondary" style="flex-grow: 0.1;">REMOVE</button>
               </div>
-
             </div>
-
-
           </div>
           <!-- 내용 끝 -->
+
         </div>
       </div>
     </div>
@@ -235,67 +233,6 @@
   </div>
   <!-- 카드영역 끝 -->
 
-  <div>
-
-    <label>Add voCumns:</label>
-    <button type="button" @click="addVoColumn">Add</button>
-    <label>Remove voCumns:</label>
-    <button type="button" @click="removeVoColumn">Remove</button>
-    <div v-for="(column, index) in $store.state.voCumns" :key="index">
-      <hr>
-      <p>
-        <label>Vo name:</label>
-        <input type="text" v-model="column.name" placeholder="vo Name">
-      </p>
-      <p>
-        <label>Logical name:</label>
-        <input type="text" v-model="column.logicalName" placeholder="logical Name">
-      </p>
-      <p>
-        <label>Table name:</label>
-        <input type="text" v-model="column.tableName" placeholder="Table name">
-      </p>
-      <p>
-        <label>Xda name:</label>
-        <input type="text" v-model="column.xdaName" placeholder="Xda name">
-        <button type="button" @click="callXdaAllParameter(index)">Call</button>
-      </p>
-      <p>
-        <label>columnList : {{ $store.state.voCumns[index].columns.length }}</label>
-        <textarea type="text" v-model="this.voCumnsList[index]" placeholder="columnList"></textarea>
-        <button type="button" @click="pushColumns(index)">Push</button>
-      </p>
-      <label>Add columns:</label>
-      <button type="button" @click="addColumn(index)">Add</button>
-      <div v-for="(column, sindex) in $store.state.voCumns[index].columns" :key="sindex">
-        <label style="width: 30px;display: inline-block;">{{ sindex + 1 }} : </label>
-        <input style="width:120px" type="text" v-model="column.name" placeholder="Column name">
-        <input style="width:100px" type="text" v-model="column.logicalName" placeholder="logical Name">
-        <!-- sql type -->
-        <select v-model="$store.state.voCumns[index].columns[sindex].sqlType"
-          @change="onChangeTypeLen(index, sindex, $store.state.voCumns[index].columns[sindex].sqlType)">
-          <option v-for="type in columnType" v-bind:key="type.name">{{ type.name }}</option>
-        </select>
-        <input style="width:30px" type="text" v-model="$store.state.voCumns[index].columns[sindex].sqlLen"
-          placeholder="Type len">
-        <!-- vo type -->
-        <select v-model="$store.state.voCumns[index].columns[sindex].dataType">
-          <option v-for="type in $store.state.voColumnType" v-bind:key="type">{{ type }}</option>
-        </select>
-        <label>
-          null :
-          <input type="checkbox" v-model="column.isChecked" />
-        </label>
-        <label>
-          pk :
-          <input type="checkbox" v-model="column.isPrimary" />
-        </label>
-        <button type="button" tabindex="-1" @click="removeColumn(index, sindex)">Remove</button>
-      </div>
-    </div>
-
-  </div>
-  <hr style="margin : 20px 0">
   <div>
     <button type="button" @click="generateSelectQuery">Create</button>
     <button type="button" @click="downloadZipFile">download zip</button>
