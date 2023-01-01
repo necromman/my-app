@@ -112,7 +112,7 @@
         <button type="button" @click="callXdaAllParameter(index)">Call</button>
       </p>
       <p>
-        <label>columnList :</label>
+        <label>columnList : {{ $store.state.voCumns[index].columns.length }}</label>
         <textarea type="text" v-model="this.voCumnsList[index]" placeholder="columnList"></textarea>
         <button type="button" @click="pushColumns(index)">Push</button>
       </p>
@@ -284,7 +284,6 @@ export default {
     },
     '$store.state.voCumns': {
       handler() {
-        console.log('change')
         this.$store.state.voCumns.forEach((column, index) => {
           let temp = []
           column.columns.forEach((col, sindex) => {
@@ -297,7 +296,6 @@ export default {
     },
     'voCumnsList': {
       handler() {
-        console.log('change1')
         this.voCumnsList.forEach((col, index)=>{
           if(!Array.isArray(col)){
             this.voCumnsList[index] = col.split(',')
