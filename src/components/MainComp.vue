@@ -4,21 +4,21 @@
   <div class="flex flex-col relative col gap-4 gr-panel">
     <div class="flex flex-col relative col gap-4">
       <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
-        <div class="gr-block gr-box relative w-full border-solid border border-gray-200 gr-padded">
+        <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
           <!-- 내용 시작 -->
-          <label class="block w-full">
+          <label class="block">
             <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
               name
             </span>
           </label>
-          <textarea data-testid="textbox" class="scroll-hide block gr-box gr-input w-full gr-text-input" placeholder=""
+          <textarea data-testid="textbox" class="w-full scroll-hide block gr-box gr-input gr-text-input" placeholder=""
             rows="1"></textarea>
           <!-- 내용 끝 -->
         </div>
       </div>
     </div>
     <!-- 버튼 영역 -->
-    <div class="flex row w-full flex-wrap gap-4">
+    <div class="flex row flex-wrap gap-4">
       <button class="gr-button gr-button-lg gr-button-secondary">클리어</button>
       <button class="gr-button gr-button-lg gr-button-primary">제출하기</button>
     </div>
@@ -29,14 +29,14 @@
   <div class="flex flex-col relative col gap-4 gr-panel">
     <div class="flex flex-col relative col gap-4">
       <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
-        <div class="gr-block gr-box relative w-full border-solid border border-gray-200 gr-padded">
+        <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
           <!-- 내용 시작 -->
-          <label class="block w-full">
+          <label class="block">
             <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
               SPEC
             </span>
           </label>
-          <textarea data-testid="textbox" class="block gr-box gr-input w-full gr-text-input" cols="30" rows="8">
+          <textarea data-testid="textbox" class="block w-full gr-box gr-input gr-text-input" cols="30" rows="8">
                 프로젝트
                 - front-end
                   - Vue.js
@@ -58,7 +58,7 @@
       </div>
     </div>
     <!-- 버튼 영역 -->
-    <!-- <div class="flex row w-full flex-wrap gap-4">
+    <!-- <div class="flex row flex-wrap gap-4">
       <button class="gr-button gr-button-lg gr-button-secondary">클리어</button>
       <button class="gr-button gr-button-lg gr-button-primary">제출하기</button>
     </div> -->
@@ -69,31 +69,31 @@
   <div class="flex flex-col relative col gap-4 gr-panel">
     <div class="flex flex-col relative col gap-4">
       <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
-        <div class="gr-block gr-box relative w-full border-solid border border-gray-200 gr-padded">
+        <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
           <!-- 내용 시작 -->
-          <label class="block w-full">
+          <label class="block">
             <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
               Package & Project Name
             </span>
-            <div class="flex row w-full flex-wrap gap-4">
+            <div class="flex row flex-wrap gap-4">
               <input type="text" v-model="$store.state.packageName" placeholder="package Name"
-                class="block gr-box gr-input w-full gr-text-input">
+                class="block gr-box gr-input gr-text-input">
               <input type="text" v-model="$store.state.projectName" placeholder="project name"
-                class="block gr-box gr-input w-full gr-text-input">
+                class="block gr-box gr-input gr-text-input">
             </div>
           </label>
-          <label class="block w-full">
+          <label class="block">
             <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
               Choose Task statement
             </span>
-            <div class="flex row w-full flex-wrap gap-4">
-              <select class="gr-box gr-input w-full disabled:cursor-not-allowed"
+            <div class="flex row flex-wrap gap-4">
+              <select class="gr-box gr-input disabled:cursor-not-allowed"
                 v-model="$store.state.selectedtaskClass" @change="onChangeSelectTask()">
                 <option v-for="task in $store.state.taskClassStatements" v-bind:key="task.name">{{ task.name }}</option>
               </select>
               <input type="text" v-model="$store.state.taskSubClass" placeholder="taskSubClass"
-                class="block gr-box gr-input w-full gr-text-input">
-              <span class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
+                class="block gr-box gr-input gr-text-input">
+              <span class="gr-sample-textbox block gr-box gr-input gr-text-input">
                 {{ $store.state.selectedtaskClass }} :
                 {{ this.$store.state.taskClassStatements.
     find(type => type.name === $store.state.selectedtaskClass).desc
@@ -113,37 +113,37 @@
   <div class="flex flex-col relative col gap-4 gr-panel">
     <div class="flex flex-col relative col gap-4">
       <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
-        <div class="gr-block gr-box relative w-full border-solid border border-gray-200 gr-padded">
+        <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
           <!-- 내용 시작 -->
-          <label class="block w-full mb-2">
-            <span style="flex-grow: 0.1;" class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
+          <label class="block mb-2">
+            <span style="flex-grow: 0.1;" class="gr-sample-textbox block gr-box gr-input gr-text-input">
               voList Generate
             </span>
           </label>
           <!-- 버튼 영역 -->
-          <div class="flex row w-full flex-wrap gap-4 mb-2">
+          <div class="flex row flex-wrap gap-4 mb-2">
             <button @click="addVoListColumn" class="gr-button gr-button-lg gr-button-primary">ADD</button>
           </div>
-          <div class="flex row w-full flex-wrap gap-4 mb-2">
-            <span style="flex-grow: 0.1;" class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
+          <div class="flex row flex-wrap gap-4 mb-2">
+            <span style="flex-grow: 0.1;" class="gr-sample-textbox block gr-box gr-input gr-text-input">
               FileName
             </span>
             <input type="text" v-model="$store.state.voListcolumns[0].name" placeholder="file name"
-              class="block gr-box gr-input w-full gr-text-input">
+              class="block gr-box gr-input gr-text-input">
           </div>
           <div v-for="(column, index) in $store.state.voListcolumns[0].content" :key="index"
-            class="flex row w-full flex-wrap gap-4 mb-2">
-            <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">{{ index
+            class="flex row flex-wrap gap-4 mb-2">
+            <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">{{ index
     + 1
 }}</label>
             <input type="text" v-model="column.name" placeholder="Column name"
-              class="block gr-box gr-input w-full gr-text-input">
+              class="block gr-box gr-input gr-text-input">
             <input type="text" v-model="column.logicalName" placeholder="logical Name"
-              class="block gr-box gr-input w-full gr-text-input">
+              class="block gr-box gr-input gr-text-input">
             <input type="text" v-model="column.link" placeholder="link vo"
-              class="block gr-box gr-input w-full gr-text-input" style="flex-grow: 4;">
+              class="block gr-box gr-input gr-text-input" style="flex-grow: 4;">
             <select v-model="$store.state.voListcolumns[0].content[index].type"
-              class="gr-box gr-input w-full disabled:cursor-not-allowed">
+              class="gr-box gr-input disabled:cursor-not-allowed">
               <option v-for="type in $store.state.voListcolumnType" v-bind:key="type">{{ type }}</option>
             </select>
             <button type="button" style="flex-grow: 0.1;" tabindex="-1" @click="removeVoListColumn(index)"
@@ -161,88 +161,88 @@
   <div class="flex flex-col relative col gap-4 gr-panel">
     <div class="flex flex-col relative col gap-4">
       <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
-        <div class="gr-block gr-box relative w-full border-solid border border-gray-200 gr-padded">
-          <label class="block w-full">
+        <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
+          <label class="block">
             <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
               vo Generate
             </span>
           </label>
           <!-- 버튼 영역 -->
-          <div class="flex row w-full flex-wrap gap-4 mb-2">
+          <div class="flex row flex-wrap gap-4 mb-2">
             <button @click="addVoColumn" class="gr-button gr-button-lg gr-button-primary">ADD</button>
             <button @click="removeVoColumn" class="gr-button gr-button-lg gr-button-secondary">REMOVE</button>
           </div>
 
           <!-- 내용 시작 -->
           <div v-for="(column, index) in $store.state.voCumns" :key="index" style="border: 3px solid #374151;border-radius: 15px;padding: 20px 13px;margin: 10px 0;">
-            <div class="flex row w-full flex-wrap gap-4 mb-2">
-              <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">Vo
+            <div class="flex row flex-wrap gap-4 mb-2">
+              <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">Vo
                 name:</label>
               <input type="text" v-model="column.name" placeholder="vo Name"
-                class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
-              <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input"
+                class="gr-sample-textbox block gr-box gr-input gr-text-input">
+              <label class="gr-sample-textbox block gr-box gr-input gr-text-input"
                 style="flex-grow: 0.1;">Logical name:</label>
               <input type="text" v-model="column.logicalName" placeholder="logical Name"
-                class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
-              <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">Table
+                class="gr-sample-textbox block gr-box gr-input gr-text-input">
+              <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">Table
                 name:</label>
               <input type="text" v-model="column.tableName" placeholder="Table name"
-                class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
+                class="gr-sample-textbox block gr-box gr-input gr-text-input">
             </div>
-            <div class="flex row w-full flex-wrap gap-4 mb-2">
-              <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">Xda
+            <div class="flex row flex-wrap gap-4 mb-2">
+              <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">Xda
                 name:</label>
               <input type="text" v-model="column.xdaName" placeholder="Xda name"
-                class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="background-color: #ffc48c;color: #ae5706;">
+                class="gr-sample-textbox block gr-box gr-input gr-text-input" style="background-color: #ffc48c;color: #ae5706;">
               <button @click="callXdaAllParameter(index)" class="gr-button gr-button-lg gr-button-primary"
                 style="flex-grow: 0.1;">CALL</button>
             </div>
-            <div class="flex row w-full flex-wrap gap-4 mb-2">
-              <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input"
+            <div class="flex row flex-wrap gap-4 mb-2">
+              <label class="gr-sample-textbox block gr-box gr-input gr-text-input"
                 style="flex-grow: 0.1;">columnList {{ $store.state.voCumns[index].columns.length }}</label>
               <textarea type="text" v-model="this.voCumnsList[index]" placeholder="columnList"
-                class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" rows="1"></textarea>
+                class="gr-sample-textbox block gr-box gr-input gr-text-input" rows="1"></textarea>
               <button @click="pushColumns(index)" class="gr-button gr-button-lg gr-button-secondary"
                 style="flex-grow: 0.1;">PUSH</button>
             </div>
 
             <div>
-              <div class="flex row w-full flex-wrap gap-4 mb-2">
+              <div class="flex row flex-wrap gap-4 mb-2">
                 <button @click="addColumn(index)" class="gr-button gr-button-lg gr-button-primary"
                   style="flex-grow: 0.2;">ADD</button>
               </div>
               <div v-for="(column, sindex) in $store.state.voCumns[index].columns" :key="sindex"
-                class="flex row w-full flex-wrap gap-4 mb-1">
-                <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">{{
+                class="flex row flex-wrap gap-4 mb-1">
+                <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">{{
     sindex + 1
 }} </label>
-                <input class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" type="text"
+                <input class="gr-sample-textbox block gr-box gr-input gr-text-input" type="text"
                   v-model="column.name" placeholder="Column name">
-                <input class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" type="text"
+                <input class="gr-sample-textbox block gr-box gr-input gr-text-input" type="text"
                   v-model="column.logicalName" placeholder="logical Name">
                 <!-- sql type -->
                 <select v-model="$store.state.voCumns[index].columns[sindex].sqlType"
                   @change="onChangeTypeLen(index, sindex, $store.state.voCumns[index].columns[sindex].sqlType)"
-                  class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
+                  class="gr-sample-textbox block gr-box gr-input gr-text-input">
                   <option v-for="type in columnType" v-bind:key="type.name">{{ type.name }}</option>
                 </select>
                 <input type="text" v-model="$store.state.voCumns[index].columns[sindex].sqlLen" placeholder="Type len"
-                  class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
+                  class="gr-sample-textbox block gr-box gr-input gr-text-input">
                 <!-- vo type -->
                 <select v-model="$store.state.voCumns[index].columns[sindex].dataType"
-                  class="gr-sample-textbox block gr-box gr-input w-full gr-text-input">
+                  class="gr-sample-textbox block gr-box gr-input gr-text-input">
                   <option v-for="type in $store.state.voColumnType" v-bind:key="type">{{ type }}</option>
                 </select>
-                <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">
+                <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">
                   null
                 </label>
                 <input type="checkbox" v-model="column.isChecked"
-                  class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" />
-                <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">
+                  class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;"/>
+                <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">
                   pk
                 </label>
                 <input type="checkbox" v-model="column.isPrimary"
-                  class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" />
+                  class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;"/>
                 <button @click="removeColumn(index, sindex)" class="gr-button gr-button-md gr-button-secondary"
                   style="flex-grow: 0.1;">REMOVE</button>
               </div>
@@ -261,14 +261,14 @@
   <div class="flex flex-col relative col gap-4 gr-panel">
     <div class="flex flex-col relative col gap-4">
       <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
-        <div class="gr-block gr-box relative w-full border-solid border border-gray-200 gr-padded">
+        <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
           <!-- 내용 시작 -->
-          <label class="block w-full">
+          <label class="block">
             <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
               Generate
             </span>
           </label>
-          <div class="flex row w-full flex-wrap gap-4">
+          <div class="flex row flex-wrap gap-4">
             <button @click="generateSelectQuery" class="gr-button gr-button-lg gr-button-primary">CREATE</button>
             <button @click="downloadZipFile" class="gr-button gr-button-lg gr-button-secondary">DOWNLOAD ZIP</button>
           </div>
