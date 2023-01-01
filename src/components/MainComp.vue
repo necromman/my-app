@@ -37,13 +37,6 @@
             </span>
           </label>
           <textarea class="scroll-hide block gr-box gr-input w-full gr-text-input" cols="30" rows="10">
-              TO-DO
-                기능
-                  - 라우팅
-                  - xml 생성 컴포넌트
-                  - DB 명세서 출력
-                  ....
-
                 프로젝트
                 - front-end
                   - Vue.js
@@ -51,6 +44,14 @@
                   - Express
                 - database
                   - MariaDB
+
+                TO-DO
+                  기능
+                    - 라우팅
+                    - xml 생성 컴포넌트
+                    - DB 명세서 출력
+                      ....
+
             </textarea>
           <!-- 내용 끝 -->
         </div>
@@ -173,7 +174,7 @@
           </div>
 
           <!-- 내용 시작 -->
-          <div v-for="(column, index) in $store.state.voCumns" :key="index">
+          <div v-for="(column, index) in $store.state.voCumns" :key="index" style="border: 3px solid #374151;border-radius: 15px;padding: 20px 13px;margin: 10px 0;">
             <div class="flex row w-full flex-wrap gap-4 mb-2">
               <label class="gr-sample-textbox block gr-box gr-input w-full gr-text-input" style="flex-grow: 0.1;">Vo
                 name:</label>
