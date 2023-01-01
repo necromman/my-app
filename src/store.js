@@ -54,6 +54,7 @@ export const store = createStore ({
         //     ],
         // }
     ],
+    voCumnsList:[],
     columns: [
         { name: "column1", isChecked: false, logicalName: "컬럼설명",
          isPrimary: true, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"},

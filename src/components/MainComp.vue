@@ -111,6 +111,11 @@
         <input type="text" v-model="column.xdaName" placeholder="Xda name">
         <button type="button" @click="callXdaAllParameter(index)">Call</button>
       </p>
+      <p>
+        <label>columnList :</label>
+        <textarea type="text" v-model="this.voCumnsList[index]" placeholder="columnList"></textarea>
+        <button type="button" @click="pushColumns(index)">Push</button>
+      </p>
       <label>Add columns:</label>
       <button type="button" @click="addColumn(index)">Add</button>
       <div v-for="(column, sindex) in $store.state.voCumns[index].columns" :key="sindex">
@@ -267,6 +272,7 @@ export default {
       columnType: [],
       oracleColumnType: [],
       mySqlColumnType: [],
+      voCumnsList: [],
     }
   },
   watch: {
@@ -275,7 +281,32 @@ export default {
     },
     '$store.state.projectName': function () {
       this.onChangeSelectTask()
-    }
+    },
+    '$store.state.voCumns': {
+      handler() {
+        console.log('change')
+        this.$store.state.voCumns.forEach((column, index) => {
+          let temp = []
+          column.columns.forEach((col, sindex) => {
+            temp.push(col.name)
+          })
+          this.voCumnsList[index] = temp
+        })
+      },
+      deep: true
+    },
+    'voCumnsList': {
+      handler() {
+        console.log('change1')
+        this.voCumnsList.forEach((col, index)=>{
+          if(!Array.isArray(col)){
+            this.voCumnsList[index] = col.split(',')
+          }
+          
+        })
+      },
+      deep: true
+    },
   },
   methods: {
     downloadZipFile() {
@@ -465,6 +496,11 @@ export default {
       if (this.changeDb == 'ORACLE') this.columnType = this.oracleColumnType
       if (this.changeDb == 'MySQL') this.columnType = this.mySqlColumnType
     },
+    pushColumns(index){
+      this.voCumnsList[index].forEach((col, sindex)=>{
+        this.$store.state.voCumns[index].columns[sindex].name = col
+      })
+    },
     callXdaAllParameter(index) {
       this.axios.post('http://localhost:3000/getAllParameter', {
         data: {
@@ -512,7 +548,7 @@ export default {
    * 메서드를 호출해보면 에러가 나오지 않는다.
    */
   created() {
-    const obj = {'a': 'a'}
+    const obj = { 'a': 'a' }
     this.$store.dispatch('a', obj)
 
     console.log("created")
