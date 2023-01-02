@@ -586,7 +586,7 @@ export default {
       })
     },
     callXdaAllParameter(index) {
-      this.axios.post('http://localhost:8080/api/getAllParameter', {
+      this.axios.post('api/getAllParameter', {
         data: {
           xdaName: this.$store.state.voCumns[index].xdaName
         },
@@ -703,7 +703,7 @@ xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.
     console.log("beforeMount");
 
     this.axios({
-      url: "http://localhost:8080/api/loginProcess",
+      url: "/api/loginProcess",
       method: "POST",
       data: {
         name: "name",
