@@ -586,7 +586,7 @@ export default {
       })
     },
     callXdaAllParameter(index) {
-      this.axios.post('api/getAllParameter', {
+      this.axios.post('/api/getAllParameter', {
         data: {
           xdaName: this.$store.state.voCumns[index].xdaName
         },
