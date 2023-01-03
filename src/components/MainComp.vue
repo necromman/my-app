@@ -7,7 +7,7 @@
         <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
           <!-- 내용 시작 -->
           <label class="block">
-            <span class="h2 block p-2">
+            <span class="h2 block p-2" @click="storeCounter.increment(5)">
               SPEC
             </span>
           </label>
@@ -645,7 +645,7 @@ export default {
    * 메서드를 호출해보면 에러가 나오지 않는다.
    */
   created() {
-    this.storeCounter.increment(2)
+    this.storeCounter.increment(5)
     const obj = { 'a': 'a' }
     this.$store.dispatch('a', obj)
 
