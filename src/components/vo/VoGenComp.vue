@@ -1,8 +1,23 @@
 <template>
-  <div v-for="(column, index) in this.$store.state.voCumns" :key="index">
-    [ {{ $store.state.voCumns[index].name }} ]
-    <textarea v-model="$store.state.voQuery[index]" style="height: 100px"></textarea>
+
+<!-- 카드영역 시작 -->
+<div v-for="(column, index) in this.$store.state.voCumns" :key="index" class="flex flex-col relative col gap-4 gr-panel">
+    <div class="flex flex-col relative col gap-4">
+      <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
+        <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
+          <!-- 내용 시작 -->
+          <label class="block">
+            <span class="h2 block p-2">
+              [ {{ $store.state.voCumns[index].name }} ]
+            </span>
+          </label>
+          <textarea data-testid="textbox" v-model="$store.state.voQuery[index]" class="w-full block gr-box gr-input gr-text-input mb-5" rows="50"></textarea>
+          <!-- 내용 끝 -->
+        </div>
+      </div>
+    </div>
   </div>
+  <!-- 카드영역 끝 -->
 </template>
 
 <script>

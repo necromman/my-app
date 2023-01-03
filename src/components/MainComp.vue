@@ -7,11 +7,12 @@
         <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
           <!-- 내용 시작 -->
           <label class="block">
-            <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
+            <span class="h2 block p-2">
               SPEC
             </span>
           </label>
           <textarea data-testid="textbox" class="block w-full gr-box gr-input gr-text-input" cols="30" rows="8">
+            {{ storeCounter.counter }} {{ storeCounter.doubleCount }}
                 프로젝트
                 - front-end
                   - Vue.js
@@ -42,7 +43,7 @@
         <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
           <!-- 내용 시작 -->
           <label class="block">
-            <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
+            <span class="h2 block p-2">
               Choose Task statement
             </span>
             <div class="flex row flex-wrap gap-4">
@@ -61,7 +62,7 @@
             </div>
           </label>
           <label class="block">
-            <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
+            <span class="h2 block p-2">
               Package & Project Name
             </span>
             <div class="flex row flex-wrap gap-4">
@@ -133,7 +134,7 @@
       <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
         <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
           <label class="block">
-            <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
+            <span class="h2 block p-2">
               vo Generate
             </span>
           </label>
@@ -234,7 +235,7 @@
         <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
           <!-- 내용 시작 -->
           <label class="block">
-            <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
+            <span class="h2 block p-2">
               Generate
             </span>
           </label>
@@ -250,6 +251,18 @@
   <!-- 카드영역 끝 -->
 
   <div>
+    <div class="flex row flex-wrap gap-4 mb-1">
+      <span style="flex-grow: 0.1;" class="text-center gr-sample-textbox block gr-box gr-input gr-text-input">
+        VO File
+      </span>
+      <button style="flex-grow: 0.1;" @click="saveToFile($store.state.voQuery, 'Vo', 'java')" class="gr-button gr-button-lg gr-button-primary">
+        DOWNLOAD
+      </button>
+    </div>
+    <VoGenComp ref="VoGenComp" />
+    <span>VO List File</span>
+    <button type="button" @click="saveToFile($store.state.voListQuery, 'ListVo', 'java')">download</button>
+    <VoListGenComp ref="VoListGenComp" />
     <span>Select Query</span>
     <textarea v-model="selectQuery" @click="selectTextarea($event)"></textarea>
     <span>Create Query</span>
@@ -259,12 +272,6 @@
     <span>FileCopyBatch File</span>
     <button type="button" @click="saveToFile(batchQuery, '', 'bat')">download</button>
     <textarea v-model="batchQuery" style="height: 100px"></textarea>
-    <span>vo File</span>
-    <button type="button" @click="saveToFile($store.state.voQuery, 'Vo', 'java')">download</button>
-    <VoGenComp ref="VoGenComp" />
-    <span>voList File</span>
-    <button type="button" @click="saveToFile($store.state.voListQuery, 'ListVo', 'java')">download</button>
-    <VoListGenComp ref="VoListGenComp" />
     <span>Controller File</span>
     <button type="button" @click="saveToFile($store.state.controllerQuery, 'Controller', 'java')">download</button>
     <ControllerGenComp ref="ControllerGenComp" />
@@ -292,7 +299,7 @@
         <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
           <!-- 내용 시작 -->
           <label class="block">
-            <span class="text-gray-500 text-[0.855rem] mb-2 block dark:text-gray-200 relative z-40">
+            <span class="h2 block p-2">
               name
             </span>
           </label>
@@ -326,6 +333,7 @@ input {
 </style>
 
 <script>
+import { useCounterStore } from '@/stores/counter'
 import VoGenComp from './vo/VoGenComp.vue'
 import VoListGenComp from './vo/VoListGenComp.vue'
 import SvcGenComp from './service/SvcGenComp.vue'
@@ -356,6 +364,7 @@ export default {
   },
   data() {
     return {
+      storeCounter: useCounterStore(),
       token: '',
       batchQuery: `@echo off`,
       sqlmapPath: this.$store.state.basePath + this.$store.state.sqlMapPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\',
@@ -632,6 +641,7 @@ export default {
    * 메서드를 호출해보면 에러가 나오지 않는다.
    */
   created() {
+    this.storeCounter.increment(2)
     const obj = { 'a': 'a' }
     this.$store.dispatch('a', obj)
 
