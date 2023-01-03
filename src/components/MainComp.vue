@@ -89,7 +89,7 @@
           <!-- 버튼 영역 -->
           <div class="flex row flex-wrap gap-4 mb-2">
             <span style="flex-grow: 0.3;" class="gr-sample-textbox block gr-box gr-input gr-text-input text-center">
-              voList Generate
+              VO List Generate
             </span>
             <button @click="addVoListColumn" style="flex-grow: 0.1;" class="gr-button gr-button-lg gr-button-primary">ADD</button>
           </div>
@@ -133,7 +133,7 @@
         <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
           <label class="block">
             <span class="h2 block p-2">
-              vo Generate
+              VO Generate
             </span>
           </label>
           <!-- 버튼 영역 -->
