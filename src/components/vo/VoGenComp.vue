@@ -11,7 +11,7 @@
               [ {{ $store.state.voCumns[index].name }} ]
             </span>
           </label>
-          <textarea data-testid="textbox" v-model="$store.state.voQuery[index]" class="w-full block gr-box gr-input gr-text-input mb-5" rows="50"></textarea>
+          <textarea data-testid="textbox" v-model="$store.state.voQuery[index]" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea>
           <!-- 내용 끝 -->
         </div>
       </div>

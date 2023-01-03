@@ -86,14 +86,12 @@
       <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
         <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
           <!-- 내용 시작 -->
-          <label class="block mb-2">
-            <span style="flex-grow: 0.1;" class="gr-sample-textbox block gr-box gr-input gr-text-input">
-              voList Generate
-            </span>
-          </label>
           <!-- 버튼 영역 -->
           <div class="flex row flex-wrap gap-4 mb-2">
-            <button @click="addVoListColumn" class="gr-button gr-button-lg gr-button-primary">ADD</button>
+            <span style="flex-grow: 0.3;" class="gr-sample-textbox block gr-box gr-input gr-text-input text-center">
+              voList Generate
+            </span>
+            <button @click="addVoListColumn" style="flex-grow: 0.1;" class="gr-button gr-button-lg gr-button-primary">ADD</button>
           </div>
           <div class="flex row flex-wrap gap-4 mb-2">
             <span style="flex-grow: 0.1;" class="gr-sample-textbox block gr-box gr-input gr-text-input">
@@ -260,8 +258,14 @@
       </button>
     </div>
     <VoGenComp ref="VoGenComp" />
-    <span>VO List File</span>
-    <button type="button" @click="saveToFile($store.state.voListQuery, 'ListVo', 'java')">download</button>
+    <div class="flex row flex-wrap gap-4 mb-1">
+      <span style="flex-grow: 0.1;" class="text-center gr-sample-textbox block gr-box gr-input gr-text-input">
+        VO List File
+      </span>
+      <button style="flex-grow: 0.1;" @click="saveToFile($store.state.voListQuery, 'ListVo', 'java')" class="gr-button gr-button-lg gr-button-primary">
+        DOWNLOAD
+      </button>
+    </div>
     <VoListGenComp ref="VoListGenComp" />
     <span>Select Query</span>
     <textarea v-model="selectQuery" @click="selectTextarea($event)"></textarea>
