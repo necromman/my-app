@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import MainComp from './components/MainComp.vue'
+import MainComp from '@/components/MainComp.vue'
 
 export default {
   name: 'App',
