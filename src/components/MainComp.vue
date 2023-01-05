@@ -47,8 +47,8 @@
               Choose Task statement
             </span>
             <div class="flex row flex-wrap gap-4">
-              <select class="gr-box gr-input disabled:cursor-not-allowed"
-                v-model="$store.state.selectedtaskClass" @change="onChangeSelectTask()">
+              <select class="gr-box gr-input disabled:cursor-not-allowed" v-model="$store.state.selectedtaskClass"
+                @change="onChangeSelectTask()">
                 <option v-for="task in $store.state.taskClassStatements" v-bind:key="task.name">{{ task.name }}</option>
               </select>
               <input type="text" v-model="$store.state.taskSubClass" placeholder="taskSubClass"
@@ -91,7 +91,8 @@
             <span style="flex-grow: 0.3;" class="gr-sample-textbox block gr-box gr-input gr-text-input text-center">
               VO List Generate
             </span>
-            <button @click="addVoListColumn" style="flex-grow: 0.1;" class="gr-button gr-button-lg gr-button-primary">ADD</button>
+            <button @click="addVoListColumn" style="flex-grow: 0.1;"
+              class="gr-button gr-button-lg gr-button-primary">ADD</button>
           </div>
           <div class="flex row flex-wrap gap-4 mb-2">
             <span style="flex-grow: 0.1;" class="gr-sample-textbox block gr-box gr-input gr-text-input">
@@ -109,8 +110,8 @@
               class="block gr-box gr-input gr-text-input">
             <input type="text" v-model="column.logicalName" placeholder="logical Name"
               class="block gr-box gr-input gr-text-input">
-            <input type="text" v-model="column.link" placeholder="link vo"
-              class="block gr-box gr-input gr-text-input" style="flex-grow: 4;">
+            <input type="text" v-model="column.link" placeholder="link vo" class="block gr-box gr-input gr-text-input"
+              style="flex-grow: 4;">
             <select v-model="$store.state.voListcolumns[0].content[index].type"
               class="gr-box gr-input disabled:cursor-not-allowed">
               <option v-for="type in $store.state.voListcolumnType" v-bind:key="type">{{ type }}</option>
@@ -143,14 +144,15 @@
           </div>
 
           <!-- 내용 시작 -->
-          <div v-for="(column, index) in $store.state.voCumns" :key="index" style="border: 3px solid #374151;border-radius: 15px;padding: 20px 13px;margin: 10px 0;">
+          <div v-for="(column, index) in $store.state.voCumns" :key="index"
+            style="border: 3px solid #374151;border-radius: 15px;padding: 20px 13px;margin: 10px 0;">
             <div class="flex row flex-wrap gap-4 mb-2">
               <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">Vo
                 name:</label>
               <input type="text" v-model="column.name" placeholder="vo Name"
                 class="gr-sample-textbox block gr-box gr-input gr-text-input">
-              <label class="gr-sample-textbox block gr-box gr-input gr-text-input"
-                style="flex-grow: 0.1;">Logical name:</label>
+              <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">Logical
+                name:</label>
               <input type="text" v-model="column.logicalName" placeholder="logical Name"
                 class="gr-sample-textbox block gr-box gr-input gr-text-input">
               <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">Table
@@ -162,13 +164,29 @@
               <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">Xda
                 name:</label>
               <input type="text" v-model="column.xdaName" placeholder="Xda name"
-                class="gr-sample-textbox block gr-box gr-input gr-text-input" style="background-color: #ffc48c;color: #ae5706;">
+                class="gr-sample-textbox block gr-box gr-input gr-text-input"
+                style="background-color: #ffc48c;color: #ae5706;">
               <button @click="callXdaAllParameter(index)" class="gr-button gr-button-lg gr-button-primary"
                 style="flex-grow: 0.1;">CALL</button>
             </div>
             <div class="flex row flex-wrap gap-4 mb-2">
-              <label class="gr-sample-textbox block gr-box gr-input gr-text-input"
-                style="flex-grow: 0.1;">columnList {{ $store.state.voCumns[index].columns.length }}</label>
+              <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">request {{
+    $store.state.voCumns[index].req.length
+}}</label>
+              <textarea type="text" v-model="this.voCumnsListReq[index]" placeholder="request"
+                class="gr-sample-textbox block gr-box gr-input gr-text-input" rows="1"></textarea>
+            </div>
+            <div class="flex row flex-wrap gap-4 mb-2">
+              <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">response {{
+    $store.state.voCumns[index].res.length
+}}</label>
+              <textarea type="text" v-model="this.voCumnsListRes[index]" placeholder="response"
+                class="gr-sample-textbox block gr-box gr-input gr-text-input" rows="1"></textarea>
+            </div>
+            <div class="flex row flex-wrap gap-4 mb-2">
+              <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">columnList {{
+    $store.state.voCumns[index].columns.length
+}}</label>
               <textarea type="text" v-model="this.voCumnsList[index]" placeholder="columnList"
                 class="gr-sample-textbox block gr-box gr-input gr-text-input" rows="1"></textarea>
               <button @click="pushColumns(index)" class="gr-button gr-button-lg gr-button-secondary"
@@ -185,8 +203,8 @@
                 <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">{{
     sindex + 1
 }} </label>
-                <input class="gr-sample-textbox block gr-box gr-input gr-text-input" type="text"
-                  v-model="column.name" placeholder="Column name">
+                <input class="gr-sample-textbox block gr-box gr-input gr-text-input" type="text" v-model="column.name"
+                  placeholder="Column name">
                 <input class="gr-sample-textbox block gr-box gr-input gr-text-input" type="text"
                   v-model="column.logicalName" placeholder="logical Name">
                 <!-- sql type -->
@@ -206,12 +224,12 @@
                   null
                 </label>
                 <input type="checkbox" v-model="column.isChecked"
-                  class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;"/>
+                  class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;" />
                 <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">
                   pk
                 </label>
                 <input type="checkbox" v-model="column.isPrimary"
-                  class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;"/>
+                  class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;" />
                 <button @click="removeColumn(index, sindex)" class="gr-button gr-button-md gr-button-secondary"
                   style="flex-grow: 0.1;">REMOVE</button>
               </div>
@@ -253,7 +271,8 @@
       <span style="flex-grow: 0.1;" class="text-center gr-sample-textbox block gr-box gr-input gr-text-input">
         VO File
       </span>
-      <button style="flex-grow: 0.1;" @click="saveToFile($store.state.voQuery, 'Vo', 'java')" class="gr-button gr-button-lg gr-button-primary">
+      <button style="flex-grow: 0.1;" @click="saveToFile($store.state.voQuery, 'Vo', 'java')"
+        class="gr-button gr-button-lg gr-button-primary">
         DOWNLOAD
       </button>
     </div>
@@ -262,7 +281,8 @@
       <span style="flex-grow: 0.1;" class="text-center gr-sample-textbox block gr-box gr-input gr-text-input">
         VO List File
       </span>
-      <button style="flex-grow: 0.1;" @click="saveToFile($store.state.voListQuery, 'ListVo', 'java')" class="gr-button gr-button-lg gr-button-primary">
+      <button style="flex-grow: 0.1;" @click="saveToFile($store.state.voListQuery, 'ListVo', 'java')"
+        class="gr-button gr-button-lg gr-button-primary">
         DOWNLOAD
       </button>
     </div>
@@ -296,8 +316,8 @@
 
 
 
-    <!-- 카드영역 시작 -->
-    <div class="flex flex-col relative col gap-4 gr-panel">
+  <!-- 카드영역 시작 -->
+  <div class="flex flex-col relative col gap-4 gr-panel">
     <div class="flex flex-col relative col gap-4">
       <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
         <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
@@ -391,6 +411,8 @@ export default {
       oracleColumnType: [],
       mySqlColumnType: [],
       voCumnsList: [],
+      voCumnsListReq: [],
+      voCumnsListRes: [],
     }
   },
   watch: {
@@ -404,10 +426,20 @@ export default {
       handler() {
         this.$store.state.voCumns.forEach((column, index) => {
           let temp = []
+          let req = []
+          let res = []
           column.columns.forEach((col, sindex) => {
             temp.push(col.name)
           })
+          for (let i = 0; i < column.req.length; i++) {
+            req.push(column.req[i])
+          }
+          for (let i = 0; i < column.res.length; i++) {
+            res.push(column.res[i])
+          }
           this.voCumnsList[index] = temp
+          this.voCumnsListReq[index] = req
+          this.voCumnsListRes[index] = res
         })
       },
       deep: true
@@ -418,7 +450,6 @@ export default {
           if (!Array.isArray(col)) {
             this.voCumnsList[index] = col.split(',')
           }
-
         })
       },
       deep: true
@@ -475,6 +506,8 @@ export default {
           name: `name${this.$store.state.voCumns.length + 1}`,
           logicalName: "LogicalName",
           tableName: "tableName",
+          req: [],
+          res: [],
           columns: [
             {
               name: "column1", isChecked: false, logicalName: "컬럼설명",
@@ -610,14 +643,18 @@ export default {
       })
         .then(res => {
           let tempList = []
+          this.$store.state.voCumns[index].req = []
+          this.$store.state.voCumns[index].res = []
           console.log("응답 데이터 : " + JSON.stringify(res.data))
           res.data.forEach((column, sindex) => {
             column.req.forEach((column, sindex) => {
               tempList.push(column)
-            })            
+              this.$store.state.voCumns[index].req.push(column)
+            })
             column.res.forEach((column, sindex) => {
               tempList.push(column)
-            })            
+              this.$store.state.voCumns[index].res.push(column)
+            })
           })
           let tempListSet = [...new Set(tempList)];
           this.$store.state.voCumns[index].columns = []
@@ -629,8 +666,8 @@ export default {
               }
             )
           }
-            
-          //this.callXdaSquery(index)
+
+          this.callXdaSquery(index)
         })
         .catch(error => {
           console.log("에러 데이터 : " + error.data);
@@ -653,9 +690,15 @@ export default {
           console.log("응답 데이터 : " + JSON.stringify(res.data))
           console.log(res.data.length)
           res.data.forEach((column, sindex) => {
-            this.$store.state.sqlmapQueryList.unshift(
-              column.sQueryText
-            )
+            if (column.sQueryText === '') {
+              this.$store.state.sqlmapQueryList.unshift(
+                column.sQuery
+              )
+            }else{
+              this.$store.state.sqlmapQueryList.unshift(
+                column.sQueryText
+              )
+            }
           })
         })
         .catch(error => {
@@ -712,6 +755,8 @@ xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.
         logicalName: "LogicalName",
         tableName: "tableName",
         xdaName: "kitech.com.sms.xda.ComSmsSS01",
+        req: [],
+        res: [],
         columns: [
           {
             name: "column1", isChecked: false, logicalName: "컬럼설명",
