@@ -609,18 +609,52 @@ export default {
         }
       })
         .then(res => {
+          let tempList = []
+          console.log("응답 데이터 : " + JSON.stringify(res.data))
+          res.data.forEach((column, sindex) => {
+            column.req.forEach((column, sindex) => {
+              tempList.push(column)
+            })            
+            column.res.forEach((column, sindex) => {
+              tempList.push(column)
+            })            
+          })
+          let tempListSet = [...new Set(tempList)];
+          this.$store.state.voCumns[index].columns = []
+          for (let i = 0; i < tempListSet.length; i++) {
+            this.$store.state.voCumns[index].columns.push(
+              {
+                name: tempListSet[i], isChecked: true, logicalName: this.snakeToCamel(tempListSet[i]),
+                isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"
+              }
+            )
+          }
+            
+          //this.callXdaSquery(index)
+        })
+        .catch(error => {
+          console.log("에러 데이터 : " + error.data);
+        })
+        .finally(() => {
+
+        })
+    },
+    callXdaSquery(index) {
+      this.axios.post('/api/getSQueryText', {
+        data: {
+          xdaName: this.$store.state.voCumns[index].xdaName
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': this.$store.state.token
+        }
+      })
+        .then(res => {
           console.log("응답 데이터 : " + JSON.stringify(res.data))
           console.log(res.data.length)
           res.data.forEach((column, sindex) => {
-            console.log(column)
-          })
-          this.$store.state.voCumns[index].columns = []
-          res.data.forEach((column, sindex) => {
-            this.$store.state.voCumns[index].columns.push(
-              {
-                name: column, isChecked: true, logicalName: this.snakeToCamel(column),
-                isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"
-              }
+            this.$store.state.sqlmapQueryList.unshift(
+              column.sQueryText
             )
           })
         })
