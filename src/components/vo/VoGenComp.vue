@@ -19,7 +19,7 @@
               [ {{ $store.state.voCumns[index].name }}Vo sqlMap ]
             </span>
           </label>
-          <textarea data-testid="textbox" v-model="this.sqlmapQueryList[index]" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea>
+          <textarea data-testid="textbox" v-model="$store.state.sqlmapQueryListView[index]" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea>
           <!-- 내용 끝 -->
         </div>
       </div>
@@ -118,7 +118,7 @@ public class ${this.$store.state.voCumns[index].name}Vo extends kr.re.kitech.biz
 }`
 this.generateSqlMap(index)
     },generateSqlMap(index) {
-      this.sqlmapQueryList[index] = 
+      this.$store.state.sqlmapQueryListView.unshift( 
 `<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper      
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"      
@@ -133,7 +133,7 @@ this.generateSqlMap(index)
   </select>
 
 </mapper>
-`
+`)
     },
     toUpperCaseFirst(str){
       return str.charAt(0).toUpperCase() + str.slice(1);

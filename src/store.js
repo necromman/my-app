@@ -16,6 +16,7 @@ export const store = createStore ({
     serviceQuery : '',
     serviceImplQuery : '',
     sqlmapQueryList: [],
+    sqlmapQueryListView: [],
     sqlmapQuery : '',
     daoQuery : '',
     selectedtaskClass: 'ccs',
