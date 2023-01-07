@@ -151,7 +151,7 @@ this.queryReplace(index)
 
 <mapper namespace="${this.$store.state.packageName}">
 
-  <${dmlStr} id="${dmlStr}Item" parameterType="${this.$store.state.packageName}.vo.${this.$store.state.projectName}Vo" resultType="${this.$store.state.packageName}.vo.${this.$store.state.projectName}Vo">
+  <${dmlStr} id="${dmlStr}Item" parameterType="${this.$store.state.packageName}.vo.${this.$store.state.voCumns[index].name}Vo" resultType="${this.$store.state.packageName}.vo.${this.$store.state.voCumns[index].name}Vo">
     
     ${str}
 
