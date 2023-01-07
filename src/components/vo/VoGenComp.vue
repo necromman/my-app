@@ -120,8 +120,8 @@ public class ${this.$store.state.voCumns[index].name}Vo extends kr.re.kitech.biz
 this.queryReplace(index)
     },
     queryReplace(index){
-      const regex = /\?/gm
-      
+      const regex = /(?<!\?)\?(?!\?)|\?\?/gm
+            
       let m
       let reqIdx = 0
       let dmlStr
