@@ -130,19 +130,18 @@ this.queryReplace(index)
       while ((m = regex.exec(str)) !== null) {
           const firstIndex = m.index
           const lastIndex = m.index + m[0].length - 1
-          str = str.substring(0, firstIndex) + reqStr[reqIdx] + str.substring(lastIndex + 1)
+          str = str.substring(0, firstIndex) + `#{${reqStr[reqIdx]}}` + str.substring(lastIndex + 1)
           reqIdx++
           if (m.index === regex.lastIndex) {
               regex.lastIndex++
           }
-          m.forEach((match, groupIndex) => {
-              // console.log(`Found match, group ${groupIndex}: ${match}`);
-          });
       }
       if (str !== null && str !== undefined) {
         str = str.replaceAll('<sql>','').replaceAll('</sql>','')
         str = str.trim();
-        dmlStr = str.split(' ')[0].toLowerCase().replaceAll('\n',' ')
+        dmlStr = str.split(' ')[0].toLowerCase()
+        dmlStr = dmlStr.split('\n')[0]
+        if(dmlStr.indexOf('--') > -1) dmlStr = 'select'
       }
       this.$store.state.voCumns[index].sqlmapQueryListView= 
 `<?xml version="1.0" encoding="UTF-8" ?>
