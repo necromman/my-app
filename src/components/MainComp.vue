@@ -781,6 +781,7 @@ xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.
         ],
       }
     )
+    this.callXdaAllParameter(0)
   },
   /**
    * Mounting 단계

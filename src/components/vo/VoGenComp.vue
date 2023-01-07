@@ -128,12 +128,34 @@ this.generateSqlMap(index)
 
   <select id="selectListItem" parameterType="${this.$store.state.packageName}.vo.${this.$store.state.projectName}Vo" resultType="${this.$store.state.packageName}.vo.${this.$store.state.projectName}Vo">
     
-    ${this.$store.state.sqlmapQueryList[index]}
+    ${this.queryReplace(index,this.$store.state.sqlmapQueryList[index], this.$store.state.voCumns[index].req)}
 
   </select>
 
 </mapper>
 `)
+    },
+    queryReplace(index, str, reqStr){
+      const regex = /\?/gm
+      let m
+      let reqIdx = 0
+
+      while ((m = regex.exec(str)) !== null) {
+          const firstIndex = m.index
+          const lastIndex = m.index + m[0].length - 1
+          str = str.substring(0, firstIndex) + reqStr[reqIdx] + str.substring(lastIndex + 1)
+          reqIdx++
+          if (m.index === regex.lastIndex) {
+              regex.lastIndex++
+          }
+          m.forEach((match, groupIndex) => {
+              // console.log(`Found match, group ${groupIndex}: ${match}`);
+          });
+      }
+      //this.$store.state.sqlmapQueryList[index] = str
+      //console.log(str)
+      str = str.replaceAll('<sql>','').replaceAll('</sql>','')
+      return str
     },
     toUpperCaseFirst(str){
       return str.charAt(0).toUpperCase() + str.slice(1);
