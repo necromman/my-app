@@ -142,7 +142,7 @@ this.queryReplace(index)
       if (str !== null && str !== undefined) {
         str = str.replaceAll('<sql>','').replaceAll('</sql>','')
         str = str.trim();
-        dmlStr = str.split(' ')[0].toLowerCase()
+        dmlStr = str.split(' ')[0].toLowerCase().replaceAll('\n',' ')
       }
       this.$store.state.voCumns[index].sqlmapQueryListView= 
 `<?xml version="1.0" encoding="UTF-8" ?>
