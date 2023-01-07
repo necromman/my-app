@@ -121,6 +121,7 @@ this.queryReplace(index)
     },
     queryReplace(index){
       const regex = /\?/gm
+      
       let m
       let reqIdx = 0
       let dmlStr
@@ -142,6 +143,10 @@ this.queryReplace(index)
         dmlStr = str.split(' ')[0].toLowerCase()
         dmlStr = dmlStr.split('\n')[0]
         if(dmlStr.indexOf('--') > -1) dmlStr = 'select'
+
+        const reg = new RegExp(/select|update|delete|insert|merge/, "i")
+        let dmlTrans = str.match(reg).join("") + ` /* QueryID : ....DAO_QueryId */ \n\t\t`
+        str = str.replace(reg, dmlTrans)
       }
       this.$store.state.voCumns[index].sqlmapQueryListView= 
 `<?xml version="1.0" encoding="UTF-8" ?>
