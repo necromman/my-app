@@ -506,6 +506,8 @@ export default {
           name: `name${this.$store.state.voCumns.length + 1}`,
           logicalName: "LogicalName",
           tableName: "tableName",
+          xdaName: "",
+          sqlmapQueryListView: '',
           req: [],
           res: [],
           columns: [
@@ -691,13 +693,9 @@ export default {
           console.log(res.data.length)
           res.data.forEach((column, sindex) => {
             if (column.sQueryText === '') {
-              this.$store.state.sqlmapQueryList.unshift(
-                column.sQuery
-              )
+              this.$store.state.voCumns[index].sqlmapQueryListView = column.sQuery
             }else{
-              this.$store.state.sqlmapQueryList.unshift(
-                column.sQueryText
-              )
+              this.$store.state.voCumns[index].sqlmapQueryListView = column.sQueryText
             }
           })
         })
@@ -755,6 +753,7 @@ xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.
         logicalName: "LogicalName",
         tableName: "tableName",
         xdaName: "kitech.com.sms.xda.ComSmsSS01",
+        sqlmapQueryListView: '',
         req: [],
         res: [],
         columns: [

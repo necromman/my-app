@@ -19,7 +19,7 @@
               [ {{ $store.state.voCumns[index].name }}Vo sqlMap ]
             </span>
           </label>
-          <textarea data-testid="textbox" v-model="$store.state.sqlmapQueryListView[index]" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea>
+          <textarea data-testid="textbox" v-model="$store.state.voCumns[index].sqlmapQueryListView" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea>
           <!-- 내용 끝 -->
         </div>
       </div>
@@ -37,6 +37,7 @@ export default {
     return {
       columnsT : [],
       sqlmapQueryList: [],
+      dmlStr:'',
     }
   },
   watch: {
@@ -116,29 +117,15 @@ public class ${this.$store.state.voCumns[index].name}Vo extends kr.re.kitech.biz
   public void _xStreamDec() {
   }
 }`
-this.generateSqlMap(index)
-    },generateSqlMap(index) {
-      this.$store.state.sqlmapQueryListView.unshift( 
-`<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper      
-    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"      
-    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="${this.$store.state.packageName}">
-
-  <select id="selectListItem" parameterType="${this.$store.state.packageName}.vo.${this.$store.state.projectName}Vo" resultType="${this.$store.state.packageName}.vo.${this.$store.state.projectName}Vo">
-    
-    ${this.queryReplace(index,this.$store.state.sqlmapQueryList[index], this.$store.state.voCumns[index].req)}
-
-  </select>
-
-</mapper>
-`)
+this.queryReplace(index)
     },
-    queryReplace(index, str, reqStr){
+    queryReplace(index){
       const regex = /\?/gm
       let m
       let reqIdx = 0
+      let dmlStr
+      let str = this.$store.state.voCumns[index].sqlmapQueryListView
+      let reqStr = this.$store.state.voCumns[index].req
 
       while ((m = regex.exec(str)) !== null) {
           const firstIndex = m.index
@@ -152,10 +139,27 @@ this.generateSqlMap(index)
               // console.log(`Found match, group ${groupIndex}: ${match}`);
           });
       }
-      //this.$store.state.sqlmapQueryList[index] = str
-      //console.log(str)
-      str = str.replaceAll('<sql>','').replaceAll('</sql>','')
-      return str
+      if (str !== null && str !== undefined) {
+        str = str.replaceAll('<sql>','').replaceAll('</sql>','')
+        str = str.trim();
+        dmlStr = str.split(' ')[0].toLowerCase()
+      }
+      this.$store.state.voCumns[index].sqlmapQueryListView= 
+`<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper      
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"      
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="${this.$store.state.packageName}">
+
+  <${dmlStr} id="${dmlStr}Item" parameterType="${this.$store.state.packageName}.vo.${this.$store.state.projectName}Vo" resultType="${this.$store.state.packageName}.vo.${this.$store.state.projectName}Vo">
+    
+    ${str}
+
+  </${dmlStr}>
+
+</mapper>
+`
     },
     toUpperCaseFirst(str){
       return str.charAt(0).toUpperCase() + str.slice(1);
