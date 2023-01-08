@@ -121,12 +121,17 @@ this.queryReplace(index)
     },
     queryReplace(index){
       const regex = /(?<!\?)\?(?!\?)|\?\?/gm
+      const regex2 = new RegExp('(\\<isNotEmpty node=)("|\')(.*?)("|\')((.*?)(>)|)([\\s\\S]*?)(<\\/isNotEmpty>)', 'g')
+      const regexChange = new RegExp('@@change@@', 'g')
+
             
       let m
       let reqIdx = 0
       let dmlStr
       let str = this.$store.state.voCumns[index].sqlmapQueryListView
       let reqStr = this.$store.state.voCumns[index].req
+      let strList = []
+      let strListIdx = 0
 
       while ((m = regex.exec(str)) !== null) {
           const firstIndex = m.index
@@ -136,6 +141,17 @@ this.queryReplace(index)
           if (m.index === regex.lastIndex) {
               regex.lastIndex++
           }
+      }
+      while ((m = regex2.exec(str)) !== null) {
+          strList.push(`<if test="${m[3]} != null">\n\t AND ${m[8].replace(/\n/g, "").trim()}\n</if>`)
+      }
+      str = str.replace(regex2, "@@change@@");
+      while ((m = regexChange.exec(str)) !== null) {
+          const firstIndex = m.index
+          const lastIndex = m.index + m[0].length - 1
+          console.log(firstIndex + ' : ' + lastIndex)
+          str = str.substring(0, firstIndex) + `${strList[strListIdx]}` + str.substring(lastIndex + 1)
+          strListIdx++
       }
       if (str !== null && str !== undefined) {
         str = str.replaceAll('<sql>','').replaceAll('</sql>','')
