@@ -54,7 +54,7 @@ export default {
           this.router.push('/')
         })
         .catch(error => {
-          console.log("에러 데이터 : " + error.data);
+          console.log("에러 데이터 : " + error);
         })
         .finally(() => {
         })
