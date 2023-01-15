@@ -1,5 +1,15 @@
 <template>
-  <textarea v-model="$store.state.serviceImplQuery" style="height: 100px"></textarea>
+  <div class="flex flex-col relative col gap-4 gr-panel">
+    <div class="flex flex-col relative col gap-4">
+      <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
+        <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
+          <textarea data-testid="textbox" v-model="$store.state.serviceImplQuery"
+            class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea>
+          <!-- 내용 끝 -->
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

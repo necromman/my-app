@@ -287,31 +287,55 @@
       </button>
     </div>
     <VoListGenComp ref="VoListGenComp" />
-    <span>Select Query</span>
-    <textarea v-model="selectQuery" @click="selectTextarea($event)"></textarea>
-    <span>Create Query</span>
-    <textarea v-model="createQuery" @click="selectTextarea($event)" style="height: 100px"></textarea>
+    <!-- <span>Select Query</span>
+    <textarea v-model="selectQuery" @click="selectTextarea($event)"></textarea> -->
+    <!-- <span>Create Query</span>
+    <textarea v-model="createQuery" @click="selectTextarea($event)" style="height: 100px"></textarea> -->
     <!-- <span>vo File</span>
     <textarea v-model="voQuery" @click="selectTextarea($event)" style="height: 100px"></textarea> -->
-    <span>FileCopyBatch File</span>
+    <!-- <span>FileCopyBatch File</span>
     <button type="button" @click="saveToFile(batchQuery, '', 'bat')">download</button>
-    <textarea v-model="batchQuery" style="height: 100px"></textarea>
-    <span>Controller File</span>
-    <button type="button" @click="saveToFile($store.state.controllerQuery, 'Controller', 'java')">download</button>
-    <ControllerGenComp ref="ControllerGenComp" />
-    <span>SqlMap File</span>
-    <button type="button"
+    <textarea v-model="batchQuery" style="height: 100px"></textarea> -->
+    <!-- <span>SqlMap File</span>
+      <button type="button"
       @click="saveToFile($store.state.sqlmapQuery, '_SQL_informix_MyBatis', 'xml')">download</button>
-    <SqlMapGenComp ref="SqlMapGenComp" />
-    <span>DAO File</span>
-    <button type="button" @click="saveToFile($store.state.daoQuery, 'DAO', 'java')">download</button>
-    <DaoGenComp ref="DaoGenComp" />
-    <span>serviceImpl File</span>
-    <button type="button" @click="saveToFile($store.state.serviceImplQuery, 'ServiceImpl', 'java')">download</button>
-    <SvcImplGenComp ref="SvcImplGenComp" />
-    <span>service File</span>
-    <button type="button" @click="saveToFile($store.state.serviceQuery, 'Service', 'java')">download</button>
+      <SqlMapGenComp ref="SqlMapGenComp" /> -->
+    <div class="flex row flex-wrap gap-4 mb-1">
+      <span style="flex-grow: 0.1;" class="text-center gr-sample-textbox block gr-box gr-input gr-text-input">
+        Controller File
+      </span>
+      <button style="flex-grow: 0.1;" @click="saveToFile($store.state.controllerQuery, 'Controller', 'java')" class="gr-button gr-button-lg gr-button-primary">
+        DOWNLOAD
+      </button>
+    </div>
+    <ControllerGenComp ref="ControllerGenComp" />
+    <div class="flex row flex-wrap gap-4 mb-1">
+      <span style="flex-grow: 0.1;" class="text-center gr-sample-textbox block gr-box gr-input gr-text-input">
+        Service File
+      </span>
+      <button style="flex-grow: 0.1;" @click="saveToFile($store.state.serviceQuery, 'Service', 'java')" class="gr-button gr-button-lg gr-button-primary">
+        DOWNLOAD
+      </button>
+    </div>
     <SvcGenComp ref="SvcGenComp" />
+    <div class="flex row flex-wrap gap-4 mb-1">
+      <span style="flex-grow: 0.1;" class="text-center gr-sample-textbox block gr-box gr-input gr-text-input">
+        ServiceImpl File
+      </span>
+      <button style="flex-grow: 0.1;" @click="saveToFile($store.state.serviceImplQuery, 'ServiceImpl', 'java')" class="gr-button gr-button-lg gr-button-primary">
+        DOWNLOAD
+      </button>
+    </div>
+    <SvcImplGenComp ref="SvcImplGenComp" />
+    <div class="flex row flex-wrap gap-4 mb-1">
+      <span style="flex-grow: 0.1;" class="text-center gr-sample-textbox block gr-box gr-input gr-text-input">
+        DAO File
+      </span>
+      <button style="flex-grow: 0.1;" @click="saveToFile($store.state.daoQuery, 'DAO', 'java')" class="gr-button gr-button-lg gr-button-primary">
+        DOWNLOAD
+      </button>
+    </div>
+    <DaoGenComp ref="DaoGenComp" />
   </div>
 
 
@@ -594,8 +618,8 @@ export default {
       this.$refs.SvcGenComp.generateQuery()
       this.$refs.SvcImplGenComp.generateQuery()
       this.$refs.DaoGenComp.generateQuery()
-      this.$refs.SqlMapGenComp.generateQuery()
       this.$refs.ControllerGenComp.generateQuery()
+      //this.$refs.SqlMapGenComp.generateQuery()
     },
     toUpperCaseFirst(str) {
       return str.charAt(0).toUpperCase() + str.slice(1);
