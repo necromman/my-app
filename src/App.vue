@@ -1,8 +1,10 @@
 <template>
-  <MainComp/>
+  <!-- <MainComp/> -->
+  <RouterView />
 </template>
 
 <script>
+import { RouterLink, RouterView } from "vue-router";
 import MainComp from '@/components/MainComp.vue'
 
 export default {

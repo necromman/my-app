@@ -189,8 +189,8 @@
 }}</label>
               <textarea type="text" v-model="this.voCumnsList[index]" placeholder="columnList"
                 class="gr-sample-textbox block gr-box gr-input gr-text-input" rows="1"></textarea>
-              <button @click="pushColumns(index)" class="gr-button gr-button-lg gr-button-secondary"
-                style="flex-grow: 0.1;">PUSH</button>
+              <!-- <button @click="pushColumns(index)" class="gr-button gr-button-lg gr-button-secondary"
+                style="flex-grow: 0.1;">PUSH</button> -->
             </div>
 
             <div>
@@ -823,8 +823,7 @@ xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.
       url: "/api/loginProcess",
       method: "POST",
       data: {
-        name: "name",
-        email: "email",
+        email: "admin",
         password: "password"
       },
     }).
