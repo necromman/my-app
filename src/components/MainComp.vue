@@ -632,15 +632,14 @@ export default {
       })
     },
     callXdaAllParameter(index) {
-      this.axios.post('/api/getAllParameter', {
-        data: {
+      const data = { data: {
           xdaName: this.$store.state.voCumns[index].xdaName
-        },
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': this.$store.state.token
-        }
-      })
+        } }
+      const headers = { 
+        "authorization": this.$store.state.token,
+        "content-type": "application/json",
+      }
+      this.axios.post("/api/getAllParameter", data, { headers })
         .then(res => {
           let tempList = []
           this.$store.state.voCumns[index].req = []
@@ -677,15 +676,14 @@ export default {
         })
     },
     callXdaSquery(index) {
-      this.axios.post('/api/getSQueryText', {
-        data: {
+      const data = { data: {
           xdaName: this.$store.state.voCumns[index].xdaName
-        },
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': this.$store.state.token
-        }
-      })
+        } }
+      const headers = { 
+        "authorization": this.$store.state.token,
+        "content-type": "application/json",
+      }
+      this.axios.post("/api/getSQueryText", data, { headers })
         .then(res => {
           console.log("응답 데이터 : " + JSON.stringify(res.data))
           console.log(res.data.length)
@@ -792,24 +790,7 @@ xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.
    */
   beforeMount() {
     console.log("beforeMount");
-
-    this.axios({
-      url: "/api/loginProcess",
-      method: "POST",
-      data: {
-        email: "admin",
-        password: "password"
-      },
-    }).
-      then(res => {
-        console.log("응답 데이터 : " + JSON.stringify(res.data.token));
-        this.$store.state.token = res.data.token
-      })
-      .catch(error => {
-        console.log("에러 데이터 : " + error.data);
-      })
-      .finally(() => {
-      })
+    if(!this.$store.state.token) this.router.push('/login')
   },
   /**
    * 여기서는 컴포넌트, 템플릿, 랜더링된 돔에 접근할 수 있는 단계이다.

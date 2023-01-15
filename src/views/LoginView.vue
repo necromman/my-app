@@ -4,7 +4,7 @@
     <div class="flex flex-col relative col gap-4 gr-panel" style="width:360px;">
       <div class="flex flex-col relative col gap-4">
         <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
-          <h1 style="padding: 15px 0px;text-align: center;word-spacing: 24px;letter-spacing: 40px;padding-left: 40px;">
+          <h1 style="padding: 15px 0px 15px 40px;text-align: center;word-spacing: 24px;letter-spacing: 40px;color: aliceblue;">
             PROST
           </h1>
           <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import router from "@/router";
 export default {
   data() {
     return {
@@ -49,9 +48,10 @@ export default {
         },
       }).
         then(res => {
-          console.log("응답 데이터 : " + JSON.stringify(res.data.token));
+          console.log("응답 데이터 : " + JSON.stringify(res.data.token))
           this.$store.state.token = res.data.token
-          router.push('/')
+          localStorage.setItem("token", res.data.token)
+          this.router.push('/')
         })
         .catch(error => {
           console.log("에러 데이터 : " + error.data);
