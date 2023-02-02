@@ -139,7 +139,7 @@
               VO Generate
             </span>
           </label>
-          <!-- 버튼 영역 -->
+          <!-- 버튼 영역 --> 
           <div class="flex row flex-wrap gap-4 mb-2">
             <button @click="addVoColumn" class="gr-button gr-button-lg gr-button-primary">ADD</button>
             <button @click="removeVoColumn" class="gr-button gr-button-lg gr-button-secondary">REMOVE</button>
