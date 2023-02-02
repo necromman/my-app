@@ -1,7 +1,7 @@
 <template>
 
   <!-- 카드영역 시작 -->
-  <div class="flex flex-col relative col gap-4 gr-panel">
+  <div class="flex flex-col relative col gap-4 gr-panel" style="display: none">
     <div class="flex flex-col relative col gap-4">
       <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
         <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
@@ -86,11 +86,13 @@
       <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
         <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
           <!-- 내용 시작 -->
-          <!-- 버튼 영역 -->
-          <div class="flex row flex-wrap gap-4 mb-2">
-            <span style="flex-grow: 0.3;" class="gr-sample-textbox block gr-box gr-input gr-text-input text-center">
+          <label class="block">
+            <span class="h2 block p-2">
               VO List Generate
             </span>
+          </label>
+          <!-- 버튼 영역 -->
+          <div class="flex row flex-wrap gap-4 mb-2">
             <button @click="addVoListColumn" style="flex-grow: 0.1;"
               class="gr-button gr-button-lg gr-button-primary">ADD</button>
           </div>
@@ -145,7 +147,7 @@
 
           <!-- 내용 시작 -->
           <div v-for="(column, index) in $store.state.voCumns" :key="index"
-            style="border: 3px solid #374151;border-radius: 15px;padding: 20px 13px;margin: 10px 0;">
+            style="border: 3px solid #374151;padding: 20px 13px;margin: 10px 0;">
             <div class="flex row flex-wrap gap-4 mb-2">
               <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">Vo
                 name:</label>
@@ -210,26 +212,26 @@
                 <!-- sql type -->
                 <select v-model="$store.state.voCumns[index].columns[sindex].sqlType"
                   @change="onChangeTypeLen(index, sindex, $store.state.voCumns[index].columns[sindex].sqlType)"
-                  class="gr-sample-textbox block gr-box gr-input gr-text-input">
+                  class="gr-sample-textbox block gr-box gr-input gr-text-input" style="display: none;">
                   <option v-for="type in columnType" v-bind:key="type.name">{{ type.name }}</option>
                 </select>
                 <input type="text" v-model="$store.state.voCumns[index].columns[sindex].sqlLen" placeholder="Type len"
-                  class="gr-sample-textbox block gr-box gr-input gr-text-input">
+                  class="gr-sample-textbox block gr-box gr-input gr-text-input" style="display: none;">
                 <!-- vo type -->
                 <select v-model="$store.state.voCumns[index].columns[sindex].dataType"
                   class="gr-sample-textbox block gr-box gr-input gr-text-input">
                   <option v-for="type in $store.state.voColumnType" v-bind:key="type">{{ type }}</option>
                 </select>
-                <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">
+                <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1; display:none;">
                   null
                 </label>
                 <input type="checkbox" v-model="column.isChecked"
-                  class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;" />
-                <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">
+                  class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1; display:none;" />
+                <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1; display:none;">
                   pk
                 </label>
                 <input type="checkbox" v-model="column.isPrimary"
-                  class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;" />
+                  class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1; display:none;" />
                 <button @click="removeColumn(index, sindex)" class="gr-button gr-button-md gr-button-secondary"
                   style="flex-grow: 0.1;">REMOVE</button>
               </div>
@@ -267,8 +269,8 @@
   <!-- 카드영역 끝 -->
 
   <div>
-    <div class="flex row flex-wrap gap-4 mb-1">
-      <span style="flex-grow: 0.1;" class="text-center gr-sample-textbox block gr-box gr-input gr-text-input">
+    <div class="flex row flex-wrap gap-4 pl-4 mb-1">
+      <span style="flex-grow: 0.1;" class="block gr-text-input h2 text-center">
         VO File
       </span>
       <button style="flex-grow: 0.1;" @click="saveToFile($store.state.voQuery, 'Vo', 'java')"
@@ -276,9 +278,11 @@
         DOWNLOAD
       </button>
     </div>
-    <VoGenComp ref="VoGenComp" />
-    <div class="flex row flex-wrap gap-4 mb-1">
-      <span style="flex-grow: 0.1;" class="text-center gr-sample-textbox block gr-box gr-input gr-text-input">
+    <div style="border: 5px solid dimgray;margin: 0 10px;">
+      <VoGenComp ref="VoGenComp" />
+    </div>
+    <div class="flex row flex-wrap gap-4 pl-4 mb-1">
+      <span style="flex-grow: 0.1;" class="block gr-text-input h2 text-center">
         VO List File
       </span>
       <button style="flex-grow: 0.1;" @click="saveToFile($store.state.voListQuery, 'ListVo', 'java')"
@@ -300,8 +304,8 @@
       <button type="button"
       @click="saveToFile($store.state.sqlmapQuery, '_SQL_informix_MyBatis', 'xml')">download</button>
       <SqlMapGenComp ref="SqlMapGenComp" /> -->
-    <div class="flex row flex-wrap gap-4 mb-1">
-      <span style="flex-grow: 0.1;" class="text-center gr-sample-textbox block gr-box gr-input gr-text-input">
+    <div class="flex row flex-wrap gap-4 pl-4 mb-1">
+      <span style="flex-grow: 0.1;" class="block gr-text-input h2 text-center">
         Controller File
       </span>
       <button style="flex-grow: 0.1;" @click="saveToFile($store.state.controllerQuery, 'Controller', 'java')" class="gr-button gr-button-lg gr-button-primary">
@@ -309,8 +313,8 @@
       </button>
     </div>
     <ControllerGenComp ref="ControllerGenComp" />
-    <div class="flex row flex-wrap gap-4 mb-1">
-      <span style="flex-grow: 0.1;" class="text-center gr-sample-textbox block gr-box gr-input gr-text-input">
+    <div class="flex row flex-wrap gap-4 pl-4 mb-1">
+      <span style="flex-grow: 0.1;" class="block gr-text-input h2 text-center">
         Service File
       </span>
       <button style="flex-grow: 0.1;" @click="saveToFile($store.state.serviceQuery, 'Service', 'java')" class="gr-button gr-button-lg gr-button-primary">
@@ -318,8 +322,8 @@
       </button>
     </div>
     <SvcGenComp ref="SvcGenComp" />
-    <div class="flex row flex-wrap gap-4 mb-1">
-      <span style="flex-grow: 0.1;" class="text-center gr-sample-textbox block gr-box gr-input gr-text-input">
+    <div class="flex row flex-wrap gap-4 pl-4 mb-1">
+      <span style="flex-grow: 0.15;" class="block gr-text-input h2 text-center">
         ServiceImpl File
       </span>
       <button style="flex-grow: 0.1;" @click="saveToFile($store.state.serviceImplQuery, 'ServiceImpl', 'java')" class="gr-button gr-button-lg gr-button-primary">
@@ -327,8 +331,8 @@
       </button>
     </div>
     <SvcImplGenComp ref="SvcImplGenComp" />
-    <div class="flex row flex-wrap gap-4 mb-1">
-      <span style="flex-grow: 0.1;" class="text-center gr-sample-textbox block gr-box gr-input gr-text-input">
+    <div class="flex row flex-wrap gap-4 pl-4 mb-1">
+      <span style="flex-grow: 0.1;" class="block gr-text-input h2 text-center">
         DAO File
       </span>
       <button style="flex-grow: 0.1;" @click="saveToFile($store.state.daoQuery, 'DAO', 'java')" class="gr-button gr-button-lg gr-button-primary">

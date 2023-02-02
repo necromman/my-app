@@ -12,10 +12,10 @@
             <!-- 내용 시작 -->
             <input data-testid="textbox" v-model="this.email"
               class="block text-left gr-box gr-input gr-text-input mt-3 scroll-hide w-full" placeholder="id" rows="1"
-              style="height: 42px;" />
-            <input data-testid="textbox" v-model="this.password"
+              style="height: 42px;"  @keyup.enter="loginProc"/>
+            <input data-testid="textbox" v-model="this.password" type='password'
               class="block text-left gr-box gr-input gr-text-input mb-3 mt-3 scroll-hide w-full" placeholder="password" rows="1"
-              style="height: 42px;"/>
+              style="height: 42px;" @keyup.enter="loginProc"/>
             <!-- 내용 끝 -->
           </div>
         </div>
