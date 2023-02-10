@@ -167,7 +167,7 @@
                 name:</label>
               <input type="text" v-model="column.xdaName" placeholder="Xda name"
                 class="gr-sample-textbox block gr-box gr-input gr-text-input"
-                style="background-color: #ffc48c;color: #ae5706;">
+                style="background-color: rgb(255 140 140);color: rgb(33 8 1);font-size: 1.5em;">
               <button @click="callXdaAllParameter(index)" class="gr-button gr-button-lg gr-button-primary"
                 style="flex-grow: 0.1;">CALL</button>
             </div>
@@ -694,8 +694,10 @@ export default {
           res.data.forEach((column, sindex) => {
             if (column.sQueryText === '') {
               this.$store.state.voCumns[index].sqlmapQueryListView = column.sQuery
+              this.$store.state.voCumns[index].sqlmapQueryListOriginal = column.sQuery
             }else{
               this.$store.state.voCumns[index].sqlmapQueryListView = column.sQueryText
+              this.$store.state.voCumns[index].sqlmapQueryListOriginal = column.sQueryText
             }
           })
         })

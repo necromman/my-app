@@ -14,12 +14,22 @@
           <textarea data-testid="textbox" v-model="$store.state.voQuery[index]" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea>
           <!-- 내용 끝 -->
           <!-- sqlMap 내용 시작 -->
-          <label class="block">
-            <span class="h2 block p-2">
-              [ {{ $store.state.voCumns[index].name }}Vo sqlMap ]
-            </span>
+          <div class="flex row flex-wrap gap-4">
+            <label class="block">
+              <span class="h2 block p-2">
+                [ {{ $store.state.voCumns[index].name }}Vo sqlMap ]
+              </span>
           </label>
-          <textarea data-testid="textbox" v-model="$store.state.voCumns[index].sqlmapQueryListView" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea>
+            <label class="block">
+              <span class="h2 block p-2">
+                [ {{ $store.state.voCumns[index].name }}Vo OriginalSql ]
+              </span>
+          </label>
+          </div>
+          <div class="flex row flex-wrap gap-4">
+            <textarea data-testid="textbox" v-model="$store.state.voCumns[index].sqlmapQueryListView" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea>
+            <textarea data-testid="textbox" v-model="$store.state.voCumns[index].sqlmapQueryListOriginal" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea>
+          </div>
           <!-- 내용 끝 -->
         </div>
       </div>
