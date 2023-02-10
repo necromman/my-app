@@ -3,7 +3,7 @@
 	"description": "prost web",
 	"version": "1.0.0",
 	"scripts": {
-		"dev": "vite --host 0.0.0.0 --port 7070",
+		"dev": "vite --host 0.0.0.0 --port 8080",
 		"build": "vite build",
 		"preview": "vite preview --port 4173",
 		"lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
