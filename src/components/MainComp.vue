@@ -269,24 +269,24 @@
   <!-- 카드영역 끝 -->
 
   <div>
-    <div class="flex row flex-wrap gap-4 pl-4 mb-1">
-      <span style="flex-grow: 0.1;" class="block gr-text-input h2 text-center">
+    <div class="flex row flex-wrap px-4 mb-1">
+      <span style="" class="block gr-text-input h2 text-center">
         VO File
       </span>
-      <button style="flex-grow: 0.1;" @click="saveToFile($store.state.voQuery, 'Vo', 'java')"
-        class="gr-button gr-button-lg gr-button-primary">
+      <button style="" @click="saveToFile($store.state.voQuery, 'Vo', 'java')"
+        class="gr-button gr-button-lg">
         DOWNLOAD
       </button>
     </div>
     <div style="border: 5px solid dimgray;margin: 0 10px;">
       <VoGenComp ref="VoGenComp" />
     </div>
-    <div class="flex row flex-wrap gap-4 pl-4 mb-1">
-      <span style="flex-grow: 0.1;" class="block gr-text-input h2 text-center">
+    <div class="flex row flex-wrap px-4 mb-1">
+      <span style="" class="block gr-text-input h2 text-center">
         VO List File
       </span>
-      <button style="flex-grow: 0.1;" @click="saveToFile($store.state.voListQuery, 'ListVo', 'java')"
-        class="gr-button gr-button-lg gr-button-primary">
+      <button style="" @click="saveToFile($store.state.voListQuery, 'ListVo', 'java')"
+        class="gr-button gr-button-lg">
         DOWNLOAD
       </button>
     </div>
@@ -304,38 +304,38 @@
       <button type="button"
       @click="saveToFile($store.state.sqlmapQuery, '_SQL_informix_MyBatis', 'xml')">download</button>
       <SqlMapGenComp ref="SqlMapGenComp" /> -->
-    <div class="flex row flex-wrap gap-4 pl-4 mb-1">
-      <span style="flex-grow: 0.1;" class="block gr-text-input h2 text-center">
+    <div class="flex row flex-wrap px-4 mb-1">
+      <span style="" class="block gr-text-input h2 text-center">
         Controller File
       </span>
-      <button style="flex-grow: 0.1;" @click="saveToFile($store.state.controllerQuery, 'Controller', 'java')" class="gr-button gr-button-lg gr-button-primary">
+      <button style="" @click="saveToFile($store.state.controllerQuery, 'Controller', 'java')" class="gr-button gr-button-lg">
         DOWNLOAD
       </button>
     </div>
     <ControllerGenComp ref="ControllerGenComp" />
-    <div class="flex row flex-wrap gap-4 pl-4 mb-1">
-      <span style="flex-grow: 0.1;" class="block gr-text-input h2 text-center">
+    <div class="flex row flex-wrap px-4 mb-1">
+      <span style="" class="block gr-text-input h2 text-center">
         Service File
       </span>
-      <button style="flex-grow: 0.1;" @click="saveToFile($store.state.serviceQuery, 'Service', 'java')" class="gr-button gr-button-lg gr-button-primary">
+      <button style="" @click="saveToFile($store.state.serviceQuery, 'Service', 'java')" class="gr-button gr-button-lg">
         DOWNLOAD
       </button>
     </div>
     <SvcGenComp ref="SvcGenComp" />
-    <div class="flex row flex-wrap gap-4 pl-4 mb-1">
-      <span style="flex-grow: 0.15;" class="block gr-text-input h2 text-center">
+    <div class="flex row flex-wrap px-4 mb-1">
+      <span style="" class="block gr-text-input h2 text-center">
         ServiceImpl File
       </span>
-      <button style="flex-grow: 0.1;" @click="saveToFile($store.state.serviceImplQuery, 'ServiceImpl', 'java')" class="gr-button gr-button-lg gr-button-primary">
+      <button style="" @click="saveToFile($store.state.serviceImplQuery, 'ServiceImpl', 'java')" class="gr-button gr-button-lg">
         DOWNLOAD
       </button>
     </div>
     <SvcImplGenComp ref="SvcImplGenComp" />
-    <div class="flex row flex-wrap gap-4 pl-4 mb-1">
-      <span style="flex-grow: 0.1;" class="block gr-text-input h2 text-center">
+    <div class="flex row flex-wrap px-4 mb-1">
+      <span style="" class="block gr-text-input h2 text-center">
         DAO File
       </span>
-      <button style="flex-grow: 0.1;" @click="saveToFile($store.state.daoQuery, 'DAO', 'java')" class="gr-button gr-button-lg gr-button-primary">
+      <button style="" @click="saveToFile($store.state.daoQuery, 'DAO', 'java')" class="gr-button gr-button-lg">
         DOWNLOAD
       </button>
     </div>
