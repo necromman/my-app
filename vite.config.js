@@ -5,7 +5,7 @@ import vue from "@vitejs/plugin-vue";
 
 import svgLoader from "vite-svg-loader";
 
-const target = 'http://localhost:3000';
+const target = 'http://localhost:7171';
 
 // https://vitejs.dev/config/
 export default defineConfig({
