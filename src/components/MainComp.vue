@@ -794,7 +794,7 @@ xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.
    */
   beforeMount() {
     console.log("beforeMount");
-    if(!this.$store.state.token) this.router.push('/login')
+    //if(!this.$store.state.token) this.router.push('/login')
   },
   /**
    * 여기서는 컴포넌트, 템플릿, 랜더링된 돔에 접근할 수 있는 단계이다.
