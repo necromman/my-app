@@ -138,7 +138,7 @@ this.queryReplace(index)
       let m
       let reqIdx = 0
       let dmlStr
-      let str = this.$store.state.voCumns[index].sqlmapQueryListView
+      let str = this.$store.state.voCumns[index].sqlmapQueryListOriginal
       let reqStr = this.$store.state.voCumns[index].req
       let strList = []
       let strListIdx = 0
