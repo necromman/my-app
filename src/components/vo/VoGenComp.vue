@@ -22,7 +22,7 @@
           </label>
             <label class="block">
               <span class="h2 block p-2">
-                [ {{ $store.state.voCumns[index].name }}Vo OriginalSql ]
+                [ {{ $store.state.voCumns[index].xdaName }} OriginalQuery ]
               </span>
           </label>
           </div>
