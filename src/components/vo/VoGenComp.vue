@@ -11,7 +11,20 @@
               [ {{ $store.state.voCumns[index].name }}Vo ]
             </span>
           </label>
-          <textarea data-testid="textbox" v-model="$store.state.voQuery[index]" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea>
+          <!-- <textarea data-testid="textbox" v-model="$store.state.voQuery[index]" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea> -->
+          <HighCode
+              ref="H"
+              class="code"
+              :codeValue="$store.state.voQuery[index]"
+              :theme="this.dark"
+              :fontSize="this.fontSize"
+              :nameShow="false"
+              :copy="true"
+              :height="this.height"
+              :width="this.width"
+              :textEditor="true"
+              :key="this.componentKey"
+            ></HighCode>
           <!-- 내용 끝 -->
           <!-- sqlMap 내용 시작 -->
           <div class="flex row flex-wrap gap-4">
