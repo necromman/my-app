@@ -27,8 +27,34 @@
           </label>
           </div>
           <div class="flex row flex-wrap gap-4">
-            <textarea data-testid="textbox" v-model="$store.state.voCumns[index].sqlmapQueryListView" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea>
-            <textarea data-testid="textbox" v-model="$store.state.voCumns[index].sqlmapQueryListOriginal" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea>
+            <!-- <textarea data-testid="textbox" v-model="$store.state.voCumns[index].sqlmapQueryListView" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea>
+            <textarea data-testid="textbox" v-model="$store.state.voCumns[index].sqlmapQueryListOriginal" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea> -->
+            <HighCode
+              ref="H"
+              class="code"
+              :codeValue="$store.state.voCumns[index].sqlmapQueryListView"
+              :theme="this.dark"
+              :fontSize="this.fontSize"
+              :nameShow="false"
+              :copy="true"
+              :height="this.height"
+              :width="this.width"
+              :textEditor="true"
+              :key="this.componentKey"
+            ></HighCode>
+            <HighCode
+              ref="H"
+              class="code"
+              :codeValue="$store.state.voCumns[index].sqlmapQueryListOriginal"
+              :theme="this.light"
+              :fontSize="this.fontSize"
+              :nameShow="false"
+              :copy="true"
+              :height="this.height"
+              :width="this.width"
+              :textEditor="true"
+              :key="this.componentKey"
+            ></HighCode>
           </div>
           <!-- 내용 끝 -->
         </div>
@@ -39,8 +65,12 @@
 </template>
 
 <script>
+import HighCode from '@/components/highlight/HighCode.vue'
 export default {
    /* eslint-disable */
+  components: {
+    HighCode
+  },
   beforeCreate() {
   },
   data() {
@@ -48,12 +78,26 @@ export default {
       columnsT : [],
       sqlmapQueryList: [],
       dmlStr:'',
+      light: 'light',
+      vue: 'vue',
+      dark: 'dark',
+      borderRadius: '0px',
+      fontSize: '12px',
+      height: '160px',
+      width: '100%',
+      booltrue: true,
+      boolfalse: false,
+      componentKey: 0
     }
   },
   watch: {
   },
   methods: {
+    forceRerender(){
+      this.componentKey += 1
+    },
     generateQuery(index) {
+      
       this.columnsT = this.$store.state.voCumns[index].columns.map(column => column).filter(name => name !== '')
       this.$store.state.voQuery[index] = `package ${this.$store.state.packageName}.vo;\n`
       this.$store.state.voQuery[index] += `
@@ -190,6 +234,7 @@ this.queryReplace(index)
 
 </mapper>
 `
+this.forceRerender()
     },
     toUpperCaseFirst(str){
       return str.charAt(0).toUpperCase() + str.slice(1);
@@ -200,6 +245,7 @@ this.queryReplace(index)
   beforeMount() {
   },
   mounted() {
+    
   },
 }
 </script>

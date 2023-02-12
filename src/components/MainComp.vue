@@ -590,6 +590,7 @@ export default {
 
       this.$store.state.voCumns.forEach((column, index) => {
         this.$refs.VoGenComp.generateQuery(index)
+        // this.$refs.VoGenComp.forceRerender()
       })
 
       this.$refs.VoListGenComp.generateQuery()
@@ -699,6 +700,7 @@ export default {
               this.$store.state.voCumns[index].sqlmapQueryListView = column.sQueryText
               this.$store.state.voCumns[index].sqlmapQueryListOriginal = column.sQueryText
             }
+            this.$refs.VoGenComp.forceRerender()
           })
         })
         .catch(error => {
