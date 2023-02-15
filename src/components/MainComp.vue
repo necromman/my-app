@@ -157,10 +157,10 @@
                 name:</label>
               <input type="text" v-model="column.logicalName" placeholder="logical Name"
                 class="gr-sample-textbox block gr-box gr-input gr-text-input">
-              <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">Table
+              <!-- <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">Table
                 name:</label>
               <input type="text" v-model="column.tableName" placeholder="Table name"
-                class="gr-sample-textbox block gr-box gr-input gr-text-input">
+                class="gr-sample-textbox block gr-box gr-input gr-text-input"> -->
             </div>
             <div class="flex row flex-wrap gap-4 mb-2">
               <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">Xda
@@ -176,14 +176,14 @@
     $store.state.voCumns[index].req.length
 }}</label>
               <textarea type="text" v-model="this.voCumnsListReq[index]" placeholder="request"
-                class="gr-sample-textbox block gr-box gr-input gr-text-input" rows="1"></textarea>
+                class="gr-sample-textbox block gr-box gr-input gr-text-input" rows="1" disabled></textarea>
             </div>
             <div class="flex row flex-wrap gap-4 mb-2">
               <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">response {{
     $store.state.voCumns[index].res.length
 }}</label>
               <textarea type="text" v-model="this.voCumnsListRes[index]" placeholder="response"
-                class="gr-sample-textbox block gr-box gr-input gr-text-input" rows="1"></textarea>
+                class="gr-sample-textbox block gr-box gr-input gr-text-input" rows="1" disabled></textarea>
             </div>
             <div class="flex row flex-wrap gap-4 mb-2">
               <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">columnList {{
@@ -536,11 +536,16 @@ export default {
           ],
         }
       )
+      //this.$refs.VoGenComp.forceRerender()
+      //this.storeCounter.increment(1)
     },
-    addColumn(index) {
+    addColumn(index, $column) {
+      let column = `column${this.$store.state.voCumns[index].columns.length + 1}`
+      if($column != undefined) column = $column
+       
       this.$store.state.voCumns[index].columns.unshift(
         {
-          name: `column${this.$store.state.voCumns[index].columns.length + 1}`,
+          name: column,
           isChecked: true,
           logicalName: "",
           isPrimary: false,
@@ -590,7 +595,8 @@ export default {
 
       this.$store.state.voCumns.forEach((column, index) => {
         this.$refs.VoGenComp.generateQuery(index)
-        // this.$refs.VoGenComp.forceRerender()
+        //this.$refs.VoGenComp.forceRerender()
+        //this.storeCounter.increment(1)
       })
 
       this.$refs.VoListGenComp.generateQuery()
@@ -700,7 +706,8 @@ export default {
               this.$store.state.voCumns[index].sqlmapQueryListView = column.sQueryText
               this.$store.state.voCumns[index].sqlmapQueryListOriginal = column.sQueryText
             }
-            this.$refs.VoGenComp.forceRerender()
+            //this.$refs.VoGenComp.forceRerender()
+            //this.storeCounter.increment(1)
           })
         })
         .catch(error => {

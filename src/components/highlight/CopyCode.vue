@@ -107,7 +107,7 @@ const getContent = () => {
     font-size: 12px;
     color: white;
     // right: 0px;
-    width: 80px;
+    width: 100%;
     height: 30px;
     line-height: 30px;
     background: rgba(0, 0, 0, 0.8);

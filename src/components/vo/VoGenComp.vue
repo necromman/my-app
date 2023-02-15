@@ -6,43 +6,60 @@
       <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
         <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
           <!-- VO 내용 시작 -->
-          <label class="block">
+          <label class="block relative">
             <span class="h2 block p-2">
               [ {{ $store.state.voCumns[index].name }}Vo ]
             </span>
           </label>
-          <!-- <textarea data-testid="textbox" v-model="$store.state.voQuery[index]" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea> -->
-          <HighCode
+          <div class="absolute w-full right-6">
+            <CopyComp
               ref="H"
               class="code"
-              :codeValue="$store.state.voQuery[index]"
-              :theme="this.dark"
-              :fontSize="this.fontSize"
               :nameShow="false"
               :copy="true"
-              :height="this.height"
-              :width="this.width"
-              :textEditor="true"
-              :key="this.componentKey"
-            ></HighCode>
+              :codeValue="$store.state.voQuery[index]"
+              :key="$store.state.voQuery[index]"
+            ></CopyComp>
+          </div>
+          <textarea data-testid="textbox" v-model="$store.state.voQuery[index]" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea>
           <!-- 내용 끝 -->
           <!-- sqlMap 내용 시작 -->
           <div class="flex row flex-wrap gap-4">
-            <label class="block">
+            <label class="block relative">
               <span class="h2 block p-2">
                 [ {{ $store.state.voCumns[index].name }}Vo sqlMap ]
               </span>
+              <div class="absolute w-full right-6">
+                <CopyComp
+                  ref="H"
+                  class="code"
+                  :nameShow="false"
+                  :copy="true"
+                  :codeValue="$store.state.voCumns[index].sqlmapQueryListView"
+                  :key="$store.state.voCumns[index].sqlmapQueryListView"
+                ></CopyComp>
+              </div>
           </label>
-            <label class="block">
+            <label class="block relative">
               <span class="h2 block p-2">
                 [ {{ $store.state.voCumns[index].xdaName }} OriginalQuery ]
               </span>
+              <div class="absolute w-full right-6">
+              <CopyComp
+                ref="H"
+                class="code"
+                :nameShow="false"
+                :copy="true"
+                :codeValue="$store.state.voCumns[index].sqlmapQueryListOriginal"
+                :key="$store.state.voCumns[index].sqlmapQueryListOriginal"
+              ></CopyComp>
+              </div>
           </label>
           </div>
           <div class="flex row flex-wrap gap-4">
-            <!-- <textarea data-testid="textbox" v-model="$store.state.voCumns[index].sqlmapQueryListView" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea>
-            <textarea data-testid="textbox" v-model="$store.state.voCumns[index].sqlmapQueryListOriginal" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea> -->
-            <HighCode
+            <textarea data-testid="textbox" v-model="$store.state.voCumns[index].sqlmapQueryListView" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea>
+            <textarea data-testid="textbox" v-model="$store.state.voCumns[index].sqlmapQueryListOriginal" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea>
+            <!-- <HighCode
               ref="H"
               class="code"
               :codeValue="$store.state.voCumns[index].sqlmapQueryListView"
@@ -67,7 +84,7 @@
               :width="this.width"
               :textEditor="true"
               :key="this.componentKey"
-            ></HighCode>
+            ></HighCode> -->
           </div>
           <!-- 내용 끝 -->
         </div>
@@ -78,11 +95,11 @@
 </template>
 
 <script>
-import HighCode from '@/components/highlight/HighCode.vue'
+import CopyComp from '@/components/highlight/CopyComp.vue'
 export default {
    /* eslint-disable */
   components: {
-    HighCode
+    CopyComp
   },
   beforeCreate() {
   },
@@ -96,8 +113,6 @@ export default {
       dark: 'dark',
       borderRadius: '0px',
       fontSize: '12px',
-      height: '160px',
-      width: '100%',
       booltrue: true,
       boolfalse: false,
       componentKey: 0
@@ -247,7 +262,8 @@ this.queryReplace(index)
 
 </mapper>
 `
-this.forceRerender()
+// this.forceRerender()
+// this.storeCounter.increment(1)
     },
     toUpperCaseFirst(str){
       return str.charAt(0).toUpperCase() + str.slice(1);

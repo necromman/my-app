@@ -5,6 +5,16 @@
       <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
         <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
           <!-- 내용 시작 -->
+          <div class="absolute w-full right-6">
+            <CopyComp
+              ref="H"
+              class="code"
+              :nameShow="false"
+              :copy="true"
+              :codeValue="$store.state.voListQuery"
+              :key="$store.state.voListQuery"
+            ></CopyComp>
+          </div>
           <textarea data-testid="textbox" v-model="$store.state.voListQuery" class="w-full block gr-box gr-input gr-text-input mb-5" rows="8"></textarea>
           <!-- 내용 끝 -->
         </div>
@@ -16,8 +26,12 @@
 </template>
 
 <script>
+import CopyComp from '@/components/highlight/CopyComp.vue'
 export default {
    /* eslint-disable */
+   components: {
+    CopyComp
+  },
   beforeCreate() {
   },
   data() {
