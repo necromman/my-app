@@ -258,7 +258,7 @@
             </span>
           </label>
           <div class="flex row flex-wrap gap-4">
-            <button @click="generateSelectQuery" class="gr-button gr-button-lg gr-button-primary">CREATE</button>
+            <button @click="generateSelectQuery" class="gr-button gr-button-lg gr-button-primary">CONVERT</button>
             <button @click="downloadZipFile" class="gr-button gr-button-lg gr-button-secondary">DOWNLOAD ZIP</button>
           </div>
           <!-- 내용 끝 -->
