@@ -56,22 +56,19 @@ public class ${this.$store.state.projectName}Controller {
 
   @ElService(key="Svc${this.selectedtaskClass}${this.taskSubClass}COMR01")
   @RequestMapping(value="Svc${this.selectedtaskClass}${this.taskSubClass}COMR01")
-  @ElDescription(sub="selectListItem",desc="리스트를 조회 한다.")
-  public ${this.$store.state.projectName}Vo selectListItem(${this.$store.state.projectName}Vo ${this.taskSubClass}Vo) throws Exception {
-      List<${this.$store.state.projectName}Vo> list = ${this.taskSubClass}Service.selectListItem(${this.$store.state.projectName}ListVo);
-      ${this.$store.state.projectName}Vo ${this.taskSubClass}VoList = new ${this.$store.state.packageName}Vo();
-      ${this.taskSubClass}VoList.set${this.$store.state.projectName}VoList(list);
-      return ${this.taskSubClass}VoList;
+  @ElDescription(sub="selectList",desc="리스트를 조회 한다.")
+  public ${this.$store.state.projectName}ListVo selectList(${this.$store.state.projectName}Vo ${this.taskSubClass}Vo) throws Exception {
+      ${this.$store.state.projectName}ListVo retVo = new ${this.$store.state.projectName}ListVo();
+      retVo.${this.$store.state.projectName}List(nameService.select${this.$store.state.projectName}List(vo));
+      retVo.setTotalCount(Long.valueOf(retVo.get${this.$store.state.projectName}List().size()))
+      return retVo;
   }
 
   @ElService(key="Svc${this.selectedtaskClass}${this.taskSubClass}COMR01")
   @RequestMapping(value="Svc${this.selectedtaskClass}${this.taskSubClass}COMR01")
   @ElDescription(sub="selectListItem",desc="단건 아이템을 조회 한다.")
-  public ${this.$store.state.projectName}Vo selectSingleItem(${this.$store.state.projectName}Vo ${this.taskSubClass}Vo) throws Exception {
-      ${this.$store.state.projectName}Vo vo = ${this.taskSubClass}Service.selectSingleItem(${this.taskSubClass}Vo);
-      ${this.$store.state.projectName}Vo ${this.taskSubClass}VoList = new ${this.$store.state.projectName}Vo();
-      ${this.taskSubClass}VoList.set${this.$store.state.projectName}VoList(vo);
-      return ${this.taskSubClass}VoList;
+  public ${this.$store.state.projectName}Vo selectSingleItem(${this.$store.state.projectName}Vo vo) throws Exception {
+      return nameService.getItem(vo);
   }
 
   @ElService(key="Svc${this.selectedtaskClass}${this.taskSubClass}COMI01")
