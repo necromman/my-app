@@ -4,7 +4,7 @@
     <div class="flex flex-col relative col gap-4 gr-panel" style="width:360px;">
       <div class="flex flex-col relative col gap-4">
         <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
-          <h1 style="padding: 15px 0px 15px 40px;text-align: center;word-spacing: 24px;letter-spacing: 40px;color: aliceblue;">
+          <h1 style="padding: 15px 0px 15px 40px;text-align: center;word-spacing: 24px;letter-spacing: 40px;color: aliceblue;background-color: slategrey;">
             PROST
           </h1>
           <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
@@ -39,33 +39,41 @@ export default {
   },
   methods: {
     loginProc() {
-      this.axios({
-        url: "/api/loginProcess",
-        method: "POST",
-        data: {
-          email: this.email,
-          password: this.password
-        },
-      }).
-        then(res => {
-          console.log("응답 데이터 : " + JSON.stringify(res.data.token))
-          this.$store.state.token = res.data.token
-          localStorage.setItem("token", res.data.token)
-          this.router.push('/')
-        })
-        .catch(error => {
-          console.log("에러 데이터 : " + error);
-        })
-        .finally(() => {
-        })
+      this.$store.state.token = "admin"
+      localStorage.setItem("token", "admin")
+      this.router.push('/')
+      // this.axios({
+      //   url: "/api/loginProcess",
+      //   method: "POST",
+      //   data: {
+      //     email: this.email,
+      //     password: this.password
+      //   },
+      // }).
+      //   then(res => {
+      //     console.log("응답 데이터 : " + JSON.stringify(res.data.token))
+      //     this.$store.state.token = res.data.token
+      //     localStorage.setItem("token", res.data.token)
+      //     this.router.push('/')
+      //   })
+      //   .catch(error => {
+      //     console.log("에러 데이터 : " + error);
+      //   })
+      //   .finally(() => {
+      //   })
     }
   },
 }
 
 </script>
 
-<style lang="scss">
-
+<style>
+  h1 {
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
+}
 </style>
 
 
