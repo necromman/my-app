@@ -65,7 +65,7 @@
           </label>
           <label class="block">
             <span class="h2 block p-2">
-              Package & Project Name
+              Package & Class Name
             </span>
             <div class="flex row flex-wrap gap-4">
               <input type="text" v-model="$store.state.packageName" placeholder="package Name"
