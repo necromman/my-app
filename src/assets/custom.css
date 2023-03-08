@@ -1,4 +1,4 @@
-body{width: 850px;margin: 0 auto !important;}
+#app{display: flex;justify-content: center;}
 .h2.block{
     background-color: dimgray;
     color: wheat;

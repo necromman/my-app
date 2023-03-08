@@ -1,5 +1,7 @@
 <template>
 
+<div id="CONTENT_LEFT" class="w-full">
+
   <!-- 카드영역 시작 -->
   <div class="flex flex-col relative col gap-4 gr-panel" style="display: none">
     <div class="flex flex-col relative col gap-4">
@@ -246,6 +248,9 @@
   </div>
   <!-- 카드영역 끝 -->
 
+</div>
+<div id="CONTENT_RIGHT" class="w-full">
+  
   <!-- 카드영역 시작 -->
   <div class="flex flex-col relative col gap-4 gr-panel">
     <div class="flex flex-col relative col gap-4">
@@ -341,6 +346,9 @@
     </div>
     <DaoGenComp ref="DaoGenComp" />
   </div>
+</div>
+  
+
 
 </template>
 <style>
