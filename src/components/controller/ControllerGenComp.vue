@@ -75,7 +75,7 @@ public class ${this.$store.state.projectName}Controller {
   @RequestMapping(value="Svc${this.selectedtaskClass}${this.taskSubClass}COMR01")
   @ElDescription(sub="insertItem",desc="아이템을 저장한다.")
   public void insertItem(${this.$store.state.projectName}Vo) throws Exception {
-      ${this.taskSubClass}Service.insertItem(${this.taskSubClass}Vo);
+      ${this.$store.state.projectName}Service.insertItem(${this.taskSubClass}Vo);
   }
   
   
