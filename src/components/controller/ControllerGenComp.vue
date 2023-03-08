@@ -59,7 +59,7 @@ public class ${this.$store.state.projectName}Controller {
   @ElDescription(sub="selectList",desc="리스트를 조회 한다.")
   public ${this.$store.state.projectName}ListVo selectList(${this.$store.state.projectName}Vo ${this.taskSubClass}Vo) throws Exception {
       ${this.$store.state.projectName}ListVo retVo = new ${this.$store.state.projectName}ListVo();
-      retVo.${this.$store.state.projectName}List(nameService.select${this.$store.state.projectName}List(vo));
+      retVo.${this.$store.state.projectName}List(${this.$store.state.projectName}Service.select${this.$store.state.projectName}List(vo));
       retVo.setTotalCount(Long.valueOf(retVo.get${this.$store.state.projectName}List().size()))
       return retVo;
   }
@@ -68,7 +68,7 @@ public class ${this.$store.state.projectName}Controller {
   @RequestMapping(value="Svc${this.selectedtaskClass}${this.taskSubClass}COMR01")
   @ElDescription(sub="selectListItem",desc="단건 아이템을 조회 한다.")
   public ${this.$store.state.projectName}Vo selectSingleItem(${this.$store.state.projectName}Vo vo) throws Exception {
-      return nameService.getItem(vo);
+      return ${this.$store.state.projectName}Service.getItem(vo);
   }
 
   @ElService(key="Svc${this.selectedtaskClass}${this.taskSubClass}COMI01")
