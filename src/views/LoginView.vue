@@ -63,6 +63,20 @@ export default {
       //   })
     }
   },
+  created() {
+    this.axios({
+      url: "/api/validation",
+      method: "GET",
+    }).
+      then(res => {
+        console.log("응답 데이터 : " + JSON.stringify(res.data.result))
+      })
+      .catch(error => {
+        console.log("에러 데이터 : " + error);
+      })
+      .finally(() => {
+      })
+  }
 }
 
 </script>
