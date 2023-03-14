@@ -722,7 +722,7 @@ export default {
         } }
       const headers = { 
         "authorization": this.$store.state.token,
-        "content-type": "application/json; charset=utf-8",
+        "content-type": "application/json; charset=euc-kr",
       }
       this.axios.post("/api/getSQueryText", data, { headers })
         .then(res => {
