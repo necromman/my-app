@@ -142,7 +142,7 @@
             </span>
           </label>
           <!-- 버튼 영역 --> 
-          <div class="flex row flex-wrap gap-4 mb-2">
+          <div class="flex row flex-wrap gap-4 mb-2" style="display:none">
             <button @click="addVoColumn" class="gr-button gr-button-lg gr-button-primary">ADD</button>
             <button @click="removeVoColumn" class="gr-button gr-button-lg gr-button-secondary">REMOVE</button>
           </div>
@@ -652,6 +652,26 @@ export default {
       })
     },
     callXdaAllParameter(index) {
+      // ['kitech', 'com', 'sms', 'xda', 'MsgSendLogMS01']
+      let xdaSplit = this.$store.state.voCumns[index].xdaName.split('.')
+      this.$store.state.selectedtaskClass = xdaSplit[1]
+      this.$store.state.taskSubClass = xdaSplit[2]
+      this.$store.state.projectName = xdaSplit[xdaSplit.length-1]
+
+      this.$store.state.voCumns[index].name = xdaSplit[xdaSplit.length-1]
+      this.$store.state.voCumns[index].logicalName = `${xdaSplit[xdaSplit.length-1]}Exp`
+
+      let link = `${this.$store.state.projectRoot}${this.$store.state.selectedtaskClass}.${this.$store.state.taskSubClass}.vo.${this.$store.state.projectName}Vo`
+      this.$store.state.voListcolumns = [
+      {
+        name: `${this.$store.state.projectName}ListVo`,
+        content: [
+          { name: `${this.$store.state.projectName}VoList`, logicalName: "List Vo", type: "List", link: link },
+          { name: `${this.$store.state.projectName}2Vo`, logicalName: "Single Vo", type: "Vo", link: link },
+        ]
+      }
+    ]
+
       const data = { data: {
           xdaName: this.$store.state.voCumns[index].xdaName
         } }
@@ -747,16 +767,6 @@ export default {
     console.log("created")
     this.initializationDb()
     this.onChangeSelectTask()
-    let link = `${this.$store.state.projectRoot}${this.$store.state.selectedtaskClass}.${this.$store.state.taskSubClass}.vo.${this.$store.state.projectName}Vo`
-    this.$store.state.voListcolumns = [
-      {
-        name: `${this.$store.state.projectName}ListVo`,
-        content: [
-          { name: `${this.$store.state.projectName}VoList`, logicalName: "List Vo", type: "List", link: link },
-          { name: `${this.$store.state.projectName}2Vo`, logicalName: "Single Vo", type: "Vo", link: link },
-        ]
-      }
-    ]
     this.batchQuery += `
 xcopy "%CD%\\${this.$store.state.projectName}Controller.java" "${this.javaPath}web" /y
 xcopy "%CD%\\${this.$store.state.projectName}DAO.java" "${this.javaPath}dao" /y
@@ -769,10 +779,10 @@ xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.
     this.$store.state.voCumns = []
     this.$store.state.voCumns.unshift(
       {
-        name: "name",
-        logicalName: "LogicalName",
-        tableName: "tableName",
-        xdaName: "kitech.com.sms.xda.ComSmsSS01",
+        name: "",
+        logicalName: "",
+        tableName: "",
+        xdaName: "kitech.com.sms.xda.MsgSendLogMS01",
         sqlmapQueryListView: '',
         req: [],
         res: [],
