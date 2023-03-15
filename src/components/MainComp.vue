@@ -680,7 +680,7 @@ export default {
         "authorization": this.$store.state.token,
         "content-type": "application/json",
       }
-      axios.get('https://authdev.kitech.re.kr/api/pcc/allParam/kitech.com.sms.xda.MsgSendLogMS01', {
+      this.axios.get('https://authdev.kitech.re.kr/api/pcc/allParam/kitech.com.sms.xda.MsgSendLogMS01', {
         headers: headers,
       })
       .then(response => {
@@ -733,7 +733,7 @@ export default {
         "authorization": this.$store.state.token,
         "content-type": "application/json; charset=euc-kr",
       }
-      axios.get('https://authdev.kitech.re.kr/api/pcc/queryText/kitech.com.sms.xda.MsgSendLogMS01', {
+      this.axios.get('https://authdev.kitech.re.kr/api/pcc/queryText/kitech.com.sms.xda.MsgSendLogMS01', {
         headers: headers,
       })
       .then(response => {
