@@ -724,28 +724,37 @@ export default {
         "authorization": this.$store.state.token,
         "content-type": "application/json; charset=euc-kr",
       }
-      this.axios.post("/api/getSQueryText", data, { headers })
-        .then(res => {
-          console.log("응답 데이터 : " + JSON.stringify(res.data))
-          console.log(res.data.length)
-          res.data.forEach((column, sindex) => {
-            if (column.sQueryText === '') {
-              this.$store.state.voCumns[index].sqlmapQueryListView = column.sQuery
-              this.$store.state.voCumns[index].sqlmapQueryListOriginal = column.sQuery
-            }else{
-              this.$store.state.voCumns[index].sqlmapQueryListView = column.sQueryText
-              this.$store.state.voCumns[index].sqlmapQueryListOriginal = column.sQueryText
-            }
-            //this.$refs.VoGenComp.forceRerender()
-            //this.storeCounter.increment(1)
-          })
-        })
-        .catch(error => {
-          console.log("에러 데이터 : " + error.data);
-        })
-        .finally(() => {
+      axios.get('https://authdev.kitech.re.kr/api/pcc/queryText/' + this.$store.state.voCumns[index].xdaName, {
+        headers: headers,
+      })
+      .then(response => {
+        console.log("응답 데이터 쿼리: " + response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+      // this.axios.post("/api/getSQueryText", data, { headers })
+      //   .then(res => {
+      //     console.log("응답 데이터 : " + JSON.stringify(res.data))
+      //     console.log(res.data.length)
+      //     res.data.forEach((column, sindex) => {
+      //       if (column.sQueryText === '') {
+      //         this.$store.state.voCumns[index].sqlmapQueryListView = column.sQuery
+      //         this.$store.state.voCumns[index].sqlmapQueryListOriginal = column.sQuery
+      //       }else{
+      //         this.$store.state.voCumns[index].sqlmapQueryListView = column.sQueryText
+      //         this.$store.state.voCumns[index].sqlmapQueryListOriginal = column.sQueryText
+      //       }
+      //       //this.$refs.VoGenComp.forceRerender()
+      //       //this.storeCounter.increment(1)
+      //     })
+      //   })
+      //   .catch(error => {
+      //     console.log("에러 데이터 : " + error.data);
+      //   })
+      //   .finally(() => {
 
-        })
+      //   })
     },
     snakeToCamel(snakeCase) {
       let words = snakeCase.split("_");
