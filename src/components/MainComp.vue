@@ -684,7 +684,7 @@ export default {
         headers: headers,
       })
       .then(response => {
-        console.log("응답 데이터 파라미터: " + response.data);
+        console.log("응답 데이터 파라미터: " + JSON.stringify(response.data));
       })
       .catch(error => {
         console.error(error);
