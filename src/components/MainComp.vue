@@ -680,41 +680,50 @@ export default {
         "authorization": this.$store.state.token,
         "content-type": "application/json",
       }
-      this.axios.post("/api/getAllParameter", data, { headers })
-        .then(res => {
-          let tempList = []
-          this.$store.state.voCumns[index].req = []
-          this.$store.state.voCumns[index].res = []
-          console.log("응답 데이터 : " + JSON.stringify(res.data))
-          res.data.forEach((column, sindex) => {
-            column.req.forEach((column, sindex) => {
-              tempList.push(column)
-              this.$store.state.voCumns[index].req.push(column)
-            })
-            column.res.forEach((column, sindex) => {
-              tempList.push(column)
-              this.$store.state.voCumns[index].res.push(column)
-            })
-          })
-          let tempListSet = [...new Set(tempList)];
-          this.$store.state.voCumns[index].columns = []
-          for (let i = 0; i < tempListSet.length; i++) {
-            this.$store.state.voCumns[index].columns.push(
-              {
-                name: tempListSet[i], isChecked: true, logicalName: this.snakeToCamel(tempListSet[i]),
-                isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"
-              }
-            )
-          }
+      axios.get('https://authdev.kitech.re.kr/api/pcc/allParam/kitech.com.sms.xda.MsgSendLogMS01', {
+        headers: headers,
+      })
+      .then(response => {
+        console.log("응답 데이터 파라미터: " + response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+      // this.axios.post("/api/getAllParameter", data, { headers })
+      //   .then(res => {
+      //     let tempList = []
+      //     this.$store.state.voCumns[index].req = []
+      //     this.$store.state.voCumns[index].res = []
+      //     console.log("응답 데이터 : " + JSON.stringify(res.data))
+      //     res.data.forEach((column, sindex) => {
+      //       column.req.forEach((column, sindex) => {
+      //         tempList.push(column)
+      //         this.$store.state.voCumns[index].req.push(column)
+      //       })
+      //       column.res.forEach((column, sindex) => {
+      //         tempList.push(column)
+      //         this.$store.state.voCumns[index].res.push(column)
+      //       })
+      //     })
+      //     let tempListSet = [...new Set(tempList)];
+      //     this.$store.state.voCumns[index].columns = []
+      //     for (let i = 0; i < tempListSet.length; i++) {
+      //       this.$store.state.voCumns[index].columns.push(
+      //         {
+      //           name: tempListSet[i], isChecked: true, logicalName: this.snakeToCamel(tempListSet[i]),
+      //           isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"
+      //         }
+      //       )
+      //     }
 
-          this.callXdaSquery(index)
-        })
-        .catch(error => {
-          console.log("에러 데이터 : " + error.data);
-        })
-        .finally(() => {
+      //     this.callXdaSquery(index)
+      //   })
+      //   .catch(error => {
+      //     console.log("에러 데이터 : " + error.data);
+      //   })
+      //   .finally(() => {
 
-        })
+      //   })
     },
     callXdaSquery(index) {
       const data = { data: {
