@@ -761,19 +761,15 @@ export default {
       })
       .then(response => {
         console.log("응답 데이터 쿼리: " + response.data);
-        console.log(response.data.length)
-          response.data.forEach((column, sindex) => {
-            if (column.sQueryText === '') {
-              this.$store.state.voCumns[index].sqlmapQueryListView = column.sQuery
-              this.$store.state.voCumns[index].sqlmapQueryListOriginal = column.sQuery
-            }else{
-              this.$store.state.voCumns[index].sqlmapQueryListView = column.sQueryText
-              this.$store.state.voCumns[index].sqlmapQueryListOriginal = column.sQueryText
-            }
-            //this.$refs.VoGenComp.forceRerender()
-            //this.storeCounter.increment(1)
-          })
-        
+        if (response.data.sQueryText === '') {
+          this.$store.state.voCumns[index].sqlmapQueryListView = response.data.sQuery
+          this.$store.state.voCumns[index].sqlmapQueryListOriginal = response.data.sQuery
+        }else{
+          this.$store.state.voCumns[index].sqlmapQueryListView = response.data.sQueryText
+          this.$store.state.voCumns[index].sqlmapQueryListOriginal = response.data.sQueryText
+        }
+        //this.$refs.VoGenComp.forceRerender()
+        //this.storeCounter.increment(1)
       })
       .catch(error => {
         console.error(error);
