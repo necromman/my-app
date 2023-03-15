@@ -724,7 +724,7 @@ export default {
         "authorization": this.$store.state.token,
         "content-type": "application/json; charset=euc-kr",
       }
-      axios.get('https://authdev.kitech.re.kr/api/pcc/queryText/' + this.$store.state.voCumns[index].xdaName, {
+      axios.get('https://authdev.kitech.re.kr/api/pcc/queryText/kitech.com.sms.xda.MsgSendLogMS01', {
         headers: headers,
       })
       .then(response => {
