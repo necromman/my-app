@@ -761,13 +761,12 @@ export default {
       })
       .then(response => {
         console.log("응답 데이터 쿼리: " + JSON.stringify(response.data));
-        debugger
-        if (response.data.sQueryText === '') {
-          this.$store.state.voCumns[index].sqlmapQueryListView = response.data.sQuery
-          this.$store.state.voCumns[index].sqlmapQueryListOriginal = response.data.sQuery
+        if (response.data.squeryText === '') {
+          this.$store.state.voCumns[index].sqlmapQueryListView = response.data.squery
+          this.$store.state.voCumns[index].sqlmapQueryListOriginal = response.data.squery
         }else{
-          this.$store.state.voCumns[index].sqlmapQueryListView = response.data.sQueryText
-          this.$store.state.voCumns[index].sqlmapQueryListOriginal = response.data.sQueryText
+          this.$store.state.voCumns[index].sqlmapQueryListView = response.data.squeryText
+          this.$store.state.voCumns[index].sqlmapQueryListOriginal = response.data.squeryText
         }
         //this.$refs.VoGenComp.forceRerender()
         //this.storeCounter.increment(1)
