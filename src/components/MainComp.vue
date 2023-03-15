@@ -684,7 +684,11 @@ export default {
         headers: headers,
       })
       .then(response => {
+        let tempList = []
+        this.$store.state.voCumns[index].req = []
+        this.$store.state.voCumns[index].res = []
         console.log("응답 데이터 파라미터: " + JSON.stringify(response.data));
+        console.log("응답 데이터 파라미터 length: " + JSON.stringify(response.data.length));
         response.data.forEach((column, sindex) => {
             column.requests.forEach((column, sindex) => {
               tempList.push(column)
