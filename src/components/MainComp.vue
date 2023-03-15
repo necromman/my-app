@@ -760,7 +760,7 @@ export default {
         headers: headers,
       })
       .then(response => {
-        console.log("응답 데이터 쿼리: " + response.data);
+        console.log("응답 데이터 쿼리: " + JSON.stringify(response.data));
         if (response.data.sQueryText === '') {
           this.$store.state.voCumns[index].sqlmapQueryListView = response.data.sQuery
           this.$store.state.voCumns[index].sqlmapQueryListOriginal = response.data.sQuery
