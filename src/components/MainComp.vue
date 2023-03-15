@@ -686,11 +686,11 @@ export default {
       .then(response => {
         console.log("응답 데이터 파라미터: " + JSON.stringify(response.data));
         res.data.forEach((column, sindex) => {
-            column.req.forEach((column, sindex) => {
+            column.requests.forEach((column, sindex) => {
               tempList.push(column)
               this.$store.state.voCumns[index].req.push(column)
             })
-            column.res.forEach((column, sindex) => {
+            column.responses.forEach((column, sindex) => {
               tempList.push(column)
               this.$store.state.voCumns[index].res.push(column)
             })
@@ -753,13 +753,26 @@ export default {
         } }
       const headers = { 
         "authorization": this.$store.state.token,
-        "content-type": "application/json; charset=euc-kr",
+        "content-type": "application/json",
       }
-      this.axios.get('https://authdev.kitech.re.kr/api/pcc/queryText/kitech.com.sms.xda.MsgSendLogMS01', {
+      this.axios.get('https://authdev.kitech.re.kr/api/pcc/queryText/' + this.$store.state.voCumns[index].xdaName, {
         headers: headers,
       })
       .then(response => {
         console.log("응답 데이터 쿼리: " + response.data);
+        console.log(response.data.length)
+          res.data.forEach((column, sindex) => {
+            if (column.sQueryText === '') {
+              this.$store.state.voCumns[index].sqlmapQueryListView = column.sQuery
+              this.$store.state.voCumns[index].sqlmapQueryListOriginal = column.sQuery
+            }else{
+              this.$store.state.voCumns[index].sqlmapQueryListView = column.sQueryText
+              this.$store.state.voCumns[index].sqlmapQueryListOriginal = column.sQueryText
+            }
+            //this.$refs.VoGenComp.forceRerender()
+            //this.storeCounter.increment(1)
+          })
+        
       })
       .catch(error => {
         console.error(error);
