@@ -761,7 +761,7 @@ export default {
       .then(response => {
         console.log("응답 데이터 쿼리: " + response.data);
         console.log(response.data.length)
-          res.data.forEach((column, sindex) => {
+          response.data.forEach((column, sindex) => {
             if (column.sQueryText === '') {
               this.$store.state.voCumns[index].sqlmapQueryListView = column.sQuery
               this.$store.state.voCumns[index].sqlmapQueryListOriginal = column.sQuery
