@@ -332,7 +332,6 @@ input {
 </style>
 
 <script>
-import { useCounterStoreLocal } from '@/stores/counter_local'
 import { useCounterStoreOpr } from '@/stores/counter_opr'
 import VoGenComp from './vo/VoGenComp.vue'
 import VoListGenComp from './vo/VoListGenComp.vue'
@@ -365,7 +364,6 @@ export default {
   data() {
     return {
       isLocal: import.meta.env.VITE_STORE_NAME,
-      storeCounterLocal: useCounterStoreLocal(),
       storeCounterOpr: useCounterStoreOpr(),
       token: '',
       batchQuery: `@echo off`,
@@ -653,7 +651,7 @@ export default {
    * 메서드를 호출해보면 에러가 나오지 않는다.
    */
   created() {
-    this.storeCounterLocal.increment(5)
+    this.storeCounterOpr.increment(5)
     const obj = { 'a': 'a' }
     this.$store.dispatch('a', obj)
 
