@@ -639,7 +639,7 @@ export default {
           ]
         }
       ]
-      console.log("isOpr" + this.isLocal)
+      console.log("isOpr : > " + this.isLocal == 'local')
       if(this.isLocal == 'local'){
         this.storeCounterLocal.getAllParam(index)
       }else{
