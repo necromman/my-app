@@ -44,8 +44,9 @@ import com.inswave.elfw.annotation.ElDescription;
 import com.inswave.elfw.annotation.ElService;
 import com.inswave.elfw.annotation.ElValidator;
 
-import ${this.$store.state.packageName}.vo.${this.$store.state.projectName}Service;
-import ${this.$store.state.packageName}.vo.${this.$store.state.projectName}Vo
+import ${this.$store.state.packageName}.service.${this.$store.state.projectName}Service;
+import ${this.$store.state.packageName}.vo.${this.$store.state.projectName}ListVo;
+import ${this.$store.state.packageName}.vo.${this.$store.state.projectName}Vo;
 `
       this.$store.state.controllerQuery += `
 @Controller
@@ -68,14 +69,14 @@ public class ${this.$store.state.projectName}Controller {
   @RequestMapping(value="Svc${this.selectedtaskClass}${this.taskSubClass}COMR01")
   @ElDescription(sub="selectListItem",desc="단건 아이템을 조회 한다.")
   public ${this.$store.state.projectName}Vo selectSingleItem(${this.$store.state.projectName}Vo vo) throws Exception {
-      return ${this.$store.state.projectName}Service.getItem(vo);
+      // return ${this.$store.state.projectName}Service.getItem(vo);
   }
 
   @ElService(key="Svc${this.selectedtaskClass}${this.taskSubClass}COMI01")
   @RequestMapping(value="Svc${this.selectedtaskClass}${this.taskSubClass}COMR01")
   @ElDescription(sub="insertItem",desc="아이템을 저장한다.")
   public void insertItem(${this.$store.state.projectName}Vo) throws Exception {
-      ${this.$store.state.projectName}Service.insertItem(${this.taskSubClass}Vo);
+      // ${this.$store.state.projectName}Service.insertItem(${this.taskSubClass}Vo);
   }
   
   

@@ -74,7 +74,7 @@ public class ${this.$store.state.projectName}ServiceImpl  extends EgovAbstractSe
 
   @Override
   public ${this.$store.state.projectName}Vo selectSingleItem(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws ElException {
-    ${this.$store.state.projectName}Vo resultVO = cgsDAO.selectSingleItem(${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo);			
+    ${this.$store.state.projectName}Vo resultVO = ${this.$store.state.taskSubClass}DAO.selectSingleItem(${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo);			
       return resultVO;
   }
 

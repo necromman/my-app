@@ -96,7 +96,7 @@ if(column.type == "List"){
   }
 
   @ElVoField(physicalName = "${column.name}")
-  public void set${this.toUpperCaseFirst(column.name)}(${column.link} ${column.name} ${column.name}){
+  public void set${this.toUpperCaseFirst(column.name)}(${column.link} ${column.name}){
       this.${column.name} = ${column.name};
   }
 `

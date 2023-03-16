@@ -43,11 +43,11 @@ public interface ${this.$store.state.projectName}Service {
   // Single Select
   public ${this.$store.state.projectName}Vo selectSingleItem(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws ElException;
   // Insert
-  public ${this.$store.state.projectName}Vo insertItem${this.$store.state.projectName}(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws ElException;
+  public int insertItem${this.$store.state.projectName}(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws Exception;
   // Update
-  public ${this.$store.state.projectName}Vo updateItem${this.$store.state.projectName}(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws ElException;
+  public int updateItem${this.$store.state.projectName}(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws Exception;
   // Delete
-  public ${this.$store.state.projectName}Vo deleteItem${this.$store.state.projectName}(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws ElException;
+  public int deleteItem${this.$store.state.projectName}(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws Exception;
   // Mail
   public void ${this.$store.state.taskSubClass}MailSend(${this.$store.state.projectName}Vo ${this.toUpperCaseFirst(this.$store.state.taskSubClass)}Vo) throws ElException;
 }
