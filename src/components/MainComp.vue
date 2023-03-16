@@ -608,6 +608,23 @@ export default {
       this.javaPath = this.$store.state.basePath + this.$store.state.javaPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\'
       this.xmlPath = this.$store.state.basePath + this.$store.state.xmlPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\'
 
+      this.$store.state.voListcolumns.forEach((column, cindex) => {
+        this.$store.state.voListcolumns[cindex].name = `${this.$store.state.projectName}ListVo`
+        this.$store.state.voListcolumns[cindex].content.forEach((column, sindex) => {
+            if (/[Vv]oList/.test(column.name)) {
+              this.$store.state.voListcolumns[cindex].content[sindex].name = `${this.$store.state.projectName}VoList`
+            }else{
+              this.$store.state.voListcolumns[cindex].content[sindex].name = `${this.$store.state.projectName}Vo`
+            }
+          
+        })
+      })
+
+      this.$store.state.voCumns.forEach((column, voIndex) => {
+        this.$store.state.voCumns[voIndex].name = `${this.$store.state.projectName}`
+        this.$store.state.voCumns[voIndex].logicalName = `${this.$store.state.projectName}Exp`
+      })
+        
     },
     initializationDb() {
       if (this.changeDb == 'INFORMIX') this.columnType = this.$store.state.informixColumnType
