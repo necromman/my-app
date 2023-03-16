@@ -60,8 +60,8 @@ public class ${this.$store.state.projectName}Controller {
   @ElDescription(sub="selectList",desc="리스트를 조회 한다.")
   public ${this.$store.state.projectName}ListVo selectList(${this.$store.state.projectName}Vo ${this.taskSubClass}Vo) throws Exception {
       ${this.$store.state.projectName}ListVo retVo = new ${this.$store.state.projectName}ListVo();
-      retVo.${this.$store.state.projectName}List(${this.$store.state.projectName}Service.select${this.$store.state.projectName}List(vo));
-      retVo.setTotalCount(Long.valueOf(retVo.get${this.$store.state.projectName}List().size()))
+      // retVo.${this.$store.state.projectName}List(${this.$store.state.projectName}Service.select${this.$store.state.projectName}List(vo));
+      // retVo.setTotalCount(Long.valueOf(retVo.get${this.$store.state.projectName}List().size()))
       return retVo;
   }
 
@@ -70,13 +70,14 @@ public class ${this.$store.state.projectName}Controller {
   @ElDescription(sub="selectListItem",desc="단건 아이템을 조회 한다.")
   public ${this.$store.state.projectName}Vo selectSingleItem(${this.$store.state.projectName}Vo vo) throws Exception {
       // return ${this.$store.state.projectName}Service.getItem(vo);
+      return null;
   }
 
   @ElService(key="Svc${this.selectedtaskClass}${this.taskSubClass}COMI01")
   @RequestMapping(value="Svc${this.selectedtaskClass}${this.taskSubClass}COMR01")
   @ElDescription(sub="insertItem",desc="아이템을 저장한다.")
-  public void insertItem(${this.$store.state.projectName}Vo) throws Exception {
-      // ${this.$store.state.projectName}Service.insertItem(${this.taskSubClass}Vo);
+  public void insertItem(${this.$store.state.projectName}Vo ${this.taskSubClass}Vo) throws Exception {
+      // ${this.$store.state.projectName}Service.insertItem(Vo);
   }
   
   

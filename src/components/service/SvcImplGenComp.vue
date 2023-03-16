@@ -102,12 +102,12 @@ public class ${this.$store.state.projectName}ServiceImpl  extends EgovAbstractSe
 		BizUserHeader siteUserHeader = (BizUserHeader)ControllerContextUtil.getUserHeader();
 		
 		
-		templateVar.put("@data@", ${this.$store.state.taskSubClass}Vo.getDataName());
+		// templateVar.put("@data@", ${this.$store.state.taskSubClass}Vo.getDataName());
 		
 		String subject = "subject";
 		String templatePath = "${this.$store.state.selectedtaskClass}/TemplateMailName";
 		String syspayno = siteUserHeader.getSession().getSn();
-		String toAddr = ${this.$store.state.taskSubClass}DAO.selectReqPsnEmail(${this.$store.state.taskSubClass}Vo).getEmail();
+		// String toAddr = ${this.$store.state.taskSubClass}DAO.selectReqPsnEmail(${this.$store.state.taskSubClass}Vo).getEmail();
 		String sender = siteUserHeader.getSession().getUid() + "@kitech.re.kr";
 		
 		templateVo.setContentVar(templateVar);
@@ -118,7 +118,7 @@ public class ${this.$store.state.projectName}ServiceImpl  extends EgovAbstractSe
 			// 비즈니스 타입, 행위자 시스템 사번, 개별발송여부는 고정 속성
 			new BizMail.Builder(syspayno, Business.${this.$store.state.selectedtaskClass.toUpperCase()}, true)
 				.senderEmail(sender.trim())
-				.toAddr(toAddr.trim())
+				//.toAddr(toAddr.trim())
 				//.ccAddr(ccAddress)
 				.subject(subject)
 				.savesent(false)	// 받은 편지함 저장 여부
