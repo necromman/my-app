@@ -61,7 +61,7 @@ public class ${this.$store.state.projectName}Controller {
   public ${this.$store.state.projectName}ListVo selectList(${this.$store.state.projectName}Vo ${this.taskSubClass}Vo) throws Exception {
       List<${this.$store.state.projectName}Vo> list = ${this.$store.state.taskSubClass}Service.selectListItem(${this.taskSubClass}Vo);    	 
       ${this.$store.state.projectName}ListVo List = new ${this.$store.state.projectName}ListVo();
-      List.set${this.$store.state.projectName}ListVo(list);
+      List.set${this.$store.state.projectName}VoList(list);
       return List;
   }
 
