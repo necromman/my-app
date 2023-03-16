@@ -639,12 +639,13 @@ export default {
           ]
         }
       ]
-      console.log("isOpr : > " + this.isLocal == 'local')
-      console.log("isOpr : > " + this.isLocal)
-      let isLocal = this.isLocal
-      debugger
-      if(isLocal == 'local') this.storeCounterLocal.getAllParam(index)    
-      if(isLocal == 'opr') this.storeCounterOpr.getAllParam(index)
+      // console.log("isOpr : > " + this.isLocal == 'local')
+      // console.log("isOpr : > " + this.isLocal)
+      // let isLocal = this.isLocal
+      // debugger
+      // if(isLocal == 'local') this.storeCounterLocal.getAllParam(index)    
+      // if(isLocal == 'opr') this.storeCounterOpr.getAllParam(index)
+      this.storeCounterOpr.getAllParam(index)
     },
   },
   /**
