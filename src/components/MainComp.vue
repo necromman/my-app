@@ -625,7 +625,7 @@ export default {
         this.$store.state.voCumns[voIndex].logicalName = `${this.$store.state.projectName}Exp`
       })
 
-      this.batchQuery += `
+      this.batchQuery = `
 xcopy "%CD%\\${this.$store.state.projectName}Controller.java" "${this.javaPath}web" /y
 xcopy "%CD%\\${this.$store.state.projectName}DAO.java" "${this.javaPath}dao" /y
 xcopy "%CD%\\${this.$store.state.projectName}ServiceImpl.java" "${this.javaPath}service\\impl" /y
@@ -686,7 +686,7 @@ xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.
     console.log("created")
     this.initializationDb()
     this.onChangeSelectTask()
-    this.batchQuery += `
+    this.batchQuery = `
 xcopy "%CD%\\${this.$store.state.projectName}Controller.java" "${this.javaPath}web" /y
 xcopy "%CD%\\${this.$store.state.projectName}DAO.java" "${this.javaPath}dao" /y
 xcopy "%CD%\\${this.$store.state.projectName}ServiceImpl.java" "${this.javaPath}service\\impl" /y
