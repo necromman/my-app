@@ -18,30 +18,26 @@ export const useCounterStore = defineStore({
     },
     getAllParam(index){
 
-      const data = { data: {
-        xdaName: store.state.voCumns[index].xdaName
-      }}
-
       const headers = { 
         "authorization": store.state.token,
         "content-type": "application/json",
       }
 
-      axios.post("/api/getAllParameter", data, { headers })
-        .then(res => {
-          let tempList = []
-          store.state.voCumns[index].req = []
-          store.state.voCumns[index].res = []
-          console.log("응답 데이터 : " + JSON.stringify(res.data))
-          res.data.forEach((column, sindex) => {
-            column.req.forEach((column, sindex) => {
-              tempList.push(column)
-              store.state.voCumns[index].req.push(column)
-            })
-            column.res.forEach((column, sindex) => {
-              tempList.push(column)
-              store.state.voCumns[index].res.push(column)
-            })
+      axios.get('https://authdev.kitech.re.kr/api/pcc/allParam/' + store.state.voCumns[index].xdaName, {
+        headers: headers,
+      })
+      .then(response => {
+        let tempList = []
+        store.state.voCumns[index].req = []
+        store.state.voCumns[index].res = []
+        console.log("응답 데이터 파라미터: " + JSON.stringify(response.data));
+        response.data.requests.forEach((column, sindex) => {
+            tempList.push(column)
+            store.state.voCumns[index].req.push(column)
+          })
+        response.data.responses.forEach((column, sindex) => {
+            tempList.push(column)
+            store.state.voCumns[index].res.push(column)
           })
           let tempListSet = [...new Set(tempList)];
           store.state.voCumns[index].columns = []
@@ -53,47 +49,37 @@ export const useCounterStore = defineStore({
               }
             )
           }
-          this.getQueryText(index)
-        })
-        .catch(error => {
-          console.log("에러 데이터 : " + error.data);
-        })
-        .finally(() => {
 
-        })
+          this.getQueryText(index)
+      })
+      .catch(error => {
+        console.error(error);
+      });
       
     },
     getQueryText(index){
-
-      const data = { data: {
-        xdaName: store.state.voCumns[index].xdaName
-      } }
       
       const headers = { 
         "authorization": store.state.token,
         "content-type": "application/json",
       }
 
-      axios.post("/api/getSQueryText", data, { headers })
-        .then(res => {
-          console.log("응답 데이터 : " + JSON.stringify(res.data))
-          console.log(res.data.length)
-          res.data.forEach((column, sindex) => {
-            if (column.sQueryText === '') {
-              store.state.voCumns[index].sqlmapQueryListView = column.sQuery
-              store.state.voCumns[index].sqlmapQueryListOriginal = column.sQuery
-            }else{
-              store.state.voCumns[index].sqlmapQueryListView = column.sQueryText
-              store.state.voCumns[index].sqlmapQueryListOriginal = column.sQueryText
-            }
-          })
-        })
-        .catch(error => {
-          console.log("에러 데이터 : " + error.data);
-        })
-        .finally(() => {
-
-        })
+      axios.get('https://authdev.kitech.re.kr/api/pcc/queryText/' + store.state.voCumns[index].xdaName, {
+        headers: headers,
+      })
+      .then(response => {
+        console.log("응답 데이터 쿼리: " + JSON.stringify(response.data));
+        if (response.data.squeryText === '') {
+          store.state.voCumns[index].sqlmapQueryListView = response.data.squery
+          store.state.voCumns[index].sqlmapQueryListOriginal = response.data.squery
+        }else{
+          store.state.voCumns[index].sqlmapQueryListView = response.data.squeryText
+          store.state.voCumns[index].sqlmapQueryListOriginal = response.data.squeryText
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
     },
     snakeToCamel2(snakeCase) {
       let words = snakeCase.split("_");
