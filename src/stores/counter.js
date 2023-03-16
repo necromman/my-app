@@ -80,6 +80,14 @@ export const useCounterStore = defineStore({
       .catch(error => {
         console.error(error);
       });
+    },
+    snakeToCamel(snakeCase) {
+      let words = snakeCase.split("_");
+      for (let i = 1; i < words.length; i++) {
+        let camelCaseWord = words[i].substr(0, 1).toUpperCase() + words[i].substr(1);
+        words.splice(i, 1, camelCaseWord);
+      }
+      return words.join("");
     }
 
   },
