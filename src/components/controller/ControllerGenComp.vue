@@ -57,17 +57,17 @@ public class ${this.$store.state.projectName}Controller {
 
   @ElService(key="Svc${this.selectedtaskClass}${this.taskSubClass}COMR01")
   @RequestMapping(value="Svc${this.selectedtaskClass}${this.taskSubClass}COMR01")
-  @ElDescription(sub="selectList",desc="리스트를 조회 한다.")
-  public ${this.$store.state.projectName}ListVo selectList(${this.$store.state.projectName}Vo ${this.taskSubClass}Vo) throws Exception {
+  @ElDescription(sub="selectListItem",desc="리스트를 조회 한다.")
+  public ${this.$store.state.projectName}ListVo selectListItem(${this.$store.state.projectName}Vo ${this.taskSubClass}Vo) throws Exception {
       List<${this.$store.state.projectName}Vo> list = ${this.$store.state.taskSubClass}Service.selectListItem(${this.taskSubClass}Vo);    	 
       ${this.$store.state.projectName}ListVo List = new ${this.$store.state.projectName}ListVo();
       List.set${this.$store.state.projectName}VoList(list);
       return List;
   }
 
-  @ElService(key="Svc${this.selectedtaskClass}${this.taskSubClass}COMR01")
-  @RequestMapping(value="Svc${this.selectedtaskClass}${this.taskSubClass}COMR01")
-  @ElDescription(sub="selectListItem",desc="단건 아이템을 조회 한다.")
+  @ElService(key="Svc${this.selectedtaskClass}${this.taskSubClass}COSR01")
+  @RequestMapping(value="Svc${this.selectedtaskClass}${this.taskSubClass}COSR01")
+  @ElDescription(sub="selectSingleItem",desc="단건 아이템을 조회 한다.")
   public ${this.$store.state.projectName}ListVo selectSingleItem(${this.$store.state.projectName}Vo ${this.taskSubClass}Vo) throws Exception {
       ${this.$store.state.projectName}Vo vo = ${this.$store.state.taskSubClass}Service.selectSingleItem(${this.taskSubClass}Vo); 
       ${this.$store.state.projectName}ListVo List = new ${this.$store.state.projectName}ListVo();
@@ -75,8 +75,8 @@ public class ${this.$store.state.projectName}Controller {
       return List;
   }
 
-  @ElService(key="Svc${this.selectedtaskClass}${this.taskSubClass}COMI01")
-  @RequestMapping(value="Svc${this.selectedtaskClass}${this.taskSubClass}COMR01")
+  @ElService(key="Svc${this.selectedtaskClass}${this.taskSubClass}COsSI01")
+  @RequestMapping(value="Svc${this.selectedtaskClass}${this.taskSubClass}COSI01")
   @ElDescription(sub="insertItem",desc="아이템을 저장한다.")
   public void insertItem(${this.$store.state.projectName}Vo ${this.taskSubClass}Vo) throws Exception {
       ${this.$store.state.taskSubClass}Service.insertItem(${this.taskSubClass}Vo);
