@@ -442,7 +442,7 @@ export default {
       zip.file(`${this.$store.state.projectName}ServiceImpl.java`, this.$store.state.serviceImplQuery);
       zip.file(`${this.$store.state.projectName}Service.java`, this.$store.state.serviceQuery);
       zip.file(`${this.$store.state.projectName}ListVo.java`, this.$store.state.voListQuery);
-      zip.file(`${this.$store.state.projectName}_SQL_informix_MyBatis.xml`, this.$store.state.sqlmapQuery);
+      zip.file(`${this.$store.state.projectName}_SQL_informix_MyBatis.xml`, store.state.voCumns[0].sqlmapQueryListView);
       for (let i = 0; i < this.$store.state.voCumns.length; i++) {
         zip.file(`${this.$store.state.voCumns[i].name}Vo.java`, this.$store.state.voQuery[i]);
       }
