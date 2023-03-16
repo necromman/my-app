@@ -41,28 +41,28 @@ import kr.re.kitech.biz.xom.base.dao.BizDefaultAbstractDAO;
 public class ${this.$store.state.projectName}DAO extends BizDefaultAbstractDAO {
   
   public List<${this.$store.state.projectName}Vo> selectList() throws ElException {
-    List<${this.$store.state.projectName}Vo> result = (List<${this.$store.state.projectName}Vo>)list("${this.$store.state.packageName}.selectList"); 
+    List<${this.$store.state.projectName}Vo> result = (List<${this.$store.state.projectName}Vo>)list("${this.$store.state.packageName}.selectList${this.$store.state.projectName}"); 
     return result;
   }
 
   public List<${this.$store.state.projectName}Vo> selectListItem(${this.$store.state.projectName}Vo vo) throws ElException {
-    return (List<${this.$store.state.projectName}Vo>)list("${this.$store.state.packageName}.selectListItem", vo);
+    return (List<${this.$store.state.projectName}Vo>)list("${this.$store.state.packageName}.selectListItem${this.$store.state.projectName}", vo);
   }
 
   public ${this.$store.state.projectName}Vo selectSingleItem(${this.$store.state.projectName}Vo vo) throws ElException {
-    return (${this.$store.state.projectName}Vo) selectByPk("${this.$store.state.packageName}.selectSingleItem", vo);
+    return (${this.$store.state.projectName}Vo) selectByPk("${this.$store.state.packageName}.selectSingleItem${this.$store.state.projectName}", vo);
   }
 
   public int insertItem(${this.$store.state.projectName}Vo vo) throws ElException {
-    return insert("${this.$store.state.packageName}.insertItem", vo);
+    return insert("${this.$store.state.packageName}.insertItem${this.$store.state.projectName}", vo);
   }
 
   public int updateItem(${this.$store.state.projectName}Vo vo) throws ElException {
-    return update("${this.$store.state.packageName}.updateItem", vo);
+    return update("${this.$store.state.packageName}.updateItem${this.$store.state.projectName}", vo);
   }
 
   public int deleteItem(${this.$store.state.projectName}Vo vo) throws ElException {
-    return update("${this.$store.state.packageName}.deleteItem", vo);
+    return update("${this.$store.state.packageName}.deleteItem${this.$store.state.projectName}", vo);
   }
 
 }
