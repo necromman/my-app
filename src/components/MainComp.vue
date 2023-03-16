@@ -640,12 +640,10 @@ export default {
         }
       ]
       console.log("isOpr : > " + this.isLocal == 'local')
-      if(this.isLocal == 'local'){
-        this.storeCounterLocal.getAllParam(index)
-      }else{
-        this.storeCounterOpr.getAllParam(index)
-      }
-      
+      console.log("isOpr : > " + this.isLocal)
+      let isLocal = this.isLocal
+      if(isLocal == 'local') this.storeCounterLocal.getAllParam(index)    
+      if(isLocal == 'opr') this.storeCounterOpr.getAllParam(index)
     },
   },
   /**
