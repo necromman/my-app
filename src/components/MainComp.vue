@@ -673,45 +673,49 @@ export default {
       }
     ]
 
-      const data = { data: {
-          xdaName: this.$store.state.voCumns[index].xdaName
-        } }
-      const headers = { 
-        "authorization": this.$store.state.token,
-        "content-type": "application/json",
-      }
-      this.axios.get('https://authdev.kitech.re.kr/api/pcc/allParam/' + this.$store.state.voCumns[index].xdaName, {
-        headers: headers,
-      })
-      .then(response => {
-        let tempList = []
-        this.$store.state.voCumns[index].req = []
-        this.$store.state.voCumns[index].res = []
-        console.log("응답 데이터 파라미터: " + JSON.stringify(response.data));
-        response.data.requests.forEach((column, sindex) => {
-            tempList.push(column)
-            this.$store.state.voCumns[index].req.push(column)
-          })
-        response.data.responses.forEach((column, sindex) => {
-            tempList.push(column)
-            this.$store.state.voCumns[index].res.push(column)
-          })
-          let tempListSet = [...new Set(tempList)];
-          this.$store.state.voCumns[index].columns = []
-          for (let i = 0; i < tempListSet.length; i++) {
-            this.$store.state.voCumns[index].columns.push(
-              {
-                name: tempListSet[i], isChecked: true, logicalName: this.snakeToCamel(tempListSet[i]),
-                isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"
-              }
-            )
-          }
+    this.storeCounter.getAllParam(index)
 
-          this.callXdaSquery(index)
-      })
-      .catch(error => {
-        console.error(error);
-      });
+      // const data = { data: {
+      //     xdaName: this.$store.state.voCumns[index].xdaName
+      //   } }
+      // const headers = { 
+      //   "authorization": this.$store.state.token,
+      //   "content-type": "application/json",
+      // }
+      // this.axios.get('https://authdev.kitech.re.kr/api/pcc/allParam/' + this.$store.state.voCumns[index].xdaName, {
+      //   headers: headers,
+      // })
+      // .then(response => {
+      //   let tempList = []
+      //   this.$store.state.voCumns[index].req = []
+      //   this.$store.state.voCumns[index].res = []
+      //   console.log("응답 데이터 파라미터: " + JSON.stringify(response.data));
+      //   response.data.requests.forEach((column, sindex) => {
+      //       tempList.push(column)
+      //       this.$store.state.voCumns[index].req.push(column)
+      //     })
+      //   response.data.responses.forEach((column, sindex) => {
+      //       tempList.push(column)
+      //       this.$store.state.voCumns[index].res.push(column)
+      //     })
+      //     let tempListSet = [...new Set(tempList)];
+      //     this.$store.state.voCumns[index].columns = []
+      //     for (let i = 0; i < tempListSet.length; i++) {
+      //       this.$store.state.voCumns[index].columns.push(
+      //         {
+      //           name: tempListSet[i], isChecked: true, logicalName: this.snakeToCamel(tempListSet[i]),
+      //           isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"
+      //         }
+      //       )
+      //     }
+
+      //     this.callXdaSquery(index)
+      // })
+      // .catch(error => {
+      //   console.error(error);
+      // });
+
+
       // this.axios.post("/api/getAllParameter", data, { headers })
       //   .then(res => {
       //     let tempList = []
