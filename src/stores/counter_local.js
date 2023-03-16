@@ -3,7 +3,7 @@ import { store } from "../store"
 import axios from 'axios';
 import { toHandlers } from "vue";
 
-export const useCounterStore = defineStore({
+export const useCounterStoreLocal = defineStore({
   id: "counter",
   state: () => ({
     counter: 0,

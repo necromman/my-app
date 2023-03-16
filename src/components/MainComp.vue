@@ -3,42 +3,6 @@
 <div id="CONTENT_LEFT" class="w-full">
 
   <!-- 카드영역 시작 -->
-  <div class="flex flex-col relative col gap-4 gr-panel" style="display: none">
-    <div class="flex flex-col relative col gap-4">
-      <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
-        <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
-          <!-- 내용 시작 -->
-          <label class="block">
-            <span class="h2 block p-2" @click="storeCounter.increment(5)">
-              SPEC
-            </span>
-          </label>
-          <textarea data-testid="textbox" class="block w-full gr-box gr-input gr-text-input" cols="30" rows="8">
-            {{ storeCounter.counter }} {{ storeCounter.doubleCount }}
-                프로젝트
-                - front-end
-                  - Vue.js
-                - back-end
-                  - Express
-                - database
-                  - MariaDB
-
-                TO-DO
-                  기능
-                    - 라우팅
-                    - xml 생성 컴포넌트
-                    - DB 명세서 출력
-                      ....
-
-            </textarea>
-          <!-- 내용 끝 -->
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- 카드영역 끝 -->
-
-  <!-- 카드영역 시작 -->
   <div class="flex flex-col relative col gap-4 gr-panel">
     <div class="flex flex-col relative col gap-4">
       <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
@@ -368,7 +332,8 @@ input {
 </style>
 
 <script>
-import { useCounterStore } from '@/stores/counter'
+import { useCounterStoreLocal } from '@/stores/counter_local'
+import { useCounterStoreOpr } from '@/stores/counter_opr'
 import VoGenComp from './vo/VoGenComp.vue'
 import VoListGenComp from './vo/VoListGenComp.vue'
 import SvcGenComp from './service/SvcGenComp.vue'
@@ -399,7 +364,9 @@ export default {
   },
   data() {
     return {
-      storeCounter: useCounterStore(),
+      isLocal: import.meta.env.VITE_STORE_NAME,
+      storeCounterLocal: useCounterStoreLocal(),
+      storeCounterOpr: useCounterStoreOpr(),
       token: '',
       batchQuery: `@echo off`,
       sqlmapPath: this.$store.state.basePath + this.$store.state.sqlMapPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\',
@@ -672,7 +639,12 @@ export default {
           ]
         }
       ]
-      this.storeCounter.getAllParam(index)
+      if(this.isLocal == 'local'){
+        this.storeCounterLocal.getAllParam(index)
+      }else{
+        this.storeCounterOpr.getAllParam(index)
+      }
+      
     },
   },
   /**
@@ -680,7 +652,7 @@ export default {
    * 메서드를 호출해보면 에러가 나오지 않는다.
    */
   created() {
-    this.storeCounter.increment(5)
+    this.storeCounterLocal.increment(5)
     const obj = { 'a': 'a' }
     this.$store.dispatch('a', obj)
 
