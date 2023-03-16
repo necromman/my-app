@@ -641,7 +641,7 @@ export default {
       let xdaSplit = this.$store.state.voCumns[index].xdaName.split('.')
       this.$store.state.selectedtaskClass = xdaSplit[1]
       this.$store.state.taskSubClass = xdaSplit[2]
-      this.$store.state.projectName = xdaSplit[xdaSplit.length-1]
+      this.$store.state.projectName = xdaSplit[xdaSplit.length-1].slice(0, -4)
 
       this.$store.state.voCumns[index].name = xdaSplit[xdaSplit.length-1]
       this.$store.state.voCumns[index].logicalName = `${xdaSplit[xdaSplit.length-1]}Exp`
