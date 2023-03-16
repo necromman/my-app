@@ -44,7 +44,7 @@ export const useCounterStore = defineStore({
           for (let i = 0; i < tempListSet.length; i++) {
             store.state.voCumns[index].columns.push(
               {
-                name: tempListSet[i], isChecked: true, logicalName: this.snakeToCamel(tempListSet[i]),
+                name: tempListSet[i], isChecked: true, logicalName: this.snakeToCamel2(tempListSet[i]),
                 isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"
               }
             )
@@ -81,7 +81,7 @@ export const useCounterStore = defineStore({
         console.error(error);
       });
     },
-    snakeToCamel(snakeCase) {
+    snakeToCamel2(snakeCase) {
       let words = snakeCase.split("_");
       for (let i = 1; i < words.length; i++) {
         let camelCaseWord = words[i].substr(0, 1).toUpperCase() + words[i].substr(1);
