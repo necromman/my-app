@@ -435,6 +435,7 @@ export default {
   },
   methods: {
     downloadZipFile() {
+      let zipName = `${this.$store.state.projectName}.zip`
       const zip = new JSZip();
       zip.file(`${this.$store.state.projectName}.bat`, this.batchQuery);
       zip.file(`${this.$store.state.projectName}Controller.java`, this.$store.state.controllerQuery);
@@ -450,7 +451,7 @@ export default {
       // zip 파일을 생성합니다.
       zip.generateAsync({ type: 'blob' }).then(function (content) {
         // 생성된 zip 파일을 일괄 다운로드합니다.
-        saveAs(content, 'queries.zip');
+        saveAs(content, zipName);
       });
     },
     saveToFile(param, tail = '', ext = 'txt') {
