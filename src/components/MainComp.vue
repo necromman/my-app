@@ -624,6 +624,16 @@ export default {
         this.$store.state.voCumns[voIndex].name = `${this.$store.state.projectName}`
         this.$store.state.voCumns[voIndex].logicalName = `${this.$store.state.projectName}Exp`
       })
+
+      this.batchQuery += `
+xcopy "%CD%\\${this.$store.state.projectName}Controller.java" "${this.javaPath}web" /y
+xcopy "%CD%\\${this.$store.state.projectName}DAO.java" "${this.javaPath}dao" /y
+xcopy "%CD%\\${this.$store.state.projectName}ServiceImpl.java" "${this.javaPath}service\\impl" /y
+xcopy "%CD%\\${this.$store.state.projectName}Service.java" "${this.javaPath}service" /y
+xcopy "%CD%\\${this.$store.state.projectName}Vo.java" "${this.javaPath}vo" /y
+xcopy "%CD%\\${this.$store.state.projectName}ListVo.java" "${this.javaPath}vo" /y
+xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.sqlmapPath}" /y
+`
         
     },
     initializationDb() {
