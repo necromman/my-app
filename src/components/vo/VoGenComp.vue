@@ -243,7 +243,7 @@ this.queryReplace(index)
         if(dmlStr.indexOf('--') > -1) dmlStr = 'select'
 
         const reg = new RegExp(/select|update|delete|insert|merge/, "i")
-        let dmlTrans = str.match(reg).join("") + ` /* QueryID : ....DAO_QueryId */ \n\t\t`
+        let dmlTrans = str.match(reg).join("") + ` /* QueryID : ${this.$store.state.packageName}.${dmlStr}ListItem${this.$store.state.projectName} */ \n\t\t`
         str = str.replace(reg, dmlTrans)
       }
       this.$store.state.voCumns[index].sqlmapQueryListView= 
