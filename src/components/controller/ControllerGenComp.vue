@@ -75,7 +75,7 @@ public class ${this.$store.state.projectName}Controller {
       return List;
   }
 
-  @ElService(key="Svc${this.selectedtaskClass}${this.taskSubClass}COsSI01")
+  @ElService(key="Svc${this.selectedtaskClass}${this.taskSubClass}COSI01")
   @RequestMapping(value="Svc${this.selectedtaskClass}${this.taskSubClass}COSI01")
   @ElDescription(sub="insertItem",desc="아이템을 저장한다.")
   public void insertItem(${this.$store.state.projectName}Vo ${this.taskSubClass}Vo) throws Exception {
