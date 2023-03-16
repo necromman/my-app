@@ -333,6 +333,7 @@ input {
 
 <script>
 import { useCounterStoreOpr } from '@/stores/counter_opr'
+import { useCounterStoreLocal } from '@/stores/counter_local'
 import VoGenComp from './vo/VoGenComp.vue'
 import VoListGenComp from './vo/VoListGenComp.vue'
 import SvcGenComp from './service/SvcGenComp.vue'
@@ -365,6 +366,7 @@ export default {
     return {
       isLocal: import.meta.env.VITE_STORE_NAME,
       storeCounterOpr: useCounterStoreOpr(),
+      storeCounterLocal: useCounterStoreLocal(),
       token: '',
       batchQuery: `@echo off`,
       sqlmapPath: this.$store.state.basePath + this.$store.state.sqlMapPath + this.$store.state.selectedtaskClass + '\\' + this.$store.state.taskSubClass + '\\',
@@ -637,13 +639,12 @@ export default {
           ]
         }
       ]
-      // console.log("isOpr : > " + this.isLocal == 'local')
-      // console.log("isOpr : > " + this.isLocal)
-      // let isLocal = this.isLocal
-      // debugger
-      // if(isLocal == 'local') this.storeCounterLocal.getAllParam(index)    
-      // if(isLocal == 'opr') this.storeCounterOpr.getAllParam(index)
-      this.storeCounterOpr.getAllParam(index)
+      console.log("isOpr : > " + this.isLocal == 'local')
+      console.log("isOpr : > " + this.isLocal)
+      let isLocal = this.isLocal
+      if(isLocal == 'local') this.storeCounterLocal.getAllParamLocal(index)    
+      if(isLocal == 'opr') this.storeCounterOpr.getAllParam(index)
+      //this.storeCounterOpr.getAllParam(index)
     },
   },
   /**

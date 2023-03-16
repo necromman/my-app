@@ -4,7 +4,7 @@ import axios from 'axios';
 import { toHandlers } from "vue";
 
 export const useCounterStoreLocal = defineStore({
-  id: "counter",
+  id: "counter2",
   state: () => ({
     counter: 0,
   }),
@@ -12,11 +12,7 @@ export const useCounterStoreLocal = defineStore({
     doubleCount: (state) => state.counter * 2,
   },
   actions: {
-    increment(num) {
-      console.log(store.state.xmlPath)
-      this.counter = this.counter + num
-    },
-    getAllParam(index){
+    getAllParamLocal(index){
 
       const data = { data: {
         xdaName: store.state.voCumns[index].xdaName
@@ -48,12 +44,12 @@ export const useCounterStoreLocal = defineStore({
           for (let i = 0; i < tempListSet.length; i++) {
             store.state.voCumns[index].columns.push(
               {
-                name: tempListSet[i], isChecked: true, logicalName: this.snakeToCamel2(tempListSet[i]),
+                name: tempListSet[i], isChecked: true, logicalName: this.snakeToCamelLocal(tempListSet[i]),
                 isPrimary: false, sqlType: "VARCHAR", sqlLen: 255, dataType: "String"
               }
             )
           }
-          this.getQueryText(index)
+          this.getQueryTextLocal(index)
         })
         .catch(error => {
           console.log("에러 데이터 : " + error.data);
@@ -63,7 +59,7 @@ export const useCounterStoreLocal = defineStore({
         })
       
     },
-    getQueryText(index){
+    getQueryTextLocal(index){
 
       const data = { data: {
         xdaName: store.state.voCumns[index].xdaName
@@ -95,7 +91,7 @@ export const useCounterStoreLocal = defineStore({
 
         })
     },
-    snakeToCamel2(snakeCase) {
+    snakeToCamelLocal(snakeCase) {
       let words = snakeCase.split("_");
       for (let i = 1; i < words.length; i++) {
         let camelCaseWord = words[i].substr(0, 1).toUpperCase() + words[i].substr(1);
