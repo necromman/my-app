@@ -49,6 +49,18 @@ export const useCounterStoreLocal = defineStore({
               }
             )
           }
+
+          let tempReqSet = [...new Set(store.state.voCumns[index].req)];
+          store.state.voCumns[index].req = []
+          for (let i = 0; i < tempReqSet.length; i++) {
+            store.state.voCumns[index].req.push(tempReqSet[i])
+          }
+          let tempResSet = [...new Set(store.state.voCumns[index].res)];
+          store.state.voCumns[index].res = []
+          for (let i = 0; i < tempResSet.length; i++) {
+            store.state.voCumns[index].res.push(tempResSet[i])
+          }
+          
           this.getQueryTextLocal(index)
         })
         .catch(error => {

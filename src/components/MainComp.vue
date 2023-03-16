@@ -310,6 +310,12 @@
       </button>
     </div>
     <DaoGenComp ref="DaoGenComp" />
+    <div class="flex row flex-wrap px-4 mb-1">
+      <span style="" class="block gr-text-input h2 text-center">
+        DataCollection
+      </span>
+    </div>
+    <DataCollectionComp ref="DataCollectionComp" />
   </div>
 </div>
   
@@ -339,6 +345,7 @@ import VoListGenComp from './vo/VoListGenComp.vue'
 import SvcGenComp from './service/SvcGenComp.vue'
 import SvcImplGenComp from './service/SvcImplGenComp.vue'
 import DaoGenComp from './dao/DaoGenComp.vue'
+import DataCollectionComp from './front/DataCollection.vue'
 import SqlMapGenComp from './sqlmap/SqlMapGenComp.vue'
 import ControllerGenComp from './controller/ControllerGenComp.vue'
 import JSZip from 'jszip'
@@ -351,6 +358,7 @@ export default {
     SvcGenComp,
     SvcImplGenComp,
     DaoGenComp,
+    DataCollectionComp,
     SqlMapGenComp,
     ControllerGenComp
   },
@@ -580,6 +588,7 @@ export default {
       this.$refs.SvcGenComp.generateQuery()
       this.$refs.SvcImplGenComp.generateQuery()
       this.$refs.DaoGenComp.generateQuery()
+      this.$refs.DataCollectionComp.generateQuery()
       this.$refs.ControllerGenComp.generateQuery()
       //this.$refs.SqlMapGenComp.generateQuery()
     },

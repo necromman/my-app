@@ -19,6 +19,7 @@ export const store = createStore ({
     sqlmapQueryListView: [],
     sqlmapQuery : '',
     daoQuery : '',
+    dataCollection : '',
     selectedtaskClass: 'ccs',
     taskSubClass: 'cgs',
     packageName: '',
