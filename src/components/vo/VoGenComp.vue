@@ -262,6 +262,10 @@ this.queryReplace(index)
 
 </mapper>
 `
+let rows = this.$store.state.voCumns[index].sqlmapQueryListView.split("\n");
+rows = rows.filter(row => row.trim() !== "");
+this.$store.state.voCumns[index].sqlmapQueryListView = rows.join("\n");
+
 // this.forceRerender()
 // this.storeCounter.increment(1)
     },
