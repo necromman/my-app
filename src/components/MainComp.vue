@@ -657,6 +657,8 @@ xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.
       })
     },
     callXdaAllParameter(index) {
+      this.$store.state.voCumns[index].req = []
+      this.$store.state.voCumns[index].res = []
       // ['kitech', 'com', 'sms', 'xda', 'MsgSendLogMS01']
       let xdaSplit = this.$store.state.voCumns[index].xdaName.split('.')
       this.$store.state.selectedtaskClass = xdaSplit[1]
