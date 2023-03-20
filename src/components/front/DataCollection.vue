@@ -19,20 +19,31 @@ export default {
   },
   data() {
     return {
+      req:[],
+      res:[]
     }
   },
   watch: {
   },
   methods: {
     generateQuery() {
+let tempReqSet = [...new Set(this.$store.state.voCumns[0].req)];
+for (let i = 0; i < tempReqSet.length; i++) {
+  this.req.push(tempReqSet[i])
+}
+let tempResSet = [...new Set(this.$store.state.voCumns[0].res)];
+for (let i = 0; i < tempResSet.length; i++) {
+  this.res.push(tempResSet[i])
+}
+
 this.$store.state.dataCollection = 
 `
 <w2:dataMap baseNode="map" id="dma_search">
   <w2:keyInfo>
 `
-for (let i = 0; i < this.$store.state.voCumns[0].req.length; i++) {
+for (let i = 0; i < this.req.length; i++) {
 this.$store.state.dataCollection += 
-`       <w2:key id="${this.$store.state.voCumns[0].req[i]}" name="${this.$store.state.voCumns[0].req[i]}" dataType="text"></w2:key>
+`       <w2:key id="${this.req[i]}" name="${this.req[i]}" dataType="text"></w2:key>
 `
 }
 this.$store.state.dataCollection += 
@@ -45,9 +56,9 @@ this.$store.state.dataCollection +=
 `<w2:dataList baseNode="list" repeatNode="map" id="dlt_list" saveRemovedData="true">
   <w2:columnInfo>
 `  
-for (let i = 0; i < this.$store.state.voCumns[0].res.length; i++) {
+for (let i = 0; i < this.res.length; i++) {
 this.$store.state.dataCollection += 
-`       <w2:column id="${this.$store.state.voCumns[0].res[i]}" name="${this.$store.state.voCumns[0].res[i]}" dataType="text"></w2:column>
+`       <w2:column id="${this.res[i]}" name="${this.res[i]}" dataType="text"></w2:column>
 `
 }
 this.$store.state.dataCollection += 
