@@ -241,6 +241,7 @@ this.queryReplace(index)
         dmlStr = str.split(' ')[0].toLowerCase()
         dmlStr = dmlStr.split('\n')[0]
         if(dmlStr.indexOf('--') > -1) dmlStr = 'select'
+        if(dmlStr == 'merge') dmlStr = 'update'
 
         const reg = new RegExp(/select|update|delete|insert|merge/, "i")
         let dmlTrans = str.match(reg).join("") + ` /* QueryID : ${this.$store.state.packageName}.${dmlStr}ListItem${this.$store.state.projectName} */ \n\t\t`

@@ -563,6 +563,9 @@ export default {
       this.generateCreateQuery()
     },
     generateCreateQuery() {
+      if (this.$store.state.packageName.endsWith(".")) {
+        this.$store.state.packageName = this.$store.state.packageName.slice(0, -1);
+      }
       this.primaryKey = []
       this.createQuery = `CREATE TABLE `
       this.createQuery += `${this.$store.state.tableName} (\n`
