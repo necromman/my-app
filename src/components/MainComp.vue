@@ -13,6 +13,10 @@
               Choose Task statement
             </span>
             <div class="flex row flex-wrap gap-4">
+              <select class="gr-box gr-input disabled:cursor-not-allowed" v-model="$store.state.selectedProjectClass"
+                @change="onChangeSelectTask()">
+                <option v-for="task in $store.state.projectClassStatements" v-bind:key="task.name">{{ task.name }}</option>
+              </select>
               <select class="gr-box gr-input disabled:cursor-not-allowed" v-model="$store.state.selectedtaskClass"
                 @change="onChangeSelectTask()">
                 <option v-for="task in $store.state.taskClassStatements" v-bind:key="task.name">{{ task.name }}</option>
@@ -609,7 +613,7 @@ export default {
       this.initializationDb()
     },
     onChangeSelectTask() {
-      const path = this.$store.state.projectRoot + this.$store.state.selectedtaskClass + `.${this.$store.state.taskSubClass}`
+      const path = this.$store.state.projectRoot + `${this.$store.state.selectedProjectClass}.`+ this.$store.state.selectedtaskClass + `.${this.$store.state.taskSubClass}`
       this.$store.state.packageName = path
       this.$store.state.voListcolumns.forEach((column, index) => {
         column.content.forEach((col, sindex) => {
