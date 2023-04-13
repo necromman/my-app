@@ -25,9 +25,7 @@
                 class="block gr-box gr-input gr-text-input">
               <span class="gr-sample-textbox block gr-box gr-input gr-text-input">
                 {{ $store.state.selectedtaskClass }} :
-                {{ this.$store.state.taskClassStatements.
-    find(type => type.name === $store.state.selectedtaskClass).desc
-}}
+                {{ this.$store.state.taskClassStatements.find(type => type.name === $store.state.selectedtaskClass)?.desc }}
               </span>
             </div>
           </label>
@@ -613,6 +611,13 @@ export default {
       this.initializationDb()
     },
     onChangeSelectTask() {
+      if(this.$store.state.selectedProjectClass == 'eip'){
+        this.$store.state.taskClassStatements = this.$store.state.taskClassStatementsEip
+        this.$store.state.selectedtaskClass = 'main'
+      }else{
+        this.$store.state.taskClassStatements = this.$store.state.taskClassStatementsBiz
+        this.$store.state.selectedtaskClass = 'com'
+      }
       const path = this.$store.state.projectRoot + `${this.$store.state.selectedProjectClass}.`+ this.$store.state.selectedtaskClass + `.${this.$store.state.taskSubClass}`
       this.$store.state.packageName = path
       this.$store.state.voListcolumns.forEach((column, index) => {
