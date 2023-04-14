@@ -613,10 +613,8 @@ export default {
     onChangeSelectTask() {
       if(this.$store.state.selectedProjectClass == 'eip'){
         this.$store.state.taskClassStatements = this.$store.state.taskClassStatementsEip
-        this.$store.state.selectedtaskClass = 'main'
       }else{
         this.$store.state.taskClassStatements = this.$store.state.taskClassStatementsBiz
-        this.$store.state.selectedtaskClass = 'com'
       }
       const path = this.$store.state.projectRoot + `${this.$store.state.selectedProjectClass}.`+ this.$store.state.selectedtaskClass + `.${this.$store.state.taskSubClass}`
       this.$store.state.packageName = path
