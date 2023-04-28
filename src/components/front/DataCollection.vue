@@ -27,6 +27,8 @@ export default {
   },
   methods: {
     generateQuery() {
+this.req = []
+this.res = []
 let tempReqSet = [...new Set(this.$store.state.voCumns[0].req)];
 for (let i = 0; i < tempReqSet.length; i++) {
   this.req.push(tempReqSet[i])
