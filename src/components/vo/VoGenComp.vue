@@ -215,6 +215,10 @@ this.queryReplace(index)
       let strList = []
       let strListIdx = 0
 
+      const input = str;
+      const cDataRegex = /<!\[CDATA\[[\s\S]*?\]\]>|([<>]=?)/g;
+      str = input.replace(cDataRegex, (match, p1) => p1 ? `<![CDATA[ ${p1} ]]>` : match);
+
       while ((m = regex.exec(str)) !== null) {
           const firstIndex = m.index
           const lastIndex = m.index + m[0].length - 1
@@ -224,6 +228,7 @@ this.queryReplace(index)
               regex.lastIndex++
           }
       }
+
       while ((m = regex2.exec(str)) !== null) {
           strList.push(`<if test="${m[3]} != null">\n\t AND ${m[8].replace(/\n/g, "").trim()}\n</if>`)
       }
