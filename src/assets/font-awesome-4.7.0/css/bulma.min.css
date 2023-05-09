@@ -1,6 +1,10 @@
 /*! bulma.io v0.9.4 | MIT License | github.com/jgthms/bulma */
 /* Bulma Utilities */
 
+.loading-hidden{
+  height: 100vh;
+  overflow: hidden;
+}
 .loading-overlay {
     color: white;
     display: flex;

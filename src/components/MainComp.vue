@@ -1,6 +1,6 @@
 <template>
 
-<div id="CONTENT_LEFT" class="w-full">
+<div id="CONTENT_LEFT" class="w-full" :class="{ 'loading-hidden': $store.state.isLoading }">
 
   <!-- 카드영역 시작 -->
   <div class="flex flex-col relative col gap-4 gr-panel">
@@ -216,7 +216,7 @@
 
 </div>
 
-<div id="CONTENT_RIGHT" class="w-full">
+<div id="CONTENT_RIGHT" class="w-full" :class="{ 'loading-hidden': $store.state.isLoading }">
   
   <!-- 카드영역 시작 -->
   <div class="flex flex-col relative col gap-4 gr-panel">
