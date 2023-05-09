@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 
 export const store = createStore ({
   state: {
+    isLoading: false,
     count : 100,
     token: '',
     // CgsCarUse_SQL_informix_MyBatis.xml

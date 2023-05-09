@@ -136,7 +136,7 @@
               <input type="text" v-model="column.xdaName" placeholder="Xda name"
                 class="gr-sample-textbox block gr-box gr-input gr-text-input"
                 style="background-color: rgb(255 140 140);color: rgb(33 8 1);font-size: 1.5em;">
-              <button @click="callXdaAllParameter(index)" class="gr-button gr-button-lg gr-button-primary"
+              <button @click="callXdaAllParameter(index)" class="gr-button gr-button-lg gr-button-primary" :class="{ 'button is-loading': $store.state.isLoading }"
                 style="flex-grow: 0.1;">CALL</button>
             </div>
             <div class="flex row flex-wrap gap-4 mb-2">
@@ -230,7 +230,7 @@
             </span>
           </label>
           <div class="flex row flex-wrap gap-4">
-            <button @click="generateSelectQuery" class="gr-button gr-button-lg gr-button-primary">CONVERT</button>
+            <button @click="generateSelectQuery" class="gr-button gr-button-lg gr-button-primary" :class="{ 'button is-loading': $store.state.isLoading }">CONVERT</button>
             <button @click="downloadZipFile" class="gr-button gr-button-lg gr-button-secondary">DOWNLOAD ZIP</button>
           </div>
           <!-- 내용 끝 -->
@@ -319,6 +319,11 @@
     </div>
     <DataCollectionComp ref="DataCollectionComp" />
   </div>
+  <transition name="fade" mode="out-in">
+    <span v-show="$store.state.isLoading" class="loading-overlay is-overlay">
+      <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+    </span>
+  </transition>
 </div>
   
 
@@ -667,6 +672,7 @@ xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.
       })
     },
     callXdaAllParameter(index) {
+      this.$store.state.isLoading = true
       this.$store.state.voCumns[index].req = []
       this.$store.state.voCumns[index].res = []
       // ['kitech', 'com', 'sms', 'xda', 'MsgSendLogMS01']

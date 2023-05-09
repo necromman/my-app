@@ -94,6 +94,7 @@ export const useCounterStoreLocal = defineStore({
               store.state.voCumns[index].sqlmapQueryListView = column.sQueryText
               store.state.voCumns[index].sqlmapQueryListOriginal = column.sQueryText
             }
+            store.state.isLoading = false
           })
         })
         .catch(error => {

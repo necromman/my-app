@@ -7,6 +7,8 @@ import { store } from "./store"
 import axios from 'axios';
 
 import "./assets/main.css";
+import "./assets/font-awesome-4.7.0/css/font-awesome.min.css";
+import "./assets/font-awesome-4.7.0/css/bulma.min.css";
 
 const app = createApp(App);
 

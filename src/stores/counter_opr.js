@@ -87,6 +87,7 @@ export const useCounterStoreOpr = defineStore({
           store.state.voCumns[index].sqlmapQueryListView = response.data.squeryText
           store.state.voCumns[index].sqlmapQueryListOriginal = response.data.squeryText
         }
+        store.state.isLoading = false
       })
       .catch(error => {
         console.error(error);
