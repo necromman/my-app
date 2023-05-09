@@ -68,10 +68,15 @@
             <span style="flex-grow: 0.1;" class="gr-sample-textbox block gr-box gr-input gr-text-input">
               FileName
             </span>
-            <input type="text" v-model="$store.state.voListcolumns[0].name" placeholder="file name"
-              class="block gr-box gr-input gr-text-input">
+            <input
+              type="text"
+              :value="$store.state.voListcolumns[0]?.name || ''"
+              @input="$event => $store.state.voListcolumns[0].name = $event.target.value"
+              placeholder="file name"
+              class="block gr-box gr-input gr-text-input"
+            />
           </div>
-          <div v-for="(column, index) in $store.state.voListcolumns[0].content" :key="index"
+          <div v-for="(column, index) in $store.state.voListcolumns[0]?.content" :key="index"
             class="flex row flex-wrap gap-4 mb-2">
             <label class="gr-sample-textbox block gr-box gr-input gr-text-input" style="flex-grow: 0.1;">{{ index
     + 1
@@ -757,7 +762,7 @@ xcopy "%CD%\\${this.$store.state.projectName}_SQL_informix_MyBatis.xml" "${this.
         ],
       }
     )
-    this.callXdaAllParameter(0)
+    //this.callXdaAllParameter(0)
   },
   /**
    * Mounting 단계
