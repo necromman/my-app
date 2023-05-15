@@ -260,9 +260,10 @@ this.queryReplace(index)
 
 <mapper namespace="${this.$store.state.packageName}">
 
-  <${dmlStr} id="${dmlStr}ListItem${this.$store.state.projectName}" parameterType="${this.$store.state.packageName}.vo.${this.$store.state.voCumns[index].name}Vo" resultType="${this.$store.state.packageName}.vo.${this.$store.state.voCumns[index].name}Vo">
+  <${dmlStr} id="${dmlStr}ListItem${this.$store.state.projectName}" parameterType="${this.$store.state.packageName}.vo.${this.$store.state.voCumns[index].name}Vo"`; if(dmlStr === 'select'){this.$store.state.voCumns[index].sqlmapQueryListView+=` resultType="${this.$store.state.packageName}.vo.${this.$store.state.voCumns[index].name}Vo">`}else{this.$store.state.voCumns[index].sqlmapQueryListView+=`>`}
     
-    ${str}
+this.$store.state.voCumns[index].sqlmapQueryListView+=`
+${str}
 
   </${dmlStr}>
 
