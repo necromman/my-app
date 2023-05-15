@@ -11,7 +11,7 @@
               [ {{ $store.state.voCumns[index].name }}Vo ]
             </span>
           </label>
-          <div class="absolute copy-wrap">
+          <div class="absolute copy-wrap f">
             <CopyComp
               ref="H"
               class="code"

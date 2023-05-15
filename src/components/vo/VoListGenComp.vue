@@ -5,7 +5,7 @@
       <div class="gr-form flex border-solid border bg-gray-200 dark:bg-gray-700 gap-px rounded-lg flex-wrap">
         <div class="gr-block gr-box relative border-solid border border-gray-200 gr-padded">
           <!-- 내용 시작 -->
-          <div class="absolute copy-wrap">
+          <div class="absolute copy-wrap f">
             <CopyComp
               ref="H"
               class="code"
