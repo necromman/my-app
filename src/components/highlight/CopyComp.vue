@@ -158,7 +158,7 @@ defineExpose({
       atom_one_light: props.theme == 'light',
     }"
     :style="{
-      width: props.width,
+      width: '100px',
       height: props.height,
       padding: '5px 10px 0 0',
       borderRadius: props.borderRadius,
@@ -179,12 +179,9 @@ defineExpose({
 
 <style lang="scss" scoped>
 .code {
-  display: flex;
-  flex-direction: column;
-  font-size: 0;
+
   position: relative;
-  text-align: left;
-  overflow: hidden;
+
   &_header {
     min-height: 14px;
     position: relative;

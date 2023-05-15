@@ -11,7 +11,7 @@
               [ {{ $store.state.voCumns[index].name }}Vo ]
             </span>
           </label>
-          <div class="absolute w-full right-6">
+          <div class="absolute copy-wrap">
             <CopyComp
               ref="H"
               class="code"
@@ -29,7 +29,7 @@
               <span class="h2 block p-2">
                 [ {{ $store.state.voCumns[index].name }}Vo sqlMap ]
               </span>
-              <div class="absolute w-full right-6">
+              <div class="absolute copy-wrap">
                 <CopyComp
                   ref="H"
                   class="code"
@@ -44,7 +44,7 @@
               <span class="h2 block p-2">
                 [ {{ $store.state.voCumns[index].xdaName }} OriginalQuery ]
               </span>
-              <div class="absolute w-full right-6">
+              <div class="absolute copy-wrap">
               <CopyComp
                 ref="H"
                 class="code"
