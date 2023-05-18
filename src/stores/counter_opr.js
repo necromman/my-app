@@ -80,6 +80,7 @@ export const useCounterStoreOpr = defineStore({
       })
       .then(response => {
         console.log("응답 데이터 쿼리: " + JSON.stringify(response.data));
+        store.state.isLoading = false
         if (response.data.squeryText === '') {
           store.state.voCumns[index].sqlmapQueryListView = response.data.squery
           store.state.voCumns[index].sqlmapQueryListOriginal = response.data.squery
@@ -87,7 +88,7 @@ export const useCounterStoreOpr = defineStore({
           store.state.voCumns[index].sqlmapQueryListView = response.data.squeryText
           store.state.voCumns[index].sqlmapQueryListOriginal = response.data.squeryText
         }
-        store.state.isLoading = false
+        
       })
       .catch(error => {
         console.error(error);

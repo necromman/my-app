@@ -86,6 +86,7 @@ export const useCounterStoreLocal = defineStore({
         .then(res => {
           console.log("응답 데이터 : " + JSON.stringify(res.data))
           console.log(res.data.length)
+          store.state.isLoading = false
           res.data.forEach((column, sindex) => {
             if (column.sQueryText === '') {
               store.state.voCumns[index].sqlmapQueryListView = column.sQuery
@@ -94,7 +95,6 @@ export const useCounterStoreLocal = defineStore({
               store.state.voCumns[index].sqlmapQueryListView = column.sQueryText
               store.state.voCumns[index].sqlmapQueryListOriginal = column.sQueryText
             }
-            store.state.isLoading = false
           })
         })
         .catch(error => {
