@@ -92,6 +92,7 @@ export const useCounterStoreOpr = defineStore({
       })
       .catch(error => {
         console.error(error);
+        store.state.isLoading = false
       });
     },
     snakeToCamel2(snakeCase) {
