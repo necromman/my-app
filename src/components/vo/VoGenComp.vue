@@ -228,6 +228,9 @@ this.queryReplace(index)
       while ((m = regex2.exec(str)) !== null) {
           strList.push(`<if test="${m[3]} != null and ${m[3]} != ''">\n\t AND ${m[8].replace(/\n/g, "").trim()}\n</if>`)
       }
+
+      str = this.convertToMyBatis(str)
+
       str = str.replace(regex2, "@@change@@");
       while ((m = regexChange.exec(str)) !== null) {
           const firstIndex = m.index
@@ -237,7 +240,9 @@ this.queryReplace(index)
           strListIdx++
       }
       if (str !== null && str !== undefined) {
-        str = str.replaceAll('<sql>','').replaceAll('</sql>','')
+        //str = str.replaceAll('<sql>','').replaceAll('</sql>','')
+        str = str.replace(/<sql>|<\/sql>|<!\[CDATA\[|\]\]>|<dynamic[^>]*>|<\/dynamic>/g, '');
+
         str = str.trim();
         dmlStr = str.split(' ')[0].toLowerCase()
         dmlStr = dmlStr.split('\n')[0]
@@ -282,6 +287,17 @@ this.$store.state.voCumns[index].sqlmapQueryListView = rows.join("\n");
     },
     toUpperCaseFirst(str){
       return str.charAt(0).toUpperCase() + str.slice(1);
+    },
+    convertToMyBatis(input) {
+       // Change <isEqual> tags to <if> tags
+      var output = input.replace(/<isEqual node="(.*?)" compareValue=['"](.*?)['"] prepend="(.*?)">/g, '<if test="$1 == \'$2\'">');
+      // Replace </isEqual> with </if>
+      output = output.replace(/<\/isEqual>/g, '</if>');
+      // Optional: Remove comments
+      output = output.replace(/<!--(.*?)-->/g, '');
+      // Optional: Change <![CDATA[ <> ]]> to !=
+      output = output.replace(/<!\[CDATA\[ <> \]\]>/g, '!=');
+      return output;
     },
   },
   created() {
