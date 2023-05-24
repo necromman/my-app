@@ -290,7 +290,7 @@ this.$store.state.voCumns[index].sqlmapQueryListView = rows.join("\n");
     },
     convertToMyBatis(input) {
        // Change <isEqual> tags to <if> tags
-      var output = input.replace(/<isEqual node="(.*?)" compareValue=['"](.*?)['"] prepend="(.*?)">/g, '<if test="$1 == \'$2\'">');
+      var output = input.replace(/<isEqual node="(.*?)" compareValue=['"](.*?)['"] prepend="(.*?)">/g, `<if test='$1 == "$2"'>`);
       // Replace </isEqual> with </if>
       output = output.replace(/<\/isEqual>/g, '</if>');
       // Optional: Remove comments
