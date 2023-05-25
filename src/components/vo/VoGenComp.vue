@@ -203,7 +203,8 @@ this.queryReplace(index)
     },
     queryReplace(index){
       const regex = /(?<!\?)\?(?!\?)|\?\?/gm
-      const regex2 = new RegExp('(\\<isNotEmpty node=)("|\')(.*?)("|\')((.*?)(>)|)([\\s\\S]*?)(<\\/isNotEmpty>)', 'g')
+      //const regex2 = new RegExp('(\\<isNotEmpty node=)("|\')(.*?)("|\')((.*?)(>)|)([\\s\\S]*?)(<\\/isNotEmpty>)', 'g')
+      const regex2 = new RegExp('(\\<isNotEmpty\\s+node\\s*=\\s*)("|\')(.*?)("|\')((.*?)(>)|)([\\s\\S]*?)(<\\/isNotEmpty>)', 'g');
       const regexChange = new RegExp('@@change@@', 'g')
 
             
